@@ -1,0 +1,6 @@
+*.pyc
+downloads/
+*.dbf
+*.shp
+*.shx
+*.prj
