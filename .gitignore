@@ -4,3 +4,4 @@ downloads/
 *.shp
 *.shx
 *.prj
+local_settings.py
