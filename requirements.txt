@@ -1,2 +1,3 @@
 Django
-django-tastypie
+django-boundaryservice
+psycopg2
