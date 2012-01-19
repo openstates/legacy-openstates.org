@@ -68,7 +68,7 @@ SHAPEFILES = {
     },
 
     'ZCTA': {
-        'file': 'zcta/merged.shp',
+        'file': 'zcta.shp',
         'singular': 'ZCTA',
         'kind_first': True,
         'ider': utils.simple_namer(['ZCTA']),
