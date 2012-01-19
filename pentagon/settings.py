@@ -73,6 +73,11 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        'boundaries.api.load_shapefiles': {
+             'handlers': ['console'],
+             'level': 'INFO',
+             'formatter': 'simple'
+        },
     }
 }
 
