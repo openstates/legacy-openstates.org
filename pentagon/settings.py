@@ -86,6 +86,11 @@ LOGGING = {
             'level': 'ERROR',
             'propagate': True,
         },
+        #'django.db.backends': {
+        #    'handlers': ['console'],
+        #    'level': 'DEBUG',
+        #    'formatter': 'simple',
+        #},
         'boundaries.api.load_shapefiles': {
              'handlers': ['console'],
              'level': 'INFO',
