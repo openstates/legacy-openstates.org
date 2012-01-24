@@ -18,6 +18,10 @@ state_fips = {
 
 
 def tiger_namer(feature):
+    # VA exception
+    if 'VAPOTHER' in feature.fields:
+        return "VA %s" % feature.get('DISTRICT_N')
+
     fips_code = feature.get('STATEFP10')
     state_abbrev = state_fips[fips_code].upper()
 
@@ -26,10 +30,10 @@ def tiger_namer(feature):
 
 SHAPEFILES = {
     'SLDL': {
-        'file': 'sldl.shp',
+        'file': 'sldl',
         'singular': 'SLDL',
         'kind_first': True,
-        'ider': utils.simple_namer(['GEOID10']),
+        'ider': utils.index_namer('sldl-'),
         'namer': tiger_namer,
         'authority': 'US Census Bureau',
         'domain': 'United States',
@@ -40,10 +44,10 @@ SHAPEFILES = {
     },
 
     'SLDU': {
-        'file': 'sldu.shp',
+        'file': 'sldu',
         'singular': 'SLDU',
         'kind_first': True,
-        'ider': utils.simple_namer(['GEOID10']),
+        'ider': utils.index_namer('sldu-'),
         'namer': tiger_namer,
         'authority': 'US Census Bureau',
         'domain': 'United States',
@@ -57,7 +61,7 @@ SHAPEFILES = {
         'file': 'cd.shp',
         'singular': 'CD',
         'kind_first': True,
-        'ider': utils.simple_namer(['GEOID10']),
+        'ider': utils.index_namer('cd-'),
         'namer': tiger_namer,
         'authority': 'US Census Bureau',
         'domain': 'United States',

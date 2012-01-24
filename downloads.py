@@ -3,7 +3,7 @@ import glob
 import shutil
 
 
-def process_census_shapefiles(slug, url, download=True):
+def download_census_shapefiles(slug, url, download=True):
     dirname = 'downloads/{0}/'.format(slug)
     if download:
         os.makedirs(dirname)
@@ -17,18 +17,12 @@ def process_census_shapefiles(slug, url, download=True):
 
     os.chdir('../..')
 
-    # combine
-    shps = glob.glob(dirname + '*.shp')
-    os.system('ogr2ogr %s.shp %s' % (slug, shps[0]))
-    for shp in shps[1:]:
-        os.system('ogr2ogr -update -append {new}.shp {shp} -nln {new}'.format(
-            new=slug, shp=shp))
 
 process_census_shapefiles('sldu',
   'ftp://ftp2.census.gov/geo/tiger/TIGER2010/SLDU/2010/*.zip')
 process_census_shapefiles('sldl',
   'ftp://ftp2.census.gov/geo/tiger/TIGER2010/SLDL/2010/*.zip')
-process_census_shapefiles('cd',
-  'ftp://ftp2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_us_cd111.zip')
-process_census_shapefiles('zcta',
-  'ftp://ftp2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_us_zcta510.zip')
+#process_census_shapefiles('cd',
+#  'ftp://ftp2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_us_cd111.zip')
+#process_census_shapefiles('zcta',
+#  'ftp://ftp2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_us_zcta510.zip')
