@@ -19,11 +19,11 @@ def download_census_shapefiles(slug, url, download=True):
     os.chdir('../..')
 
 
-download_census_shapefiles('sldu',
-  'ftp://ftp2.census.gov/geo/tiger/TIGER2010/SLDU/2010/*.zip')
-download_census_shapefiles('sldl',
-  'ftp://ftp2.census.gov/geo/tiger/TIGER2010/SLDL/2010/*.zip')
-#process_census_shapefiles('cd',
-#  'ftp://ftp2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_us_cd111.zip')
-#process_census_shapefiles('zcta',
+#download_census_shapefiles('sldu',
+#  'ftp://ftp2.census.gov/geo/tiger/TIGER2010/SLDU/2010/*.zip')
+#download_census_shapefiles('sldl',
+#  'ftp://ftp2.census.gov/geo/tiger/TIGER2010/SLDL/2010/*.zip')
+download_census_shapefiles('cd',
+  'ftp://ftp2.census.gov/geo/tiger/TIGER2010/CD/111/tl_2010_us_cd111.zip')
+#download_census_shapefiles('zcta',
 #  'ftp://ftp2.census.gov/geo/tiger/TIGER2010/ZCTA5/2010/tl_2010_us_zcta510.zip')

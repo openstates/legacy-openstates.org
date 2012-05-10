@@ -98,7 +98,7 @@ LOGGING = {
     }
 }
 
-SHAPEFILES_DIR = 'shapefiles'
+BOUNDARIES_SHAPEFILES_DIR = 'shapefiles'
 
 from local_settings import *
 
