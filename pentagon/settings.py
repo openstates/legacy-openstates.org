@@ -54,8 +54,7 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sites',
-    'tastypie',
-    'boundaryservice',
+    'boundaries',
 )
 
 LOGGING = {
