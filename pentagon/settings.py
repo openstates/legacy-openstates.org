@@ -90,7 +90,7 @@ LOGGING = {
         #    'level': 'DEBUG',
         #    'formatter': 'simple',
         #},
-        'boundaries.api.load_shapefiles': {
+        'boundaries': {
              'handlers': ['console'],
              'level': 'INFO',
              'formatter': 'simple'
