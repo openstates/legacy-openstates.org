@@ -21,11 +21,14 @@ def tiger_namer(feature):
     # VA exception
     if 'VAPOTHER' in feature.fields:
         return "VA %s" % feature.get('DISTRICT_N')
+    elif 'STATEFP10' in feature.fields:
+        fips_code = feature.get('STATEFP10')
+        state_abbrev = state_fips[fips_code].upper()
 
-    fips_code = feature.get('STATEFP10')
-    state_abbrev = state_fips[fips_code].upper()
-
-    return "%s %s" % (state_abbrev, feature.get('NAMELSAD10'))
+        return "%s %s" % (state_abbrev, feature.get('NAMELSAD10'))
+    # NJ exception
+    else:
+        return 'NJ %s' % feature.get('ID')
 
 
 SHAPEFILES = {
