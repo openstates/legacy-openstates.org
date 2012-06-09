@@ -1,15 +1,14 @@
 {% extends base_template %}
 {% load url from future %}
-{% load static from staticfiles %}
 {% load customtags %}
 
 
-{% block title %}{% include description_template %}{% endblock %}
+{% block title %}Search results{% endblock %}
 
 {% block headblock %}
 <script type="text/javascript">
 $(document).ready(function() {
-    
+
     // Make table rows clickable.
     var trs = $("#main-table tbody tr");
     var trs_count = trs.length;
@@ -32,13 +31,13 @@ $(document).ready(function() {
 </script>
 <style>
     .selected {
-        background-color: #FFFFD6;
+        background-color: #FFFF99;
     }
 </style>
 {% endblock %}
 
 {% block content %}
-        <h2>{% include description_template %}</h2>
+        <h2>Bills with bill id "{{bill_id}}"</h2>
         <div class="fullWidth">
             <div id="pagination-links">
                 Showing {{object_list.range_start}} to {{object_list.range_end}} of {{object_list.count}}</br>
