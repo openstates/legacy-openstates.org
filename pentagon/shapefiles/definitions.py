@@ -18,8 +18,12 @@ state_fips = {
 
 
 def tiger_namer(feature):
+    # new modified P_NAME files
+    if 'P_NAME' in feature.fields:
+        return '%s %s' % (feature.get('P_STATE').upper(),
+                          feature.get('P_NAME'))
     # VA exception
-    if 'VAPOTHER' in feature.fields:
+    elif 'VAPOTHER' in feature.fields:
         return "VA %s" % feature.get('DISTRICT_N')
     elif 'STATEFP10' in feature.fields:
         fips_code = feature.get('STATEFP10')
