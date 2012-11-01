@@ -17,6 +17,12 @@ state_fips = {
 }
 
 
+def cd_namer(feature):
+    fips_code = feature.get('STATEFP')
+    state_abbrev = state_fips[fips_code].upper()
+    return "%s %s" % (state_abbrev, feature.get('CDFP'))
+
+
 def tiger_namer(feature):
     # new modified P_NAME files
     if 'P_NAME' in feature.fields:
@@ -74,6 +80,20 @@ SHAPEFILES = {
         'domain': 'United States',
         'last_updated': date(2010, 12, 12),
         'href': 'http://www.census.gov/geo/www/tiger/tgrshp2010/tgrshp2010.html',
+        'notes': '',
+        'encoding': '',
+    },
+
+    'CD2012': {
+        'file': 'cd2012',
+        'singular': 'CD2012',
+        'kind_first': True,
+        'ider': utils.index_namer('cd2012-'),
+        'namer': cd_namer,
+        'authority': 'US Census Bureau',
+        'domain': 'United States',
+        'last_updated': date(2012, 11, 1),
+        'href': 'http://www.census.gov/geo/www/tiger/tgrshp2010/tgrshp2010.htm://www.census.gov/rdo/data/113th_congressional_and_new_state_legislative_district_plans.html',
         'notes': '',
         'encoding': '',
     },
