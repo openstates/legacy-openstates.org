@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
 
 urlpatterns = patterns('',
-   (r'', include('boundaryservice.urls')),
+   (r'', include('boundaries.urls')),
 )

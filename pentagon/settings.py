@@ -54,8 +54,7 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sites',
-    'tastypie',
-    'boundaryservice',
+    'boundaries',
 )
 
 LOGGING = {
@@ -91,7 +90,7 @@ LOGGING = {
         #    'level': 'DEBUG',
         #    'formatter': 'simple',
         #},
-        'boundaries.api.load_shapefiles': {
+        'boundaries': {
              'handlers': ['console'],
              'level': 'INFO',
              'formatter': 'simple'
@@ -99,7 +98,7 @@ LOGGING = {
     }
 }
 
-SHAPEFILES_DIR = 'shapefiles'
+BOUNDARIES_SHAPEFILES_DIR = 'shapefiles'
 
 from local_settings import *
 

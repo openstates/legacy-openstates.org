@@ -1,3 +1,4 @@
 Django
-django-boundaryservice
 psycopg2
+-e git://github.com/rhymeswithcycle/represent-boundaries.git#egg=boundaries
+django-appconf
