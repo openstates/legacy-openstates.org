@@ -14,17 +14,14 @@ def tiger_namer(feature):
         '34': 'nj', '35': 'nm', '36': 'ny', '37': 'nc', '38': 'nd', '39': 'oh',
         '40': 'ok', '41': 'or', '42': 'pa', '44': 'ri', '45': 'sc', '46': 'sd',
         '47': 'tn', '48': 'tx', '49': 'ut', '50': 'vt', '51': 'va', '53': 'wa',
-        '54': 'wv', '55': 'wi', '56': 'wy', '72': 'pr',
+        '54': 'wv', '55': 'wi', '56': 'wy', '60': 'as', '66': 'gu', '69': 'mp',
+        '72': 'pr', '78': 'vi'
     }
 
-    # VA exception
-    if 'VAPOTHER' in feature.feature.fields:
-        return "VA %s" % feature.get('DISTRICT_N')
-
-    fips_code = feature.get('STATEFP10')
+    fips_code = feature.get('STATEFP')
     state_abbrev = state_fips[fips_code].upper()
 
-    return "%s %s" % (state_abbrev, feature.get('NAMELSAD10'))
+    return "%s %s" % (state_abbrev, feature.get('NAME'))
 
 class index_namer(object):
     def __init__(self, prefix):
@@ -38,48 +35,6 @@ class index_namer(object):
 
 
 SHAPEFILES = {
-    #'SLDL': {
-    #    'file': 'sldl',
-    #    'singular': 'SLDL',
-    #    'kind_first': True,
-    #    'ider': utils.index_namer('sldl-'),
-    #    'namer': tiger_namer,
-    #    'authority': 'US Census Bureau',
-    #    'domain': 'United States',
-    #    'last_updated': date(2010, 12, 12),
-    #    'href': 'http://www.census.gov/geo/www/tiger/tgrshp2010/tgrshp2010.html',
-    #    'notes': '',
-    #    'encoding': '',
-    #},
-
-    #'SLDU': {
-    #    'file': 'sldu',
-    #    'singular': 'SLDU',
-    #    'kind_first': True,
-    #    'ider': utils.index_namer('sldu-'),
-    #    'namer': tiger_namer,
-    #    'authority': 'US Census Bureau',
-    #    'domain': 'United States',
-    #    'last_updated': date(2010, 12, 12),
-    #    'href': 'http://www.census.gov/geo/www/tiger/tgrshp2010/tgrshp2010.html',
-    #    'notes': '',
-    #    'encoding': '',
-    #},
-
-    #'CD': {
-    #    'file': 'cd.shp',
-    #    'singular': 'CD',
-    #    'kind_first': True,
-    #    'ider': utils.index_namer('cd-'),
-    #    'namer': tiger_namer,
-    #    'authority': 'US Census Bureau',
-    #    'domain': 'United States',
-    #    'last_updated': date(2010, 12, 12),
-    #    'href': 'http://www.census.gov/geo/www/tiger/tgrshp2010/tgrshp2010.html',
-    #    'notes': '',
-    #    'encoding': '',
-    #},
-
     #'ZCTA': {
     #    'file': 'zcta.shp',
     #    'singular': 'ZCTA',
@@ -95,17 +50,46 @@ SHAPEFILES = {
     #},
 }
 
+CENSUS_URL = 'https://www.census.gov/rdo/data/113th_congressional_and_new_state_legislative_district_plans.html'
 
-boundaries.register('Congressional Districts',
-                    singular='Congressional District',
+boundaries.register('cd',
+                    singular='cd',
                     domain='United States',
                     file='cd/',
-                    last_updated=date(2010, 12, 12),
+                    last_updated=date(2012, 11, 15),
                     name_func=tiger_namer,
                     id_func=index_namer('cd-'),
                     authority='US Census Bureau',
-                    source_url='http://www.census.gov/geo/www/tiger/tgrshp2010/tgrshp2010.html',
-                    licence_url='http://www.census.gov/geo/www/tiger/tgrshp2010/tgrshp2010.html',
-                    data_url='http://www.census.gov/geo/www/tiger/tgrshp2010/tgrshp2010.html',
+                    source_url=CENSUS_URL,
+                    licence_url=CENSUS_URL,
+                    data_url=CENSUS_URL,
+                    notes='',
+                   )
+
+boundaries.register('SLDL',
+                    singular='SLDL',
+                    domain='United States',
+                    file='sldl/',
+                    last_updated=date(2012, 11, 15),
+                    name_func=tiger_namer,
+                    id_func=index_namer('sldl-'),
+                    authority='US Census Bureau',
+                    source_url=CENSUS_URL,
+                    licence_url=CENSUS_URL,
+                    data_url=CENSUS_URL,
+                    notes='',
+                   )
+
+boundaries.register('SLDU',
+                    singular='SLDU',
+                    domain='United States',
+                    file='sldu/',
+                    last_updated=date(2012, 11, 15),
+                    name_func=tiger_namer,
+                    id_func=index_namer('sldu-'),
+                    authority='US Census Bureau',
+                    source_url=CENSUS_URL,
+                    licence_url=CENSUS_URL,
+                    data_url=CENSUS_URL,
                     notes='',
                    )
