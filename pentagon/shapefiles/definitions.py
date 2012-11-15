@@ -33,25 +33,9 @@ class index_namer(object):
         self.i += 1
         return out
 
-
-SHAPEFILES = {
-    #'ZCTA': {
-    #    'file': 'zcta.shp',
-    #    'singular': 'ZCTA',
-    #    'kind_first': True,
-    #    'ider': utils.simple_namer(['ZCTA5CE10']),
-    #    'namer': utils.simple_namer(['ZCTA5CE10']),
-    #    'authority': 'US Census Bureau',
-    #    'domain': 'United States',
-    #    'last_updated': date(2010, 1, 1),
-    #    'href': 'http://www.census.gov/geo/www/tiger/tgrshp2010/tgrshp2010.html',
-    #    'notes': '',
-    #    'encoding': '',
-    #},
-}
-
 CENSUS_URL = 'https://www.census.gov/rdo/data/113th_congressional_and_new_state_legislative_district_plans.html'
 
+# congressional districts
 boundaries.register('cd',
                     singular='cd',
                     domain='United States',
@@ -66,8 +50,24 @@ boundaries.register('cd',
                     notes='',
                    )
 
-boundaries.register('SLDL',
-                    singular='SLDL',
+# Zip Code Tabulation Areas
+boundaries.register('zcta',
+                    singular='zcta',
+                    domain='United States',
+                    file='zcta/',
+                    last_updated=date(2012, 11, 15),
+                    name_func=boundaries.attr('ZCTA5CE10'),
+                    id_func=index_namer('zcta-'),
+                    authority='US Census Bureau',
+                    source_url=CENSUS_URL,
+                    licence_url=CENSUS_URL,
+                    data_url=CENSUS_URL,
+                    notes='',
+                   )
+
+
+boundaries.register('sldl',
+                    singular='sldl',
                     domain='United States',
                     file='sldl/',
                     last_updated=date(2012, 11, 15),
@@ -80,8 +80,8 @@ boundaries.register('SLDL',
                     notes='',
                    )
 
-boundaries.register('SLDU',
-                    singular='SLDU',
+boundaries.register('sldu',
+                    singular='sldu',
                     domain='United States',
                     file='sldu/',
                     last_updated=date(2012, 11, 15),
