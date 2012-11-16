@@ -1,0 +1,4 @@
+config for sunlight's boundary server, currently supports
+    * ZCTAs
+    * State Legislative Districts (upper & lower)
+    * Congressional Districts
