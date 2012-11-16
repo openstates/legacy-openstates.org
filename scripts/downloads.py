@@ -37,7 +37,7 @@ def download_census_pvs_files():
             os.system('wget ftp://ftp2.census.gov/geo/pvs/{0}/partnership_shapefiles_12v2_{0}.zip'.format(fip))
     for f in glob.glob('*.zip'):
         os.system('unzip -o %s' % f)
-        os.system('rm  *tracts* *ait* *necta* *elsd* *unsd* *uac* *mcd* *county* *place* *aia* *tbg* *scsd* *state* *tct* *puma* *hhl* *cbsa* *anrc*')
+        os.system('rm  *tracts* *ait* *necta* *elsd* *unsd* *uac* *mcd* *county* *place* *aia* *tbg* *scsd* *state* *tct* *puma* *hhl* *cbsa* *anrc* *cdp*')
 
     # extract the types we care about
     for type in ('cd', 'sldl', 'sldu'):
@@ -51,7 +51,7 @@ def download_census_pvs_files():
 
         # do 2d conversion
         for f in glob.glob(dir + '/*.shp'):
-            os.system('ogr2ogr -f "ESRI Shapefile" -overwrite . {0} -nlt POLYGON')
+            os.system('ogr2ogr -f "ESRI Shapefile" -overwrite . {0} -nlt POLYGON'.format(f))
 
 download_census_pvs_files()
-download_census_shapefiles('zcta', 'http://www2.census.gov/geo/tiger/TIGER2012/ZCTA5/tl_2012_us_zcta510.zip')
+#download_census_shapefiles('zcta', 'http://www2.census.gov/geo/tiger/TIGER2012/ZCTA5/tl_2012_us_zcta510.zip')
