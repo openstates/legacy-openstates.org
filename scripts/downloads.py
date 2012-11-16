@@ -51,7 +51,7 @@ def download_census_pvs_files():
 
         # do 2d conversion
         for f in glob.glob(dir + '/*.shp'):
-            os.system('ogr2ogr -f "ESRI Shapefile" -overwrite . {0} -nlt POLYGON'.format(f))
+            os.system('ogr2ogr -f "ESRI Shapefile" -overwrite {0} {1} -nlt POLYGON'.format(dir, f))
 
         os.system('cp ../shapefiles/exceptions/{0}/* ../shapefiles/{0}/'.format(type))
 
