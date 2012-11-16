@@ -37,6 +37,7 @@ def download_census_pvs_files():
             os.system('wget ftp://ftp2.census.gov/geo/pvs/{0}/partnership_shapefiles_12v2_{0}.zip'.format(fip))
     for f in glob.glob('*.zip'):
         os.system('unzip -o %s' % f)
+        os.system('rm  *tracts* *ait* *necta* *elsd* *unsd* *uac* *mcd* *county* *place* *aia* *tbg* *scsd* *state* *tct* *puma* *hhl* *cbsa* *anrc*')
 
     # extract the types we care about
     for type in ('cd', 'sldl', 'sldu'):
