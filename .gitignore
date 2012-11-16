@@ -1,5 +1,9 @@
 *.pyc
 downloads/
+shapefiles/sldu
+shapefiles/sldl
+shapefiles/cd
+shapefiles/zcta
 *.dbf
 *.shp
 *.shx
