@@ -49,11 +49,8 @@ def download_census_pvs_files():
         # copy files over
         os.system('mv *_{0}_* ../shapefiles/{0}'.format(type))
 
-        # go into type dir
-        os.chdir(dir)
-
         # do 2d conversion
-        for f in glob.glob('*.shp'):
+        for f in glob.glob(dir + '/*.shp'):
             os.system('ogr2ogr -f "ESRI Shapefile" -overwrite . {0} -nlt POLYGON')
 
 download_census_pvs_files()
