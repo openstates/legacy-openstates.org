@@ -23,6 +23,15 @@ def tiger_namer(feature):
 
     return "%s %s" % (state_abbrev, feature.get('NAME'))
 
+class index_namer(object):
+    def __init__(self, prefix):
+        self.prefix = prefix
+        self.count = 0
+
+    def __call__(self, feature):
+        self.count += 1
+        return '{0}{1}'.format(self.prefix, self.count)
+
 CENSUS_URL = 'https://www.census.gov/rdo/data/113th_congressional_and_new_state_legislative_district_plans.html'
 
 # congressional districts
