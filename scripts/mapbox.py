@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import random
 import itertools
 import shapefile
 from shapely.geometry import Polygon
@@ -41,30 +42,45 @@ def generate_mss(mss_id, shpfile, selector=None):
             raise Exception("Unknown Shape Type: %s" % shape.shapeType)
 
     # color choices
-    colors = ('@c1', '@c2', '@c3', '@c4', '@c5', '@c6', '@c7', '@c8', '@c9')
-    colors = itertools.cycle(colors)
+    all_colors = ('@c1', '@c2', '@c3', '@c4', '@c5', '@c6', '@c7', '@c8', '@c9')
+    colors = itertools.cycle(all_colors)
 
-    # pick a color
-    shape_colors = {}
-    for name1, shape1 in shapes.iteritems():
-        disallowed_colors = set([None])
-        # find overlapping colors
-        for name2, shape2 in shapes.iteritems():
-            try:
-                if name1 != name2 and shape1.intersects(shape2):
+    shapes = shapes.items()
+
+    is_well_colored = False
+    while not is_well_colored:
+        # shuffle the shapes
+        random.shuffle(shapes)
+
+        # assume we succeed
+        is_well_colored = True
+
+        # pick a color
+        shape_colors = {}
+        for name1, shape1 in shapes:
+            disallowed_colors = set([None])
+            # find overlapping colors
+            for name2, shape2 in shapes:
+                try:
+                    if name1 != name2 and shape1.intersects(shape2):
+                        disallowed_colors.add(shape_colors.get(name2))
+                except PredicateError:
+                    # not sure why these happen, but we'll count them as collisions
                     disallowed_colors.add(shape_colors.get(name2))
-            except PredicateError:
-                # not sure why these happen, but we'll count them as collisions
-                disallowed_colors.add(shape_colors.get(name2))
-        # pick a color that matches
-        proposed_color = None
-        if len(disallowed_colors) == 9:
-            proposed_color = '@grey'
-            print 'had to use grey for ', name1
-        else:
-            while proposed_color in disallowed_colors:
-                proposed_color = colors.next()
-        shape_colors[name1] = proposed_color
+            # pick a color that matches
+            proposed_color = None
+            if len(disallowed_colors) == 9:
+                proposed_color = '@grey'
+                print "couldn't color", name1
+                is_well_colored = False
+                break
+            else:
+                while proposed_color in disallowed_colors:
+                    proposed_color = colors.next()
+            shape_colors[name1] = proposed_color
+
+    for color in all_colors:
+        print color, shape_colors.values().count(color)
 
     # write the .mss
     mss = """{0} {{ line-color: #999; line-width: 0.5; polygon-opacity: 0.5; }}
@@ -77,12 +93,14 @@ def generate_mss(mss_id, shpfile, selector=None):
 @c7: #8cbcb5;
 @c8: #698784;
 @c9: #204e50;
-\n\n
-""".format(mss_id)
+\n
+{0}[{1}="ZZZ"] {{ polygon-opacity: 0; line-opacity: 0; }}
+\n
+""".format(mss_id, selector)
     return mss + '\n'.join(
         '{0}[{1}="{2}"] {{ polygon-fill: {3}; }}'.format(mss_id, selector,
                                                          id, color)
-        for id, color in shape_colors.iteritems())
+        for id, color in sorted(shape_colors.iteritems()))
 
 
 def generate_mml(shpfile, state=None, chamber=None, selector=None):
