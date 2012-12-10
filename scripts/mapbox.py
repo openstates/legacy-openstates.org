@@ -69,8 +69,7 @@ def generate_mss(mss_id, shpfile, selector=None):
                     disallowed_colors.add(shape_colors.get(name2))
             # pick a color that matches
             proposed_color = None
-            if len(disallowed_colors) == 9:
-                proposed_color = '@grey'
+            if len(disallowed_colors) == 10:
                 print "couldn't color", name1
                 is_well_colored = False
                 break

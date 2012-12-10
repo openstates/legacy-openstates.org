@@ -9,3 +9,4 @@ shapefiles/zcta
 *.shx
 *.prj
 local_settings.py
+.thumb.png
