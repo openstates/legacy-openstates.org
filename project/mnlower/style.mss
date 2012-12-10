@@ -1,0 +1,149 @@
+#districts { line-color: #999; line-width: 0.5; polygon-opacity: 0.5; }
+@c1: #f3b05d;
+@c2: #b3bf7e;
+@c3: #8cbcb5;
+@c4: #e1582c;
+@c5: #5e6f3e;
+@c6: #698784;
+@c7: #932700;
+@c8: #7f985e;
+@c9: #204e50;
+
+
+#districts[SLDLST="ZZZ"] { polygon-opacity: 0; line-opacity: 0; }
+
+
+#districts[SLDLST="01A"] { polygon-fill: @c4; }
+#districts[SLDLST="01B"] { polygon-fill: @c9; }
+#districts[SLDLST="02A"] { polygon-fill: @c5; }
+#districts[SLDLST="02B"] { polygon-fill: @c3; }
+#districts[SLDLST="03A"] { polygon-fill: @c9; }
+#districts[SLDLST="03B"] { polygon-fill: @c3; }
+#districts[SLDLST="04A"] { polygon-fill: @c7; }
+#districts[SLDLST="04B"] { polygon-fill: @c5; }
+#districts[SLDLST="05A"] { polygon-fill: @c4; }
+#districts[SLDLST="05B"] { polygon-fill: @c8; }
+#districts[SLDLST="06A"] { polygon-fill: @c5; }
+#districts[SLDLST="06B"] { polygon-fill: @c1; }
+#districts[SLDLST="07A"] { polygon-fill: @c7; }
+#districts[SLDLST="07B"] { polygon-fill: @c8; }
+#districts[SLDLST="08A"] { polygon-fill: @c6; }
+#districts[SLDLST="08B"] { polygon-fill: @c1; }
+#districts[SLDLST="09A"] { polygon-fill: @c2; }
+#districts[SLDLST="09B"] { polygon-fill: @c6; }
+#districts[SLDLST="10A"] { polygon-fill: @c6; }
+#districts[SLDLST="10B"] { polygon-fill: @c3; }
+#districts[SLDLST="11A"] { polygon-fill: @c2; }
+#districts[SLDLST="11B"] { polygon-fill: @c5; }
+#districts[SLDLST="12A"] { polygon-fill: @c2; }
+#districts[SLDLST="12B"] { polygon-fill: @c4; }
+#districts[SLDLST="13A"] { polygon-fill: @c6; }
+#districts[SLDLST="13B"] { polygon-fill: @c9; }
+#districts[SLDLST="14A"] { polygon-fill: @c7; }
+#districts[SLDLST="14B"] { polygon-fill: @c4; }
+#districts[SLDLST="15A"] { polygon-fill: @c4; }
+#districts[SLDLST="15B"] { polygon-fill: @c5; }
+#districts[SLDLST="16A"] { polygon-fill: @c8; }
+#districts[SLDLST="16B"] { polygon-fill: @c3; }
+#districts[SLDLST="17A"] { polygon-fill: @c7; }
+#districts[SLDLST="17B"] { polygon-fill: @c5; }
+#districts[SLDLST="18A"] { polygon-fill: @c8; }
+#districts[SLDLST="18B"] { polygon-fill: @c2; }
+#districts[SLDLST="19A"] { polygon-fill: @c6; }
+#districts[SLDLST="19B"] { polygon-fill: @c5; }
+#districts[SLDLST="20A"] { polygon-fill: @c3; }
+#districts[SLDLST="20B"] { polygon-fill: @c9; }
+#districts[SLDLST="21A"] { polygon-fill: @c6; }
+#districts[SLDLST="21B"] { polygon-fill: @c1; }
+#districts[SLDLST="22A"] { polygon-fill: @c9; }
+#districts[SLDLST="22B"] { polygon-fill: @c5; }
+#districts[SLDLST="23A"] { polygon-fill: @c4; }
+#districts[SLDLST="23B"] { polygon-fill: @c8; }
+#districts[SLDLST="24A"] { polygon-fill: @c7; }
+#districts[SLDLST="24B"] { polygon-fill: @c4; }
+#districts[SLDLST="25A"] { polygon-fill: @c2; }
+#districts[SLDLST="25B"] { polygon-fill: @c4; }
+#districts[SLDLST="26A"] { polygon-fill: @c3; }
+#districts[SLDLST="26B"] { polygon-fill: @c6; }
+#districts[SLDLST="27A"] { polygon-fill: @c1; }
+#districts[SLDLST="27B"] { polygon-fill: @c3; }
+#districts[SLDLST="28A"] { polygon-fill: @c8; }
+#districts[SLDLST="28B"] { polygon-fill: @c5; }
+#districts[SLDLST="29A"] { polygon-fill: @c4; }
+#districts[SLDLST="29B"] { polygon-fill: @c9; }
+#districts[SLDLST="30A"] { polygon-fill: @c1; }
+#districts[SLDLST="30B"] { polygon-fill: @c7; }
+#districts[SLDLST="31A"] { polygon-fill: @c2; }
+#districts[SLDLST="31B"] { polygon-fill: @c9; }
+#districts[SLDLST="32A"] { polygon-fill: @c6; }
+#districts[SLDLST="32B"] { polygon-fill: @c8; }
+#districts[SLDLST="33A"] { polygon-fill: @c2; }
+#districts[SLDLST="33B"] { polygon-fill: @c6; }
+#districts[SLDLST="34A"] { polygon-fill: @c6; }
+#districts[SLDLST="34B"] { polygon-fill: @c1; }
+#districts[SLDLST="35A"] { polygon-fill: @c4; }
+#districts[SLDLST="35B"] { polygon-fill: @c1; }
+#districts[SLDLST="36A"] { polygon-fill: @c8; }
+#districts[SLDLST="36B"] { polygon-fill: @c7; }
+#districts[SLDLST="37A"] { polygon-fill: @c5; }
+#districts[SLDLST="37B"] { polygon-fill: @c8; }
+#districts[SLDLST="38A"] { polygon-fill: @c4; }
+#districts[SLDLST="38B"] { polygon-fill: @c5; }
+#districts[SLDLST="39A"] { polygon-fill: @c1; }
+#districts[SLDLST="39B"] { polygon-fill: @c8; }
+#districts[SLDLST="40A"] { polygon-fill: @c2; }
+#districts[SLDLST="40B"] { polygon-fill: @c3; }
+#districts[SLDLST="41A"] { polygon-fill: @c6; }
+#districts[SLDLST="41B"] { polygon-fill: @c9; }
+#districts[SLDLST="42A"] { polygon-fill: @c7; }
+#districts[SLDLST="42B"] { polygon-fill: @c8; }
+#districts[SLDLST="43A"] { polygon-fill: @c3; }
+#districts[SLDLST="43B"] { polygon-fill: @c4; }
+#districts[SLDLST="44A"] { polygon-fill: @c3; }
+#districts[SLDLST="44B"] { polygon-fill: @c7; }
+#districts[SLDLST="45A"] { polygon-fill: @c4; }
+#districts[SLDLST="45B"] { polygon-fill: @c7; }
+#districts[SLDLST="46A"] { polygon-fill: @c5; }
+#districts[SLDLST="46B"] { polygon-fill: @c9; }
+#districts[SLDLST="47A"] { polygon-fill: @c6; }
+#districts[SLDLST="47B"] { polygon-fill: @c7; }
+#districts[SLDLST="48A"] { polygon-fill: @c2; }
+#districts[SLDLST="48B"] { polygon-fill: @c9; }
+#districts[SLDLST="49A"] { polygon-fill: @c6; }
+#districts[SLDLST="49B"] { polygon-fill: @c4; }
+#districts[SLDLST="50A"] { polygon-fill: @c3; }
+#districts[SLDLST="50B"] { polygon-fill: @c2; }
+#districts[SLDLST="51A"] { polygon-fill: @c8; }
+#districts[SLDLST="51B"] { polygon-fill: @c5; }
+#districts[SLDLST="52A"] { polygon-fill: @c3; }
+#districts[SLDLST="52B"] { polygon-fill: @c7; }
+#districts[SLDLST="53A"] { polygon-fill: @c2; }
+#districts[SLDLST="53B"] { polygon-fill: @c7; }
+#districts[SLDLST="54A"] { polygon-fill: @c1; }
+#districts[SLDLST="54B"] { polygon-fill: @c5; }
+#districts[SLDLST="55A"] { polygon-fill: @c8; }
+#districts[SLDLST="55B"] { polygon-fill: @c4; }
+#districts[SLDLST="56A"] { polygon-fill: @c1; }
+#districts[SLDLST="56B"] { polygon-fill: @c6; }
+#districts[SLDLST="57A"] { polygon-fill: @c3; }
+#districts[SLDLST="57B"] { polygon-fill: @c4; }
+#districts[SLDLST="58A"] { polygon-fill: @c5; }
+#districts[SLDLST="58B"] { polygon-fill: @c2; }
+#districts[SLDLST="59A"] { polygon-fill: @c1; }
+#districts[SLDLST="59B"] { polygon-fill: @c2; }
+#districts[SLDLST="60A"] { polygon-fill: @c5; }
+#districts[SLDLST="60B"] { polygon-fill: @c9; }
+#districts[SLDLST="61A"] { polygon-fill: @c1; }
+#districts[SLDLST="61B"] { polygon-fill: @c2; }
+#districts[SLDLST="62A"] { polygon-fill: @c8; }
+#districts[SLDLST="62B"] { polygon-fill: @c3; }
+#districts[SLDLST="63A"] { polygon-fill: @c1; }
+#districts[SLDLST="63B"] { polygon-fill: @c5; }
+#districts[SLDLST="64A"] { polygon-fill: @c7; }
+#districts[SLDLST="64B"] { polygon-fill: @c2; }
+#districts[SLDLST="65A"] { polygon-fill: @c6; }
+#districts[SLDLST="65B"] { polygon-fill: @c9; }
+#districts[SLDLST="66A"] { polygon-fill: @c1; }
+#districts[SLDLST="66B"] { polygon-fill: @c8; }
+#districts[SLDLST="67A"] { polygon-fill: @c9; }
+#districts[SLDLST="67B"] { polygon-fill: @c7; }
