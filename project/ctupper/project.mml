@@ -1,49 +1,53 @@
 {
-  "attribution": "", 
-  "description": "", 
-  "format": "png", 
-  "minzoom": 4, 
-  "maxzoom": 12, 
-  "legend": "", 
-  "center": [
-    -72.757507, 
-    41.500765, 
-    6
-  ], 
-  "interactivity": {
-    "layer": "districts", 
-    "template_teaser": "{{NAMELSAD}}"
-  }, 
-  "Layer": [
-    {
-      "srs": "", 
-      "srs-name": "autodetect", 
-      "Datasource": {
-        "file": "../../shapefiles/sldu/PVS_12_v2_sldu_09.shp"
-      }, 
-      "extent": [
-        -73.727775, 
-        40.950942999999995, 
-        -71.787239, 
-        42.050587
-      ], 
-      "geometry": "polygon", 
-      "name": "districts", 
-      "id": "districts", 
-      "advanced": {}, 
-      "class": ""
-    }
-  ], 
-  "name": "ctupper", 
-  "metatile": 2, 
   "bounds": [
-    -73.727775, 
-    40.950942999999995, 
-    -71.787239, 
-    42.050587
-  ], 
+    -73.7278,
+    40.9509,
+    -71.7872,
+    42.0506
+  ],
+  "center": [
+    -72.7575,
+    41.5008,
+    6
+  ],
+  "format": "png",
+  "interactivity": {
+    "layer": "districts",
+    "template_teaser": "{{NAMELSAD}}",
+    "fields": [
+      "NAMELSAD"
+    ]
+  },
+  "minzoom": 4,
+  "maxzoom": 15,
+  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
   "Stylesheet": [
     "style.mss"
-  ], 
-  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+  ],
+  "Layer": [
+    {
+      "srs": "",
+      "srs-name": "autodetect",
+      "Datasource": {
+        "file": "../../shapefiles/sldu/PVS_12_v2_sldu_09.shp"
+      },
+      "extent": [
+        -73.727775,
+        40.950942999999995,
+        -71.787239,
+        42.050587
+      ],
+      "geometry": "polygon",
+      "name": "districts",
+      "id": "districts",
+      "advanced": {},
+      "class": ""
+    }
+  ],
+  "scale": 1,
+  "metatile": 2,
+  "attribution": "",
+  "description": "",
+  "legend": "",
+  "name": "ctupper"
 }

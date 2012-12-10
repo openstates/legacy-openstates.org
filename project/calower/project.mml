@@ -1,49 +1,53 @@
 {
-  "attribution": "", 
-  "description": "", 
-  "format": "png", 
-  "minzoom": 4, 
-  "maxzoom": 12, 
-  "legend": "", 
-  "center": [
-    -119.30660699999999, 
-    37.2691745, 
-    6
-  ], 
-  "interactivity": {
-    "layer": "districts", 
-    "template_teaser": "{{NAMELSAD}}"
-  }, 
-  "Layer": [
-    {
-      "srs": "", 
-      "srs-name": "autodetect", 
-      "Datasource": {
-        "file": "../../shapefiles/sldl/PVS_12_v2_sldl_06.shp"
-      }, 
-      "extent": [
-        -124.48200299999999, 
-        32.528832, 
-        -114.131211, 
-        42.009516999999995
-      ], 
-      "geometry": "polygon", 
-      "name": "districts", 
-      "id": "districts", 
-      "advanced": {}, 
-      "class": ""
-    }
-  ], 
-  "name": "calower", 
-  "metatile": 2, 
   "bounds": [
-    -124.48200299999999, 
-    32.528832, 
-    -114.131211, 
-    42.009516999999995
-  ], 
+    -124.482,
+    32.5288,
+    -114.1312,
+    42.0095
+  ],
+  "center": [
+    -119.3066,
+    37.2692,
+    6
+  ],
+  "format": "png",
+  "interactivity": {
+    "layer": "districts",
+    "template_teaser": "{{NAMELSAD}}",
+    "fields": [
+      "NAMELSAD"
+    ]
+  },
+  "minzoom": 4,
+  "maxzoom": 13,
+  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
   "Stylesheet": [
     "style.mss"
-  ], 
-  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+  ],
+  "Layer": [
+    {
+      "srs": "",
+      "srs-name": "autodetect",
+      "Datasource": {
+        "file": "../../shapefiles/sldl/PVS_12_v2_sldl_06.shp"
+      },
+      "extent": [
+        -124.48200299999999,
+        32.528832,
+        -114.131211,
+        42.009516999999995
+      ],
+      "geometry": "polygon",
+      "name": "districts",
+      "id": "districts",
+      "advanced": {},
+      "class": ""
+    }
+  ],
+  "scale": 1,
+  "metatile": 2,
+  "attribution": "",
+  "description": "",
+  "legend": "",
+  "name": "calower"
 }
