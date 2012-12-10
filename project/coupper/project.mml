@@ -1,0 +1,49 @@
+{
+  "attribution": "", 
+  "description": "", 
+  "format": "png", 
+  "minzoom": 4, 
+  "maxzoom": 12, 
+  "legend": "", 
+  "center": [
+    -105.550889, 
+    38.997934, 
+    6
+  ], 
+  "interactivity": {
+    "layer": "districts", 
+    "template_teaser": "{{NAMELSAD}}"
+  }, 
+  "Layer": [
+    {
+      "srs": "", 
+      "srs-name": "autodetect", 
+      "Datasource": {
+        "file": "../../shapefiles/sldu/PVS_12_v2_sldu_08.shp"
+      }, 
+      "extent": [
+        -109.060256, 
+        36.992424, 
+        -102.041522, 
+        41.003443999999995
+      ], 
+      "geometry": "polygon", 
+      "name": "districts", 
+      "id": "districts", 
+      "advanced": {}, 
+      "class": ""
+    }
+  ], 
+  "name": "coupper", 
+  "metatile": 2, 
+  "bounds": [
+    -109.060256, 
+    36.992424, 
+    -102.041522, 
+    41.003443999999995
+  ], 
+  "Stylesheet": [
+    "style.mss"
+  ], 
+  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+}

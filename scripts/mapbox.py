@@ -79,19 +79,19 @@ def generate_mss(mss_id, shpfile, selector=None):
                     proposed_color = colors.next()
             shape_colors[name1] = proposed_color
 
-    for color in all_colors:
-        print color, shape_colors.values().count(color)
+    #for color in all_colors:
+    #    print color, shape_colors.values().count(color)
 
     # write the .mss
     mss = """{0} {{ line-color: #999; line-width: 0.5; polygon-opacity: 0.5; }}
 @c1: #f3b05d;
-@c2: #e1582c;
-@c3: #932700;
-@c4: #b3bf7e;
-@c5: #7f985e;
-@c6: #5e6f3e;
-@c7: #8cbcb5;
-@c8: #698784;
+@c2: #b3bf7e;
+@c3: #8cbcb5;
+@c4: #e1582c;
+@c5: #5e6f3e;
+@c6: #698784;
+@c7: #932700;
+@c8: #7f985e;
 @c9: #204e50;
 \n
 {0}[{1}="ZZZ"] {{ polygon-opacity: 0; line-opacity: 0; }}
