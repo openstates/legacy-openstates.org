@@ -1,0 +1,53 @@
+{
+  "bounds": [
+    -75.5636,
+    38.7887,
+    -73.8851,
+    41.3574
+  ],
+  "center": [
+    -74.7243,
+    40.073,
+    6
+  ],
+  "format": "png",
+  "interactivity": {
+    "layer": "districts",
+    "template_teaser": "{{NAMELSAD}}",
+    "fields": [
+      "NAMELSAD"
+    ]
+  },
+  "minzoom": 4,
+  "maxzoom": 15,
+  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+  "Stylesheet": [
+    "style.mss"
+  ],
+  "Layer": [
+    {
+      "srs": "",
+      "srs-name": "autodetect",
+      "Datasource": {
+        "file": "../../shapefiles/sldu/PVS_12_v2_sldu_34.shp"
+      },
+      "extent": [
+        -75.563586,
+        38.788657,
+        -73.88506,
+        41.357423
+      ],
+      "geometry": "polygon",
+      "name": "districts",
+      "id": "districts",
+      "advanced": {},
+      "class": ""
+    }
+  ],
+  "scale": 1,
+  "metatile": 2,
+  "attribution": "",
+  "description": "",
+  "legend": "",
+  "name": "njupper"
+}

@@ -1,0 +1,53 @@
+{
+  "bounds": [
+    -79.7626,
+    40.4774,
+    -71.7775,
+    45.0159
+  ],
+  "center": [
+    -75.77,
+    42.7466,
+    6
+  ],
+  "format": "png",
+  "interactivity": {
+    "layer": "districts",
+    "template_teaser": "{{NAMELSAD}}",
+    "fields": [
+      "NAMELSAD"
+    ]
+  },
+  "minzoom": 4,
+  "maxzoom": 13,
+  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+  "Stylesheet": [
+    "style.mss"
+  ],
+  "Layer": [
+    {
+      "srs": "",
+      "srs-name": "autodetect",
+      "Datasource": {
+        "file": "../../shapefiles/sldu/PVS_12_v2_sldu_36.shp"
+      },
+      "extent": [
+        -79.76259,
+        40.477399,
+        -71.777491,
+        45.015865
+      ],
+      "geometry": "polygon",
+      "name": "districts",
+      "id": "districts",
+      "advanced": {},
+      "class": ""
+    }
+  ],
+  "scale": 1,
+  "metatile": 2,
+  "attribution": "",
+  "description": "",
+  "legend": "",
+  "name": "nyupper"
+}
