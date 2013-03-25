@@ -115,8 +115,8 @@ def save_shapefiles(*args, **kwargs):
     os.chdir('..')
 
 
-#download_census_shapefiles('zcta',
-#    'http://www2.census.gov/geo/tiger/TIGER2012/ZCTA5/tl_2012_us_zcta510.zip')
+download_census_shapefiles('zcta',
+    'http://www2.census.gov/geo/tiger/TIGER2012/ZCTA5/tl_2012_us_zcta510.zip')
 
 download_state_legislative_districts()
 download_counties()
