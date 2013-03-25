@@ -59,6 +59,11 @@ def download_counties():
         download_census_file(fip, 'county10')
 
 
+def download_congressional_districts():
+    for fip in fips:
+        download_census_file(fip, 'cd113')
+
+
 def list_files(_type, *flags):
     files = os.listdir('.')
     for _file in files:
@@ -110,11 +115,11 @@ def save_shapefiles(*args, **kwargs):
     os.chdir('..')
 
 
-download_census_shapefiles('zcta',
-    'http://www2.census.gov/geo/tiger/TIGER2012/ZCTA5/tl_2012_us_zcta510.zip')
+#download_census_shapefiles('zcta',
+#    'http://www2.census.gov/geo/tiger/TIGER2012/ZCTA5/tl_2012_us_zcta510.zip')
 
 download_state_legislative_districts()
 download_counties()
+download_congressional_districts()
 
-save_shapefiles('sldl', 'sldu', county10='county')
-
+save_shapefiles('sldl', 'sldu', county10='county', cd113='cd')
