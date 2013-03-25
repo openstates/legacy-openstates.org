@@ -23,7 +23,7 @@ def tiger_namer(feature):
     global state_fips
     fips_code = feature.get("STATEFP")
     state_abbrev = state_fips[fips_code].upper()
-    return "%s %s" % (state_abbrev, feature.get('NAME'))
+    return "%s %s" % (state_abbrev, feature.get('NAMELSAD'))
 
 
 def tiger10_namer(feature):
