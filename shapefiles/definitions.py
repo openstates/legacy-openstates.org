@@ -92,3 +92,17 @@ boundaries.register('sldu',
                     data_url=CENSUS_URL,
                     notes='',
                    )
+
+boundaries.register('county',
+                    singular='county',
+                    domain='United States',
+                    file='county/',
+                    last_updated=date(2012, 11, 15),
+                    name_func=tiger_namer,
+                    id_func=index_namer('county-'),
+                    authority='US Census Bureau',
+                    source_url=CENSUS_URL,
+                    licence_url=CENSUS_URL,
+                    data_url=CENSUS_URL,
+                    notes='',
+                   )
