@@ -1,9 +1,11 @@
 *.pyc
+*.swp
 downloads/
 shapefiles/sldu
 shapefiles/sldl
 shapefiles/cd
 shapefiles/zcta
+shapefiles/county
 *.dbf
 *.shp
 *.shx

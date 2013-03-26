@@ -6,16 +6,17 @@ import shutil
 def download_census_shapefiles(slug, url, download=True):
     dirname = 'shapefiles/{0}/'.format(slug)
     if download:
-        os.makedirs(dirname)
+        if not os.path.exists(dirname):
+            os.makedirs(dirname)
 
     os.chdir(dirname)
     if download:
-        os.system('wget ' + url)
+        if not os.path.exists(os.path.basename(url)):
+            os.system('wget ' + url)
 
     # unzip
     for f in glob.glob('*.zip'):
         os.system('unzip -o %s' % f)
-        os.system('rm %s' % f)
 
     os.chdir('../..')
 
