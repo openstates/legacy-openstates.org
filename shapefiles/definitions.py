@@ -117,3 +117,17 @@ boundaries.register('county',
                     data_url=CENSUS_URL,
                     notes='',
                    )
+
+#boundaries.register('cousub',
+#                    singular='cousub',
+#                    domain='United States',
+#                    file='cousub/',
+#                    last_updated=date(2012, 11, 15),
+#                    name_func=tiger10_namer,
+#                    id_func=index_namer('cousub-'),
+#                    authority='US Census Bureau',
+#                    source_url=CENSUS_URL,
+#                    licence_url=CENSUS_URL,
+#                    data_url=CENSUS_URL,
+#                    notes='',
+#                   )

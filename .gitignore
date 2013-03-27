@@ -6,6 +6,7 @@ shapefiles/sldl
 shapefiles/cd
 shapefiles/zcta
 shapefiles/county
+shapefiles/cousub
 *.dbf
 *.shp
 *.shx

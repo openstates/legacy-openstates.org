@@ -58,6 +58,7 @@ def download_state_legislative_districts():
 def download_counties():
     for fip in fips:
         download_census_file(fip, 'county10')
+#        download_census_file(fip, 'cousub10')
 
 
 def download_congressional_districts():
@@ -123,4 +124,7 @@ download_state_legislative_districts()
 download_counties()
 download_congressional_districts()
 
-save_shapefiles('sldl', 'sldu', county10='county', cd113='cd')
+save_shapefiles('sldl', 'sldu',
+                county10='county',
+#                cousub10='cousub',
+                cd113='cd')
