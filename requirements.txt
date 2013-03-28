@@ -4,3 +4,4 @@ psycopg2
 django-appconf
 pyshp
 shapely
+raven

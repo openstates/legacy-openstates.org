@@ -55,6 +55,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sites',
     'boundaries',
+    'raven.contrib.django.raven_compat',
 )
 
 LOGGING = {
