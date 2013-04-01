@@ -46,13 +46,13 @@ class index_namer(object):
 CENSUS_URL = 'https://www.census.gov/rdo/data/113th_congressional_and_new_state_legislative_district_plans.html'
 
 # congressional districts
-boundaries.register('cd',
-                    singular='cd',
+boundaries.register('cd-13',
+                    singular='cd-13',
                     domain='United States',
-                    file='cd/',
+                    file='cd-13/',
                     last_updated=date(2012, 11, 15),
                     name_func=tiger_namer,
-                    id_func=index_namer('cd-'),
+                    id_func=index_namer('cd-13-'),
                     authority='US Census Bureau',
                     source_url=CENSUS_URL,
                     licence_url=CENSUS_URL,
