@@ -118,4 +118,5 @@ def download_zcta():
 
 download_state_leg_bounds()
 download_fed_leg_bounds()
+download_counties()
 download_zcta()

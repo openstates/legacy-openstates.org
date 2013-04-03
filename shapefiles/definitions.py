@@ -1,6 +1,7 @@
 """
 Configuration describing the shapefiles to be loaded.
 """
+from django.contrib.gis.gdal.error import OGRIndexError
 from datetime import date
 import boundaries
 
@@ -21,7 +22,14 @@ state_fips = {
 
 def tiger_namer(feature):
     global state_fips
-    fips_code = feature.get("STATEFP")
+    global OGRIndexError
+    global tiger10_namer
+
+    try:
+        fips_code = feature.get("STATEFP")
+    except OGRIndexError:
+        return tiger10_namer(feature)
+
     state_abbrev = state_fips[fips_code].upper()
     return "%s %s" % (state_abbrev, feature.get('NAMELSAD'))
 
@@ -53,6 +61,20 @@ boundaries.register('cd-113',
                     last_updated=date(2012, 11, 15),
                     name_func=tiger_namer,
                     id_func=index_namer('cd-113-'),
+                    authority='US Census Bureau',
+                    source_url=CENSUS_URL,
+                    licence_url=CENSUS_URL,
+                    data_url=CENSUS_URL,
+                    notes='',
+                   )
+
+boundaries.register('cd-111',
+                    singular='cd-111',
+                    domain='United States',
+                    file='cd-111/',
+                    last_updated=date(2012, 11, 15),
+                    name_func=tiger_namer,
+                    id_func=index_namer('cd-111-'),
                     authority='US Census Bureau',
                     source_url=CENSUS_URL,
                     licence_url=CENSUS_URL,
@@ -104,19 +126,19 @@ boundaries.register('sldu-13',
                     notes='',
                    )
 
-#boundaries.register('county-13',
-#                    singular='county-13',
-#                    domain='United States',
-#                    file='county-13/',
-#                    last_updated=date(2012, 11, 15),
-#                    name_func=tiger10_namer,
-#                    id_func=index_namer('county-13-'),
-#                    authority='US Census Bureau',
-#                    source_url=CENSUS_URL,
-#                    licence_url=CENSUS_URL,
-#                    data_url=CENSUS_URL,
-#                    notes='',
-#                   )
+boundaries.register('county-13',
+                    singular='county-13',
+                    domain='United States',
+                    file='county-13/',
+                    last_updated=date(2012, 11, 15),
+                    name_func=tiger10_namer,
+                    id_func=index_namer('county-13-'),
+                    authority='US Census Bureau',
+                    source_url=CENSUS_URL,
+                    licence_url=CENSUS_URL,
+                    data_url=CENSUS_URL,
+                    notes='',
+                   )
 
 #boundaries.register('cousub',
 #                    singular='cousub',
