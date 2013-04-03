@@ -99,11 +99,15 @@ def download_counties():
 
 
 def download_fed_leg_bounds():
-    download_file("ftp://ftp2.census.gov/geo/tiger/TIGERrd13_st/nation/tl_rd13_us_cd111.zip", "downloads/cd-111")
+    for fip in fips:
+        download_census_file("TIGERrd13_st", fip, "cd111",
+                             "13", "downloads/cd-111")
+        download_census_file("TIGERrd13_st", fip, "cd113",
+                             "13", "downloads/cd-113")
+
+    extract_cwd("downloads/cd-113")
     extract_cwd("downloads/cd-111")
 
-    download_file("ftp://ftp2.census.gov/geo/tiger/TIGERrd13_st/nation/tl_rd13_us_cd111.zip", "downloads/cd-113")
-    extract_cwd("downloads/cd-113")
 
 
 def download_zcta():
