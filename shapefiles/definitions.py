@@ -51,7 +51,9 @@ class index_namer(object):
         self.count += 1
         return '{0}{1}'.format(self.prefix, self.count)
 
+
 CENSUS_URL = 'https://www.census.gov/rdo/data/113th_congressional_and_new_state_legislative_district_plans.html'
+
 
 # congressional districts
 boundaries.register('cd-113',
@@ -89,7 +91,7 @@ boundaries.register('zcta-13',
                     file='zcta-13/',
                     last_updated=date(2012, 11, 15),
                     name_func=boundaries.attr('ZCTA5CE10'),
-                    id_func=index_namer('zcta-13'),
+                    id_func=index_namer('zcta-13-'),
                     authority='US Census Bureau',
                     source_url=CENSUS_URL,
                     licence_url=CENSUS_URL,
@@ -104,7 +106,7 @@ boundaries.register('sldl-13',
                     file='sldl-13/',
                     last_updated=date(2012, 11, 15),
                     name_func=tiger_namer,
-                    id_func=index_namer('sldl-13'),
+                    id_func=index_namer('sldl-13-'),
                     authority='US Census Bureau',
                     source_url=CENSUS_URL,
                     licence_url=CENSUS_URL,

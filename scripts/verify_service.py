@@ -12,6 +12,7 @@ URL_BASE = "http://localhost:8000"
 def query_bs(lat, lon):
     path = "/boundaries/?contains={lat},{lon}".format(**locals())
     URL = "%s%s" % (URL_BASE, path)
+    print "[ fetch ] %s" % (URL)
     return json.load(urllib2.urlopen(URL))
 
 
