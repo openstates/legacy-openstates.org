@@ -90,12 +90,21 @@ def extract_cwd(path=None):
 
     os.chdir(pop)
 
+
 def download_counties():
     for fip in fips:
         download_census_file("TIGERrd13_st", fip, "county10",
             "13", "downloads/county-13")
 
     extract_cwd("downloads/county-13")
+
+
+def download_places():
+    for fip in fips:
+        download_census_file("TIGERrd13_st", fip, "place10",
+            "13", "downloads/place-13")
+
+    extract_cwd("downloads/place-13")
 
 
 def download_fed_leg_bounds():
@@ -116,6 +125,7 @@ def download_zcta():
 
 
 
+download_places()
 download_state_leg_bounds()
 download_fed_leg_bounds()
 download_counties()
