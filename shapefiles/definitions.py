@@ -34,13 +34,12 @@ def tiger_namer(feature):
     return "%s %s" % (state_abbrev, feature.get('NAMELSAD'))
 
 
-def place_tiger_namer(feature):
+def geoid_tiger_namer(feature):
     global state_fips
 
     fips_code = feature.get("STATEFP10")
     state_abbrev = state_fips[fips_code].upper()
-    return "%s %s-%s" % (state_abbrev, feature.get('PLACEFP10'),
-                         feature.get('NAMELSAD10'))
+    return "%s" % (feature.get('GEOID10'))
 
 
 def tiger10_namer(feature):
@@ -143,8 +142,8 @@ boundaries.register('county-13',
                     domain='United States',
                     file='county-13/',
                     last_updated=date(2012, 11, 15),
-                    name_func=tiger_namer,
-                    id_func=index_namer('county-13-'),
+                    name_func=geoid_tiger_namer,
+                    id_func=index_namer(''),
                     authority='US Census Bureau',
                     source_url=CENSUS_URL,
                     licence_url=CENSUS_URL,
@@ -158,8 +157,8 @@ boundaries.register('place-13',
                     domain='United States',
                     file='place-13/',
                     last_updated=date(2012, 11, 15),
-                    name_func=place_tiger_namer,
-                    id_func=index_namer('place-13-'),
+                    name_func=geoid_tiger_namer,
+                    id_func=index_namer(''),
                     authority='US Census Bureau',
                     source_url=CENSUS_URL,
                     licence_url=CENSUS_URL,
