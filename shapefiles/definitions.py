@@ -35,11 +35,7 @@ def tiger_namer(feature):
 
 
 def geoid_tiger_namer(feature):
-    global state_fips
-
-    fips_code = feature.get("STATEFP10")
-    state_abbrev = state_fips[fips_code].upper()
-    return "%s" % (feature.get('GEOID10'))
+    return feature.get('GEOID10')
 
 
 def tiger10_namer(feature):
