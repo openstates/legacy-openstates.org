@@ -153,6 +153,7 @@ boundaries.register('county-13',
                    )
 
 boundaries.register('place-13',
+                    encoding='latin-1',
                     singular='place-13',
                     domain='United States',
                     file='place-13/',
