@@ -1,3 +1,5 @@
+from .base import *
+
 DATABASES = {
     'default': {
         'NAME': 'pentagon',
@@ -7,3 +9,5 @@ DATABASES = {
         'PASSWORD': 'somepassword',
     }
 }
+
+SECRET_KEY = 'not-so-secret'
