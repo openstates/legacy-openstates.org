@@ -11,3 +11,4 @@ DATABASES = {
 }
 
 SECRET_KEY = 'not-so-secret'
+PENTAGON_URL = 'http://localhost:8000/'
