@@ -23,27 +23,28 @@ state_fips = {
 def tiger_namer(feature):
     global OGRIndexError
     global state_fips
-    global tiger10_namer
 
     try:
-        fips_code = feature.get("STATEFP")
+        fips_code = feature.get('STATEFP')
     except OGRIndexError:
-        return tiger10_namer(feature)
+        fips_code = feature.get('STATEFP10')
+
+    try:
+        name = feature.get('NAMELSAD')
+    except OGRIndexError:
+        name = feature.get('NAMELSAD10')
+
+    try:
+        geoid = feature.get('GEOID')
+    except OGRIndexError:
+        geoid = feature.get('GEOID10')
 
     state_abbrev = state_fips[fips_code].upper()
-    return "%s %s" % (state_abbrev, feature.get('NAMELSAD'))
+    return "{0} {1} {2}".format(state_abbrev, name, geoid)
 
 
 def geoid_tiger_namer(feature):
     return feature.get('GEOID10')
-
-
-def tiger10_namer(feature):
-    global state_fips
-    fips_code = feature.get("STATEFP10")
-    state_abbrev = state_fips[fips_code].upper()
-    return "%s %s" % (state_abbrev, feature.get('NAMELSAD10'))
-
 
 
 class index_namer(object):
