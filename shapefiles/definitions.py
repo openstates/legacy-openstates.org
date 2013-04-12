@@ -21,8 +21,8 @@ state_fips = {
 
 
 def tiger_namer(feature):
-    global state_fips
     global OGRIndexError
+    global state_fips
     global tiger10_namer
 
     try:
@@ -56,122 +56,75 @@ class index_namer(object):
         return '{0}{1}'.format(self.prefix, self.count)
 
 
-CENSUS_URL = 'https://www.census.gov/rdo/data/113th_congressional_and_new_state_legislative_district_plans.html'
+CENSUS_URL = 'http://www.census.gov/geo/maps-data/data/tiger.html'
+LAST_UPDATE = date(2013, 1, 1)
+defaults = dict(last_updated=LAST_UPDATE,
+                domain='United States',
+                authority='US Census Bureau',
+                source_url=CENSUS_URL,
+                license_URL=CENSUS_URL,
+                data_url=CENSUS_URL,
+                notes='',
+               )
 
 
 # congressional districts
 boundaries.register('cd-113',
                     singular='cd-113',
-                    domain='United States',
                     file='cd-113/',
-                    last_updated=date(2012, 11, 15),
                     name_func=tiger_namer,
                     id_func=index_namer('cd-113-'),
-                    authority='US Census Bureau',
-                    source_url=CENSUS_URL,
-                    licence_url=CENSUS_URL,
-                    data_url=CENSUS_URL,
-                    notes='',
+                    **defaults
                    )
 
 boundaries.register('cd-111',
                     singular='cd-111',
-                    domain='United States',
                     file='cd-111/',
-                    last_updated=date(2012, 11, 15),
                     name_func=tiger_namer,
                     id_func=index_namer('cd-111-'),
-                    authority='US Census Bureau',
-                    source_url=CENSUS_URL,
-                    licence_url=CENSUS_URL,
-                    data_url=CENSUS_URL,
-                    notes='',
+                    **defaults
                    )
 
 # Zip Code Tabulation Areas
 boundaries.register('zcta-13',
                     singular='zcta-13',
-                    domain='United States',
                     file='zcta-13/',
-                    last_updated=date(2012, 11, 15),
                     name_func=boundaries.attr('ZCTA5CE10'),
                     id_func=index_namer('zcta-13-'),
-                    authority='US Census Bureau',
-                    source_url=CENSUS_URL,
-                    licence_url=CENSUS_URL,
-                    data_url=CENSUS_URL,
-                    notes='',
+                    **defaults
                    )
 
 
-boundaries.register('sldl-13',
-                    singular='sldl-13',
-                    domain='United States',
-                    file='sldl-13/',
-                    last_updated=date(2012, 11, 15),
-                    name_func=tiger_namer,
-                    id_func=index_namer('sldl-13-'),
-                    authority='US Census Bureau',
-                    source_url=CENSUS_URL,
-                    licence_url=CENSUS_URL,
-                    data_url=CENSUS_URL,
-                    notes='',
-                   )
+#boundaries.register('sldl-13',
+#                    singular='sldl-13',
+#                    file='sldl-13/',
+#                    name_func=tiger_namer,
+#                    id_func=index_namer('sldl-13-'),
+#                    **defaults
+#                   )
 
-boundaries.register('sldu-13',
-                    singular='sldu-13',
-                    domain='United States',
-                    file='sldu-13/',
-                    last_updated=date(2012, 11, 15),
-                    name_func=tiger_namer,
-                    id_func=index_namer('sldu-13-'),
-                    authority='US Census Bureau',
-                    source_url=CENSUS_URL,
-                    licence_url=CENSUS_URL,
-                    data_url=CENSUS_URL,
-                    notes='',
-                   )
+#boundaries.register('sldu-13',
+#                    singular='sldu-13',
+#                    file='sldu-13/',
+#                    name_func=tiger_namer,
+#                    id_func=index_namer('sldu-13-'),
+#                    **defaults
+#                   )
 
 boundaries.register('county-13',
-                    encoding='latin-1',
                     singular='county-13',
-                    domain='United States',
                     file='county-13/',
-                    last_updated=date(2012, 11, 15),
-                    name_func=geoid_tiger_namer,
-                    id_func=index_namer(''),
-                    authority='US Census Bureau',
-                    source_url=CENSUS_URL,
-                    licence_url=CENSUS_URL,
-                    data_url=CENSUS_URL,
-                    notes='',
+                    encoding='latin-1',
+                    name_func=tiger_namer,
+                    id_func=geoid_tiger_namer,
+                    **defaults
                    )
 
 boundaries.register('place-13',
-                    encoding='latin-1',
                     singular='place-13',
-                    domain='United States',
                     file='place-13/',
-                    last_updated=date(2012, 11, 15),
-                    name_func=geoid_tiger_namer,
-                    id_func=index_namer(''),
-                    authority='US Census Bureau',
-                    source_url=CENSUS_URL,
-                    licence_url=CENSUS_URL,
-                    data_url=CENSUS_URL,
-                    notes='',
+                    name_func=tiger_namer,
+                    id_func=geoid_tiger_namer,
+                    encoding='latin-1',
+                    **defaults
                    )
-
-#boundaries.register('cousub',
-#                    singular='cousub',
-#                    domain='United States',
-#                    file='cousub/',
-#                    last_updated=date(2012, 11, 15),
-#                    name_func=tiger_namer,
-#                    id_func=index_namer('cousub-'),
-#                    authority='US Census Bureau',
-#                    source_url=CENSUS_URL,
-#                    licence_url=CENSUS_URL,
-#                    data_url=CENSUS_URL,
-#                    notes='',
-#                   )

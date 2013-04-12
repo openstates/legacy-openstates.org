@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'boundaries',
     'locust',
+    'south',
 )
 
 LOGGING = {
