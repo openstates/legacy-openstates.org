@@ -40,7 +40,8 @@ def tiger_namer(feature):
         geoid = feature.get('GEOID10')
 
     state_abbrev = state_fips[fips_code].upper()
-    return "{0} {1} {2}".format(state_abbrev, name, geoid)
+    name = "{0} {1} {2}".format(state_abbrev, name.encode('latin1'), geoid)
+    return name
 
 
 def geoid_tiger_namer(feature):
