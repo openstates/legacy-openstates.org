@@ -9,4 +9,4 @@ To get started:
     ./manage.py syncdb
     ./manage.py loadshapefiles
     ./manage.py loaddivisions https://raw.github.com/opencivicdata/ocd-division-ids/master/identifiers/country-us.csv
-    ./manage.py loadgeomapping county-13 1980-01-01 https://raw.github.com/opencivicdata/ocd-division-ids/master/mappings/country-us/state-nc-id_to_censusgeo.csv
+    ./manage.py loadgeomapping county-13 1980-01-01 https://raw.github.com/opencivicdata/ocd-division-ids/master/mappings/us-census-geoids.csv
