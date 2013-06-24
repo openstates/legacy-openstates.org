@@ -36,7 +36,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
-ROOT_URLCONF = 'newapi.urls'
+ROOT_URLCONF = 'ocdapi.urls'
 
 TEMPLATE_DIRS = (
     os.path.abspath(os.path.join(os.path.dirname(__file__), 'templates')),
