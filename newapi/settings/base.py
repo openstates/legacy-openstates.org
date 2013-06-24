@@ -1,3 +1,5 @@
+import os
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -37,15 +39,17 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'newapi.urls'
 
 TEMPLATE_DIRS = (
+    os.path.abspath(os.path.join(os.path.dirname(__file__), 'templates')),
 )
 
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sites',
+    'south',
+    'raven.contrib.django.raven_compat',
     'boundaries',
     'locust',
-    'south',
 )
 
 LOGGING = {

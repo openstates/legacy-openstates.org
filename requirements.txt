@@ -4,5 +4,6 @@ django-appconf
 pyshp
 shapely
 south
+raven
 -e git://github.com/rhymeswithcycle/represent-boundaries.git#egg=boundaries
 -e git://github.com/opencivicdata/locust.git#egg=locust
