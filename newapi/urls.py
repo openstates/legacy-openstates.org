@@ -5,6 +5,6 @@ from django.conf.urls.defaults import patterns, include, url
 
 urlpatterns = patterns('',
    (r'', include('boundaries.urls')),
-   (r'^locust/', include('locust.urls')),
+   (r'^divisions/', include('locust.urls')),
    #(r'^admin/', include(admin.site.urls)),
 )

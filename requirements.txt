@@ -1,7 +1,8 @@
 Django
 psycopg2
--e git://github.com/rhymeswithcycle/represent-boundaries.git#egg=boundaries
 django-appconf
 pyshp
 shapely
+south
+-e git://github.com/rhymeswithcycle/represent-boundaries.git#egg=boundaries
 -e git://github.com/opencivicdata/locust.git#egg=locust
