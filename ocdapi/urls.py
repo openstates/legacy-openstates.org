@@ -4,7 +4,8 @@ from django.conf.urls.defaults import patterns, include, url
 #admin.autodiscover()
 
 urlpatterns = patterns('',
-   (r'', include('boundaries.urls')),
-   (r'^divisions/', include('locust.urls')),
+   ('', include('boundaries.urls')),
+   ('', include('locust.urls')),
+   ('', include('imago.urls')),
    #(r'^admin/', include(admin.site.urls)),
 )
