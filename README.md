@@ -14,3 +14,5 @@ To get started w/ boundaries and locust:
     ./manage.py loadshapefiles
     ./manage.py loaddivisions https://raw.github.com/opencivicdata/ocd-division-ids/master/identifiers/country-us.csv
     ./manage.py loadgeomapping county-13 1980-01-01 https://raw.github.com/opencivicdata/ocd-division-ids/master/mappings/us-census-geoids.csv
+    ./manage.py loadgeomapping place-13 1980-01-01 https://raw.github.com/opencivicdata/ocd-division-ids/master/mappings/us-census-geoids.csv
+    # also need to load mappings for zctas, cds, sldus, sldls
