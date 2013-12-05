@@ -49,7 +49,7 @@ INSTALLED_APPS = (
     'south',
     'raven.contrib.django.raven_compat',
     'boundaries',
-    'locust',
+    'imago',
 )
 
 LOGGING = {
