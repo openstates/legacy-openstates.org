@@ -46,7 +46,11 @@ def tiger_namer(feature):
 
 
 def geoid_tiger_namer(feature):
-    return feature.get('GEOID10')
+    try:
+        geoid = feature.get('GEOID')
+    except OGRIndexError:
+        geoid = feature.get('GEOID10')
+    return geoid
 
 
 class index_namer(object):
@@ -98,21 +102,21 @@ boundaries.register('zcta-13',
                    )
 
 
-#boundaries.register('sldl-13',
-#                    singular='sldl-13',
-#                    file='sldl-13/',
-#                    name_func=tiger_namer,
-#                    id_func=index_namer('sldl-13-'),
-#                    **defaults
-#                   )
+boundaries.register('sldl-13',
+                    singular='sldl-13',
+                    file='sldl-13/',
+                    name_func=tiger_namer,
+                    id_func=geoid_tiger_namer,
+                    **defaults
+                   )
 
-#boundaries.register('sldu-13',
-#                    singular='sldu-13',
-#                    file='sldu-13/',
-#                    name_func=tiger_namer,
-#                    id_func=index_namer('sldu-13-'),
-#                    **defaults
-#                   )
+boundaries.register('sldu-13',
+                    singular='sldu-13',
+                    file='sldu-13/',
+                    name_func=tiger_namer,
+                    id_func=geoid_tiger_namer,
+                    **defaults
+                   )
 
 boundaries.register('county-13',
                     singular='county-13',
