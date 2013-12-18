@@ -1,11 +1,10 @@
 Actual API code is a part of several other projects:
 
 * [boundaries](https://github.com/rhymeswithcycle/represent-boundaries) - backs GIS portion
-* [locust](https://github.com/opencivicdata/locust) - ocd-division portion
 * [imago](https://github.com/opencivicdata/imago) - people, bills, events, etc.
 
 
-To get started w/ boundaries and locust:
+To get started:
 
     python scripts/downloads.py                 # downloads shapefiles
     # create a postgres database & user and add to a local_settings.py file
