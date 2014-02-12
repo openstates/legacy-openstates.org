@@ -15,20 +15,24 @@
   text-align: center;
 }
 
-/* Bar chart count series. */
+/* Bar chart count series.
 g.nv-series-0 rect {
-  /*fill: #E6842A;*/
-/*  fill: #8E6C8A;*/
   fill: #F6B656;
 }
 
-/* Bar chart percentile series. */
+g.nv-series > circle.nv-legend-symbol {
+ fill: #F6B656;
+}
+
+ Bar chart percentile series.
 g.nv-series-1 rect {
-  /*fill: #F2DA57 ; */
-  /*fill: #B396AD;*/
   fill: #F2DA57;
 }
 
+sunlighty svg circle.nv-legend-symbol {
+ fill: #F2DA57;
+}
+*/
 .sunlighty {
   background-color: #EFECEA;
   width: 900px;
