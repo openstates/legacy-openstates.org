@@ -30,13 +30,14 @@ def report():
     _points = list(sorted(report['points'], key=party))
     minx = 0
     maxx = 0
+    avg_size = sum(pt['size'] for pt in _points)/len(_points)
     for partyletter, iterator in groupby(_points, key=party):
         key = party_verbose.get(partyletter, 'Other')
         values = list(iterator)
         for val in values:
             size = val['size']
             if not size:
-                size = 5
+                size = avg_size
             val['size'] = size
         color = colormap[partyletter]
         points.append(dict(key=key, values=values, color=color))
