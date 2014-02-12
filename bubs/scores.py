@@ -355,6 +355,7 @@ def import_all(*abbrs):
                 term=term['name'],
                 abbr=abbr,
                 chamber=chamber)
+
             if mongo.reports.find_one(spec):
                 logging.debug('Skipping %r' % spec)
                 continue
@@ -374,8 +375,7 @@ def import_all(*abbrs):
 
 if __name__ == '__main__':
     # import_scores(*sys.argv[1:])
-    # import_scores('ny', 'lower', term='2011-2012')
     logging.basicConfig(level=logging.DEBUG)
     socket.setdefaulttimeout(5)
-    mongo.reports.drop()
+    # mongo.reports.drop()
     import_all()
