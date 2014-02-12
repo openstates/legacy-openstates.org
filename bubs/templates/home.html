@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<head>
+</head>
+<body>
+  <form method="GET" action="/report" >
+    <select name="meta">
+      {% for meta in report_meta %}
+      <option value="{{meta.abbr}},{{meta.chamber}},{{meta.term}}">{{meta.abbr}}, {{meta.chamber}}, {{meta.term}}</option>
+      {% endfor %}
+    </select>
+    <button type='submit'>Submit<button>
+  </form>
+</body>
+</html>
