@@ -5,6 +5,7 @@
 <body>
   <form method="GET" action="/report" >
     <select name="meta">
+      <option value="">Choose a jurisdiction</option>
       {% for meta in report_meta %}
       <option value="{{meta.abbr}},{{meta.chamber}},{{meta.term}}">{{meta.abbr}}, {{meta.chamber}}, {{meta.term}}</option>
       {% endfor %}
