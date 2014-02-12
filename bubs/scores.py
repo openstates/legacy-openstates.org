@@ -340,8 +340,10 @@ class ScoreCalculator(object):
         return report
 
 
-def import_all():
+def import_all(*abbrs):
     for state in openstates.all_metadata():
+        if abbrs and state['abbreviation'] not in abbrs:
+            continue
         abbr = state['abbreviation']
         if abbr in ('co', 'ar', 'ct', 'al', 'dc', 'id'):
             continue
