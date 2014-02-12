@@ -6,5 +6,5 @@ MONGO_PASSWORD = None
 MONGO_HOST = None
 MONGO_DATABASE_NAME = 'pscl'
 
-#from settings_local import *
+from settings_local import *
 
