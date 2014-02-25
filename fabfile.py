@@ -7,14 +7,25 @@ DBUSER = 'api'
 DBPASSWORD = 'test'
 SETTINGS = 'ocdapi.settings.local'
 
+def _dj(cmd):
+    local('django-admin.py {} --settings={}'.format(cmd, SETTINGS))
+
 def localdb():
     local('sudo -u postgres bash -c "dropuser {}"'.format(DBUSER))
     local('sudo -u postgres bash -c "createuser {} -P"'.format(DBUSER))
     local('sudo -u postgres bash -c "dropdb {}"'.format(DBNAME))
     local('sudo -u postgres bash -c "createdb {}"'.format(DBNAME))
     local('''sudo -u postgres bash -c "psql {} -c 'CREATE EXTENSION postgis'"'''.format(DBNAME))
-    local('django-admin.py syncdb --settings={}'.format(SETTINGS))
-    local('django-admin.py migrate --settings={}'.format(SETTINGS))
+    _dj('syncdb')
+    _dj('migrate')
+
+def loadeverything():
+    _dj('loadshapefiles')
+    _dj('loaddivisions https://raw.github.com/opencivicdata/ocd-division-ids/master/identifiers/country-us.csv')
+    _dj('loadgeomapping county-13 1980-01-01 https://raw.github.com/opencivicdata/ocd-division-ids/master/mappings/us-census-geoids.csv')
+    _dj('loadgeomapping place-13 1980-01-01 https://raw.github.com/opencivicdata/ocd-division-ids/master/mappings/us-census-geoids.csv')
+
+### downloads
 
 fips = ('01', '02', '04', '05', '06', '08', '09', '10', '11', '12', '13', '15', '16', '17', '18',
         '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31' ,'32', '33',
