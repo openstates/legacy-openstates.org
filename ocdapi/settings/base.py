@@ -1,4 +1,5 @@
 import os
+import datetime
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -100,3 +101,8 @@ LOGGING = {
 }
 
 BOUNDARIES_SHAPEFILES_DIR = 'shapefiles'
+IMAGO_COUNTRY = 'us'
+IMAGO_BOUNDARY_MAPPINGS = {
+    'county-13': {'url': 'us-census-geoids.csv', 'start': datetime.date(1980,1,1)},
+    'place-13': {'url': 'us-census-geoids.csv', 'start': datetime.date(1980,1,1)},
+}

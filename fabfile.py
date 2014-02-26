@@ -21,9 +21,7 @@ def localdb():
 
 def loadeverything():
     _dj('loadshapefiles')
-    _dj('loaddivisions https://raw.github.com/opencivicdata/ocd-division-ids/master/identifiers/country-us.csv')
-    _dj('loadgeomapping county-13 1980-01-01 https://raw.github.com/opencivicdata/ocd-division-ids/master/mappings/us-census-geoids.csv')
-    _dj('loadgeomapping place-13 1980-01-01 https://raw.github.com/opencivicdata/ocd-division-ids/master/mappings/us-census-geoids.csv')
+    _dj('loaddivisions')
 
 ### downloads
 
