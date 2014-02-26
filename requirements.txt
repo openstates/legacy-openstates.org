@@ -6,5 +6,4 @@ shapely
 south
 raven
 -e git://github.com/rhymeswithcycle/represent-boundaries.git#egg=boundaries
--e git://github.com/opencivicdata/locust.git#egg=locust
 -e git://github.com/sunlightlabs/django-locksmith.git#egg=django-locksmith
