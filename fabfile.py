@@ -11,11 +11,11 @@ def _dj(cmd):
     local('django-admin.py {} --settings={}'.format(cmd, SETTINGS))
 
 def localdb():
-    local('sudo -u postgres bash -c "dropuser {}"'.format(DBUSER))
-    local('sudo -u postgres bash -c "createuser {} -P"'.format(DBUSER))
     local('sudo -u postgres bash -c "dropdb {}"'.format(DBNAME))
     local('sudo -u postgres bash -c "createdb {}"'.format(DBNAME))
     local('''sudo -u postgres bash -c "psql {} -c 'CREATE EXTENSION postgis'"'''.format(DBNAME))
+    local('sudo -u postgres bash -c "dropuser {}"'.format(DBUSER))
+    local('sudo -u postgres bash -c "createuser {} -P"'.format(DBUSER))
     _dj('syncdb')
     _dj('migrate')
 
