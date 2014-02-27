@@ -1,5 +1,7 @@
 Django
 psycopg2
+pymongo
+pyelasticsearch
 django-appconf
 pyshp
 shapely

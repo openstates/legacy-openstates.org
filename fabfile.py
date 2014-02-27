@@ -23,6 +23,9 @@ def loadeverything():
     _dj('loadshapefiles')
     _dj('loaddivisions')
 
+def run():
+    _dj('runserver')
+
 ### downloads
 
 fips = ('01', '02', '04', '05', '06', '08', '09', '10', '11', '12', '13', '15', '16', '17', '18',
