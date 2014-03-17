@@ -80,7 +80,7 @@ boundaries.register('cd-113',
                     singular='cd-113',
                     file='cd-113/',
                     name_func=tiger_namer,
-                    id_func=index_namer('cd-113-'),
+                    id_func=geoid_tiger_namer,
                     **defaults
                    )
 
@@ -88,7 +88,7 @@ boundaries.register('cd-111',
                     singular='cd-111',
                     file='cd-111/',
                     name_func=tiger_namer,
-                    id_func=index_namer('cd-111-'),
+                    id_func=geoid_tiger_namer,
                     **defaults
                    )
 
@@ -97,7 +97,7 @@ boundaries.register('zcta-13',
                     singular='zcta-13',
                     file='zcta-13/',
                     name_func=boundaries.attr('ZCTA5CE10'),
-                    id_func=index_namer('zcta-13-'),
+                    id_func=geoid_tiger_namer,
                     **defaults
                    )
 
