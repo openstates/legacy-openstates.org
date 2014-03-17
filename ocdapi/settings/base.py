@@ -98,9 +98,9 @@ LOGGING = {
 BOUNDARIES_SHAPEFILES_DIR = 'shapefiles'
 IMAGO_COUNTRY = 'us'
 IMAGO_BOUNDARY_MAPPINGS = {
-    'county-13': {'url': 'us-census-places-geoids.csv', 'start': datetime.date(1980,1,1)},
-    'place-13': {'url': 'us-census-places-geoids.csv', 'start': datetime.date(1980,1,1)},
-    'sldl-13': {'url': 'us-sldl-geoid.csv', 'start': datetime.date(2012,1,1)},
-    'sldu-13': {'url': 'us-sldu-geoid.csv', 'start': datetime.date(2012,1,1)},
-    'cd113': {'url': 'us-cds-geoid.csv', 'start': datetime.date(2012,1,1)},
+    'county-13': {'key': 'census_geoid', 'start': datetime.date(1980,1,1)},
+    'place-13': {'key': 'census_geoid', 'start': datetime.date(1980,1,1)},
+    'sldl-13': {'key': 'census_geoid', 'start': datetime.date(2012,1,1)},
+    'sldu-13': {'key': 'census_geoid', 'start': datetime.date(2012,1,1)},
+    'cd113': {'key': 'census_geoid', 'start': datetime.date(2012,1,1)},
 }
