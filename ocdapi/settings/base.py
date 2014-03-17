@@ -102,5 +102,5 @@ IMAGO_BOUNDARY_MAPPINGS = {
     'place-13': {'key': 'census_geoid', 'start': datetime.date(1980,1,1)},
     'sldl-13': {'key': 'census_geoid', 'start': datetime.date(2012,1,1)},
     'sldu-13': {'key': 'census_geoid', 'start': datetime.date(2012,1,1)},
-    'cd113': {'key': 'census_geoid', 'start': datetime.date(2012,1,1)},
+    'cd-113': {'key': 'census_geoid', 'start': datetime.date(2012,1,1)},
 }
