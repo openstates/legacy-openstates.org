@@ -21,7 +21,7 @@ def localdb():
     _dj('migrate')
 
 def loadeverything():
-    _dj('loadshapefiles')
+    _dj('loadshapefiles -osldl-13,sldu-13,cd-113,place-13,county-13')
     _dj('loaddivisions')
 
 def run():

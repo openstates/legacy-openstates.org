@@ -6,6 +6,6 @@ django-appconf
 pyshp
 shapely
 south
-raven
--e git://github.com/rhymeswithcycle/represent-boundaries.git#egg=boundaries
+raven!=4.1
+-e git://github.com/jamesturk/represent-boundaries.git#egg=boundaries
 -e git://github.com/sunlightlabs/django-locksmith.git#egg=django-locksmith
