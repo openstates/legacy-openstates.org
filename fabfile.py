@@ -1,10 +1,33 @@
 import os
 import glob
-from fabric.api import local, settings
+from fabric.api import env, local, settings
+from cheerwine.server import set_hosts, install_base, checkout, update
+from cheerwine.roles import python3, uwsgi_nginx
+from cheerwine.aws import add_project_ebs
+from cheerwine.python import make_venv
+
+env.PROJECT_NAME = 'ocdapi'
+env.use_ssh_config = True
+
+### deployment #################################
+
+def prepare_server():
+    set_hosts('ocdapi')
+    install_base(('unzip', 'gdal-bin', 'postgresql-9.1-postgis', 'postgresql-server-dev-9.1'))
+    python3()
+    add_project_ebs(15, 'ocdapi')
+
+
+def deploy():
+    #checkout('ocdapi', 'git://github.com/opencivicdata/api.opencivicdata.org.git')
+    #checkout('imago', 'git://github.com/opencivicdata/imago.git')
+    #make_venv()
+    uwsgi_nginx()
+
+### local development ###########################
 
 DBNAME = 'api'
 DBUSER = 'api'
-DBPASSWORD = 'test'
 SETTINGS = 'ocdapi.settings.local'
 
 def _dj(cmd):
@@ -27,7 +50,7 @@ def loadeverything():
 def run():
     _dj('runserver')
 
-### downloads
+### downloads #######################
 
 fips = ('01', '02', '04', '05', '06', '08', '09', '10', '11', '12', '13', '15', '16', '17', '18',
         '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31' ,'32', '33',
@@ -70,7 +93,6 @@ def _extract_cwd(path=None):
 
     os.chdir(pop)
 
-
 def _download_census_file(top, fips, what, year, where):
 
     if year == "13":
@@ -81,7 +103,6 @@ def _download_census_file(top, fips, what, year, where):
             **{ "year": year, "what": what, "WHAT": what.upper(), "fips": fips, "top": top, })
 
     _download_file(URL, where)
-
 
 def download_state_leg_bounds():
     for fip in fips:
