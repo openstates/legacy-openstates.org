@@ -22,7 +22,7 @@ STATIC_ROOT = ''
 STATIC_URL = '/static/'
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
-SECRET_KEY = '4=1+-g0^voh4a*w9+(0(fpn_5-k4gks%cfv(h(5dt8h%4#zc4*'
+SECRET_KEY = 'not-so-secret'
 
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -52,6 +52,10 @@ INSTALLED_APPS = (
     'boundaries',
     'imago',
 )
+
+ALLOWED_HOSTS = [
+    '127.0.0.1', 'localhost', '.api.opencivicdata.org'
+]
 
 LOGGING = {
     'version': 1,

@@ -1,12 +1,11 @@
 *.pyc
 *.swp
-downloads/
 *.dbf
 *.shp
 *.shx
 *.prj
-local_settings.py
 .thumb.png
+downloads/
 shapefiles/cd-111/
 shapefiles/cd-113/
 shapefiles/sldl-12/
@@ -17,3 +16,4 @@ shapefiles/zcta-13/
 shapefiles/county-13/
 shapefiles/place-13/
 ocdapi/settings/local.py
+ocdapi/settings/production.py

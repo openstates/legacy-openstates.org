@@ -1,10 +1,11 @@
 import os
 import glob
-from fabric.api import env, local, settings
+from fabric.api import env, local, settings, sudo
 from cheerwine.server import set_hosts, install_base, checkout, update
 from cheerwine.roles import python3, uwsgi_nginx
 from cheerwine.aws import add_project_ebs
-from cheerwine.python import make_venv
+from cheerwine.python import make_venv, pip_install
+from cheerwine.utils import write_configfile, run
 
 env.PROJECT_NAME = 'ocdapi'
 env.use_ssh_config = True
@@ -21,12 +22,19 @@ def prepare_server():
 def deploy():
     checkout('ocdapi', 'git://github.com/opencivicdata/api.opencivicdata.org.git')
     checkout('imago', 'git://github.com/opencivicdata/imago.git')
-    make_venv()
+    make_venv(python3=True)
+    pip_install('-r /projects/ocdapi/src/ocdapi/requirements.txt')
+    write_configfile('/projects/ocdapi/src/ocdapi/ocdapi/settings/production.py',
+                     filename='ocdapi/settings/production.py')
     uwsgi_nginx(
         module='ocdapi.wsgi:application',
+        settings='ocdapi.settings.production',
         pythonpath=['/projects/ocdapi/src/ocdapi/', '/projects/ocdapi/src/imago/'],
         processes=8,
     )
+
+def logs():
+    sudo('tail -f /projects/{}/logs/*'.format(env.PROJECT_NAME))
 
 ### local development ###########################
 
@@ -37,13 +45,13 @@ SETTINGS = 'ocdapi.settings.local'
 def _dj(cmd):
     local('django-admin.py {} --settings={}'.format(cmd, SETTINGS))
 
-def localdb():
+def createdb(local=True, sudo=False):
     with settings(warn_only=True):
-        local('sudo -u postgres bash -c "dropdb {}"'.format(DBNAME))
-        local('sudo -u postgres bash -c "dropuser {}"'.format(DBUSER))
-    local('sudo -u postgres bash -c "createdb {}"'.format(DBNAME))
-    local('''sudo -u postgres bash -c "psql {} -c 'CREATE EXTENSION postgis'"'''.format(DBNAME))
-    local('sudo -u postgres bash -c "createuser {} -P"'.format(DBUSER))
+        run('dropdb {}'.format(DBNAME), sudo='postgres')
+        run('dropuser {}'.format(DBUSER), sudo='postgres')
+    run('createdb {}'.format(DBNAME), sudo='postgres')
+    run('''psql {} -c 'CREATE EXTENSION postgis' '''.format(DBNAME), sudo='postgres')
+    run('createuser {} -P'.format(DBUSER), sudo='postgres')
     _dj('syncdb')
     _dj('migrate')
 
@@ -51,8 +59,8 @@ def loadeverything():
     _dj('loadshapefiles -osldl-13,sldu-13,cd-113,place-13,county-13')
     _dj('loaddivisions')
 
-def run():
-    _dj('runserver')
+#def run():
+#    _dj('runserver')
 
 ### downloads #######################
 
