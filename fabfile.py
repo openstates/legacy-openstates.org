@@ -19,10 +19,14 @@ def prepare_server():
 
 
 def deploy():
-    #checkout('ocdapi', 'git://github.com/opencivicdata/api.opencivicdata.org.git')
-    #checkout('imago', 'git://github.com/opencivicdata/imago.git')
-    #make_venv()
-    uwsgi_nginx()
+    checkout('ocdapi', 'git://github.com/opencivicdata/api.opencivicdata.org.git')
+    checkout('imago', 'git://github.com/opencivicdata/imago.git')
+    make_venv()
+    uwsgi_nginx(
+        module='ocdapi.wsgi:application',
+        pythonpath=['/projects/ocdapi/src/ocdapi/', '/projects/ocdapi/src/imago/'],
+        processes=8,
+    )
 
 ### local development ###########################
 
