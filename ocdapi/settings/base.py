@@ -4,9 +4,7 @@ import datetime
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-ADMINS = (
-    ('James Turk', 'jturk@sunlightfoundation.com'),
-)
+ADMINS = ()
 
 MANAGERS = ADMINS
 
@@ -21,8 +19,6 @@ MEDIA_URL = ''
 STATIC_ROOT = ''
 STATIC_URL = '/static/'
 ADMIN_MEDIA_PREFIX = '/static/admin/'
-
-SECRET_KEY = 'not-so-secret'
 
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
@@ -52,10 +48,6 @@ INSTALLED_APPS = (
     'boundaries',
     'imago',
 )
-
-ALLOWED_HOSTS = [
-    '127.0.0.1', 'localhost', '.api.opencivicdata.org'
-]
 
 LOGGING = {
     'version': 1,
