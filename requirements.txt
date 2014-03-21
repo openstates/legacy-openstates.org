@@ -4,7 +4,7 @@ pymongo
 pyelasticsearch
 django-appconf
 pyshp
-shapely
+#shapely
 south
 raven!=4.1
 -e git://github.com/jamesturk/represent-boundaries.git#egg=boundaries
