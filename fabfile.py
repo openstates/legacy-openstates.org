@@ -1,11 +1,11 @@
 import os
 import glob
 from fabric.api import env, local, settings, sudo
-from cheerwine.server import set_hosts, install_base, checkout, update
-from cheerwine.roles import python3, uwsgi_nginx
-from cheerwine.aws import add_project_ebs
-from cheerwine.python import make_venv, pip_install
-from cheerwine.utils import write_configfile, run
+#from cheerwine.server import set_hosts, install_base, checkout, update
+#from cheerwine.roles import python3, uwsgi_nginx
+#from cheerwine.aws import add_project_ebs
+#from cheerwine.python import make_venv, pip_install
+#from cheerwine.utils import write_configfile, run
 
 env.PROJECT_NAME = 'ocdapi'
 env.use_ssh_config = True
