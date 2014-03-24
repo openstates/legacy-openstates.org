@@ -23,13 +23,15 @@ class API(Django):
         )
 
     def download(self):
-        self.script('ocdapi/scripts/download.py')
+        self.script('ocdapi/scripts/download.py', workdir='/projects/ocdapi/src/ocdapi/')
 
     def syncdb(self):
         self.django('syncdb')
         self.django('migrate')
-        #_dj('loadshapefiles -osldl-13,sldu-13,cd-113,place-13,county-13')
-        #_dj('loaddivisions')
+        self.django('loadshapefiles -osldl-13,sldu-13,cd-113,place-13,county-13',
+                    workdir='/projects/ocdapi/src/ocdapi/')
+        self.django('loaddivisions',
+                    workdir='/projects/ocdapi/src/ocdapi/')
 
 Postgres(15, 'api', 'api', postgis=True)
 API()
