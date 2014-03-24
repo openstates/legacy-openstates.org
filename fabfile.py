@@ -22,6 +22,9 @@ class API(Django):
             django_settings='ocdapi.settings.production',
         )
 
+    def download(self):
+        self.script('ocdapi/scripts/download.py')
+
     def syncdb(self):
         self.django('syncdb')
         self.django('migrate')
