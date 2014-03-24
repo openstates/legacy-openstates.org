@@ -1,40 +1,39 @@
 import os
 import glob
-from fabric.api import env, local, settings, sudo
-#from cheerwine.server import set_hosts, install_base, checkout, update
-#from cheerwine.roles import python3, uwsgi_nginx
-#from cheerwine.aws import add_project_ebs
-#from cheerwine.python import make_venv, pip_install
-#from cheerwine.utils import write_configfile, run
+from fabric.api import env, local, settings, sudo, task
+from cheerwine.api import add_role
+from cheerwine.server import set_hosts, install_base
+from cheerwine.roles import Django, Postgres
 
-env.PROJECT_NAME = 'ocdapi'
 env.use_ssh_config = True
+***REMOVED***
+***REMOVED***'
+env.POSTGRES_PASSWORD = 'test'
+env.CMD_LOCAL = False
 
 ### deployment #################################
-
+@task
 def prepare_server():
     set_hosts('ocdapi')
-    install_base(('unzip', 'gdal-bin', 'postgresql-9.1-postgis', 'postgresql-server-dev-9.1'))
-    python3()
-    add_project_ebs(15, 'ocdapi')
+    install_base(('unzip', 'gdal-bin'))
 
+class API(Django):
+    def __init__(self):
+        super(API, self).__init__(
+            name='ocdapi', ebs_size=10, wsgi_module='ocdapi.wsgi:application',
+            repos={'ocdapi':'git://github.com/opencivicdata/api.opencivicdata.org.git',
+                   'imago': 'git://github.com/opencivicdata/imago.git'},
+            python3=True,
+            dependencies=['-r ocdapi/requirements.txt'],
+            django_settings='ocdapi.settings.dev',
+        )
+
+add_role(Postgres(15, 'api', 'api', postgis=True))
+add_role(API())
 
 def deploy():
-    checkout('ocdapi', 'git://github.com/opencivicdata/api.opencivicdata.org.git')
-    checkout('imago', 'git://github.com/opencivicdata/imago.git')
-    make_venv(python3=True)
-    pip_install('-r /projects/ocdapi/src/ocdapi/requirements.txt')
     write_configfile('/projects/ocdapi/src/ocdapi/ocdapi/settings/production.py',
                      filename='ocdapi/settings/production.py')
-    uwsgi_nginx(
-        module='ocdapi.wsgi:application',
-        settings='ocdapi.settings.production',
-        pythonpath=['/projects/ocdapi/src/ocdapi/', '/projects/ocdapi/src/imago/'],
-        processes=8,
-    )
-
-def logs():
-    sudo('tail -f /projects/{}/logs/*'.format(env.PROJECT_NAME))
 
 ### local development ###########################
 
@@ -46,12 +45,8 @@ def _dj(cmd):
     local('django-admin.py {} --settings={}'.format(cmd, SETTINGS))
 
 def createdb(local=True, sudo=False):
-    with settings(warn_only=True):
-        run('dropdb {}'.format(DBNAME), sudo='postgres')
-        run('dropuser {}'.format(DBUSER), sudo='postgres')
-    run('createdb {}'.format(DBNAME), sudo='postgres')
-    run('''psql {} -c 'CREATE EXTENSION postgis' '''.format(DBNAME), sudo='postgres')
-    run('createuser {} -P'.format(DBUSER), sudo='postgres')
+    postgres_createdb(DBNAME, postgis=True, drop=True)
+    postgres_createuser(DBUSER, 'password', drop=True)
     _dj('syncdb')
     _dj('migrate')
 
@@ -59,8 +54,6 @@ def loadeverything():
     _dj('loadshapefiles -osldl-13,sldu-13,cd-113,place-13,county-13')
     _dj('loaddivisions')
 
-#def run():
-#    _dj('runserver')
 
 ### downloads #######################
 
