@@ -26,35 +26,17 @@ class API(Django):
                    'ocdapi/settings/production.py'},
             python3=True,
             dependencies=['-r ocdapi/requirements.txt'],
-            django_settings='ocdapi.settings.dev',
+            django_settings='ocdapi.settings.production',
         )
+
+    def syncdb(self):
+        self.django('syncdb')
+        self.django('migrate')
+        #_dj('loadshapefiles -osldl-13,sldu-13,cd-113,place-13,county-13')
+        #_dj('loaddivisions')
 
 Postgres(15, 'api', 'api', postgis=True)
 API()
-
-def deploy():
-    write_configfile('/projects/ocdapi/src/ocdapi/ocdapi/settings/production.py',
-                     filename='ocdapi/settings/production.py')
-
-### local development ###########################
-
-DBNAME = 'api'
-DBUSER = 'api'
-SETTINGS = 'ocdapi.settings.local'
-
-def _dj(cmd):
-    local('django-admin.py {} --settings={}'.format(cmd, SETTINGS))
-
-def createdb(local=True, sudo=False):
-    postgres_createdb(DBNAME, postgis=True, drop=True)
-    postgres_createuser(DBUSER, 'password', drop=True)
-    _dj('syncdb')
-    _dj('migrate')
-
-def loadeverything():
-    _dj('loadshapefiles -osldl-13,sldu-13,cd-113,place-13,county-13')
-    _dj('loaddivisions')
-
 
 ### downloads #######################
 
