@@ -1,7 +1,6 @@
 import os
 import glob
 from fabric.api import env, local, settings, sudo, task
-from cheerwine.api import add_role
 from cheerwine.server import set_hosts, install_base
 from cheerwine.roles import Django, Postgres
 
@@ -23,13 +22,15 @@ class API(Django):
             name='ocdapi', ebs_size=10, wsgi_module='ocdapi.wsgi:application',
             repos={'ocdapi':'git://github.com/opencivicdata/api.opencivicdata.org.git',
                    'imago': 'git://github.com/opencivicdata/imago.git'},
+            files={'/projects/ocdapi/src/ocdapi/ocdapi/settings/production.py':
+                   'ocdapi/settings/production.py'},
             python3=True,
             dependencies=['-r ocdapi/requirements.txt'],
             django_settings='ocdapi.settings.dev',
         )
 
-add_role(Postgres(15, 'api', 'api', postgis=True))
-add_role(API())
+Postgres(15, 'api', 'api', postgis=True)
+API()
 
 def deploy():
     write_configfile('/projects/ocdapi/src/ocdapi/ocdapi/settings/production.py',
