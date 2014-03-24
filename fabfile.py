@@ -5,10 +5,7 @@ from cheerwine.server import set_hosts, install_base
 from cheerwine.roles import Django, Postgres
 
 env.use_ssh_config = True
-env.POSTGRES_PASSWORD = 'test'
-env.CMD_LOCAL = False
 
-### deployment #################################
 @task
 def prepare_server():
     set_hosts('ocdapi')
