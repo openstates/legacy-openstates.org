@@ -5,8 +5,6 @@ from cheerwine.server import set_hosts, install_base
 from cheerwine.roles import Django, Postgres
 
 env.use_ssh_config = True
-***REMOVED***
-***REMOVED***'
 env.POSTGRES_PASSWORD = 'test'
 env.CMD_LOCAL = False
 
