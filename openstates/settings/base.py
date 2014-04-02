@@ -32,10 +32,10 @@ DATE_FORMAT = 'Y-m-d'
 TIME_FORMAT = 'H:i:s'
 DATETIME_FORMAT = 'Y-m-d H:i:s'
 
-STATIC_ROOT = os.path.join(os.path.dirname(__file__), '..', 'collected_static')
+STATIC_ROOT = os.path.join(os.path.dirname(__file__), '../..', 'collected_static')
 STATIC_URL = '/media/'
 STATICFILES_DIRS = (
-    os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'media')),
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '../..', 'media')),
 )
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -67,16 +67,12 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'openstates_site.urls'
+ROOT_URLCONF = 'openstates.urls'
 
-# Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'openstates_site.wsgi.application'
+WSGI_APPLICATION = 'openstates.wsgi.application'
 
 TEMPLATE_DIRS = (
-    os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'templates')),
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '../..', 'templates')),
 )
 
 INSTALLED_APPS = (
@@ -98,7 +94,6 @@ INSTALLED_APPS = (
 
 AUTHENTICATION_BACKENDS = (
     'sunlightauth.backends.SunlightBackend',
-    #'django.contrib.auth.backends.ModelBackend',
 )
 
 SUNLIGHT_AUTH_BASE_URL = 'https://login.sunlightfoundation.com/'
@@ -134,12 +129,3 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login/sunlight/'
 
 LOCKSMITH_REGISTRATION_URL = 'http://services.sunlightlabs.com/accounts/register/'
-
-# try local_settings in same dir, then on global path
-try:
-    from .local_settings import *
-except ImportError:
-    try:
-        from local_settings import *
-    except ImportError:
-        pass
