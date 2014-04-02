@@ -1,0 +1,3 @@
+fab prepare_server
+fab openstates_install_app
+fab openstates_install_server
