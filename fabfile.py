@@ -15,6 +15,18 @@ openstates = Django(name='openstates', ebs_size=10, wsgi_module='openstates.wsgi
                     files={'/projects/openstates/src/openstates/openstates/settings/production.py': 'production.py',
                            '/projects/openstates/src/openstates/billy_local.py': 'billy_local.py'
                           },
+                    nginx_locations={'/robots.txt': '/projects/openstates/src/openstates/',
+                                     '/favicon.ico': '/projects/openstates/src/openstates/media/images/',
+                              },
+                    uwsgi_extras={'processes': 12,
+                                  'reload-on-rss': 200,
+                                  'log-x-forwarded-for': 'true'
+                                  # no-orphans
+                                  # 'log-5xx': 'true',
+                                  # 'log-slow': 700,
+                                  # 'disable-logging': 'true',
+                                 },
                     python3=False,
                     dependencies=['-r openstates/requirements.txt'],
-                    django_settings='openstates.settings.production')
+                    django_settings='openstates.settings.production'
+                   )
