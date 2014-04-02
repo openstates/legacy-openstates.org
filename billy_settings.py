@@ -81,3 +81,8 @@ BILLY_ENABLE_DOCUMENT_VIEW = {
     'wv': False,
     'wv': False
 }
+
+try:
+    from billy_local import *
+except ImportError:
+    print('no billy local')
