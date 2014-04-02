@@ -1,5 +1,5 @@
 from fabric.api import env, task
-from cheerwine.server import set_hosts, install_base
+from cheerwine.server import set_hosts, install_base, write_cron
 from cheerwine.roles import Django, Postgres
 from cheerwine.config import config
 
@@ -9,6 +9,11 @@ env.use_ssh_config = True
 def prepare_server():
     set_hosts('openstates')
     install_base(('libxslt-dev', 'libpq-dev'))
+
+@task
+def cron():
+    write_cron('0 4 * * * /projects/openstates/virt/bin/python /projects/openstates/src/openstates/site/manage.py apireport >> /projects/openstates/logs/apireport.log', 'openstates')
+
 
 openstates = Django(name='openstates', ebs_size=10, wsgi_module='openstates.wsgi:application',
                     repos={'openstates': 'git://github.com/sunlightlabs/openstates.org.git'},
