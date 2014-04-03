@@ -16,6 +16,9 @@ This repo is essentially just a Django project for deployment- actual API code i
 
 To get started:
 
-    fab download_cds             # can also do other downloads
-    fab localdb                  # destructive!
-    fab loadeverything
+    fab postgres_install
+    fab postgres_createdb
+    fab ocdapi_download
+    fab ocdapi_syncdb
+    fab ocdapi_install_app
+    fab ocdapi_install_server

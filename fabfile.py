@@ -16,10 +16,12 @@ class API(Django):
             repos={'ocdapi':'git://github.com/opencivicdata/api.opencivicdata.org.git',
                    'imago': 'git://github.com/opencivicdata/imago.git'},
             files={'/projects/ocdapi/src/ocdapi/ocdapi/settings/production.py':
-                   'ocdapi/settings/production.py'},
+                   'settings.py'},
             python3=True,
             dependencies=['-r ocdapi/requirements.txt'],
             django_settings='ocdapi.settings.production',
+            ssl_cert='api.opencivicdata.org.crt',
+            ssl_key='api.opencivicdata.org.key',
         )
 
     def download(self):
