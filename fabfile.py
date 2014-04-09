@@ -12,7 +12,8 @@ def prepare_server():
 
 @task
 def cron():
-    write_cron('0 4 * * * /projects/openstates/virt/bin/python /projects/openstates/src/openstates/site/manage.py apireport >> /projects/openstates/logs/apireport.log', 'openstates')
+    write_cron('0 4 * * * /projects/openstates/virt/bin/python /projects/openstates/src/openstates/manage.py apireport  --settings=openstates.settings.production >> /projects/openstates/logs/apireport.log\n' +
+               '0 2 * * * /projects/openstates/virt/bin/python /projects/openstates/src/openstates/manage.py scout_push --settings=openstates.settings.production >> /projects/openstates/logs/scout_push.log' , 'openstates')
 
 
 openstates = Django(name='openstates',
