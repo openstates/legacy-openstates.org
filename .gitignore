@@ -17,3 +17,4 @@ shapefiles/county-13/
 shapefiles/place-13/
 ocdapi/settings/local.py
 ocdapi/settings/production.py
+hosts.production

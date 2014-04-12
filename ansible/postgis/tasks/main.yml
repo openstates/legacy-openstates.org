@@ -1,0 +1,43 @@
+---
+# EC2 stuff (separate?)
+- name: install XFS packages
+  apt: pkg=xfsprogs update_cache=yes
+  sudo: yes
+- name: gather EC2 facts
+  action: ec2_facts
+- name: create EC2 volume
+  ec2_vol: device_name=/dev/sd{{device_letter}} volume_size={{volume_size}} region={{ansible_ec2_placement_region}} zone={{ansible_ec2_placement_availability_zone}} instance={{ansible_ec2_instance_id}} aws_access_key={{aws_key}} aws_secret_key={{aws_secret}}
+- name: format volume
+  filesystem: fstype=xfs dev=/dev/xvd{{device_letter}}
+  sudo: yes
+- name: mount volume
+  mount: fstype=xfs name=/var/lib/postgresql src=/dev/xvd{{device_letter}} state=mounted
+  sudo: yes
+
+# Postgres stuff
+- name: add postgres key
+  apt_key: state=present id=ACCC4CF8 url=https://www.postgresql.org/media/keys/ACCC4CF8.asc
+  sudo: yes
+- name: add postgres repository
+  apt_repository: state=present update_cache=yes repo="deb http://apt.postgresql.org/pub/repos/apt/ saucy-pgdg main"
+  sudo: yes
+- name: install postgres and postgis
+  apt: pkg={{item}} update_cache=yes
+  sudo: yes
+  with_items:
+      - postgresql-9.3
+      - postgresql-9.3-postgis-2.1
+      - postgresql-server-dev-9.3
+- name: install psycopg2 package
+  apt: pkg=python-psycopg2 update_cache=yes
+  sudo: yes
+- name: create postgres user
+  postgresql_user: name={{dbuser}} password={{dbpassword}} role_attr_flags=SUPERUSER state=present
+  sudo: yes
+  sudo_user: postgres
+- name: create postgres database
+  postgresql_db: name={{dbname}}
+  sudo: yes
+  sudo_user: postgres
+  notify:
+    - load postgis
