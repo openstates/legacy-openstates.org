@@ -1,13 +1,30 @@
 import os
 import datetime
+from django.exceptions import ImproperlyConfigured
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+def envvar(name, default=None):
+    result = os.environ.get(name, default)
+    if result is None:
+        raise ImproperlyConfigured('missing required environment variable ' + name)
 
-ADMINS = ()
+# env variables
+SECRET_KEY = envvar('SECRET_KEY')
+RAVEN_DSN = envvar('RAVEN_DSN', '')
+ALLOWED_HOSTS = envvar('ALLOWED_HOSTS', '*').split(',')
+DATABASE_NAME = envvar('DATABASE_NAME', 'api')
+DATABASE_HOST = envvar('DATABASE_HOST', 'localhost')
+DATABASE_USER = envvar('DATABASE_USER', 'api')
+DATABASE_PASSWORD = envvar('DATABASE_NAME', 'api')
+IMAGO_MONGO_URI = envvar('IMAGO_MONGO_URI', 'mongodb://localhost')
+LOCKSMITH_MONGO_HOST = envvar('LOCKSMITH_MONGO_HOST', IMAGO_MONGO_URI)
+ELASTICSEARCH_HOST = envvar('ELASTICSEARCH_HOST', 'http://localhost:9200')
+TEMPLATE_DEBUG = DEBUG = envvar('DJANGO_DEBUG', 'False').lower() == 'true'
+USE_LOCKSMITH = envvar('USE_LOCKSMITH', 'False').lower() == 'true'
+if USE_LOCKSMITH:
+    LOCKSMITH_SIGNING_KEY = envvar('LOCKSMITH_SIGNING_KEY')
 
-MANAGERS = ADMINS
 
+# settings we don't override
 TIME_ZONE = 'America/New_York'
 LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
@@ -44,10 +61,22 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sites',
     'south',
-    'raven.contrib.django.raven_compat',
     'boundaries',
     'imago',
 )
+if RAVEN_DSN:
+    INSTALLED_APPS += ('raven.contrib.django.raven_compat',)
+    RAVEN_CONFIG = {'dsn': RAVEN_DSN}
+
+DATABASES = {
+    'default': {
+        'NAME': DATABASE_NAME,
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'HOST': DATABASE_HOST,
+        'USER': DATABASE_USER,
+        'PASSWORD': DATABASE_PASSWORD,
+    }
+}
 
 LOGGING = {
     'version': 1,
@@ -90,6 +119,14 @@ LOGGING = {
         },
     }
 }
+
+# locksmith stuff
+if USE_LOCKSMITH:
+    INSTALLED_APPS += ('locksmith.mongoauth',)
+    MIDDLEWARE_CLASSES += ('locksmith.mongoauth.middleware.APIKeyMiddleware',)
+    LOCKSMITH_REGISTRATION_URL = 'http://sunlightfoundation.com/api/accounts/register/#ocd'
+    LOCKSMITH_HUB_URL = 'http://sunlightfoundation.com/api/analytics/'
+    LOCKSMITH_API_NAME = 'opencivicdata'
 
 BOUNDARIES_SHAPEFILES_DIR = 'shapefiles'
 IMAGO_COUNTRY = 'us'
