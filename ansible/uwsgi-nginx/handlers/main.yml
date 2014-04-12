@@ -1,4 +1,5 @@
 ---
-- name: load postgis
-  command: psql {{dbname}} -c "CREATE EXTENSION postgis"
-  sudo_user: postgres
+- name: restart uwsgi
+  service: name=uwsgi state=restarted args={{project_name}}
+- name: restart nginx
+  service: name=nginx state=restarted

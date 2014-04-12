@@ -1,0 +1,14 @@
+[uwsgi]
+uid = {{project_name | mandatory}}
+gid = {{project_name | mandatory}}
+logto2 = /projects/{{project_name | mandatory}}/logs/uwsgi.log
+socket = /projects/{{project_name | mandatory}}/data/uwsgi.sock
+stats = /projects/{{project_name | mandatory}}/data/stats.sock
+virtualenv = /projects/{{project_name | mandatory}}/virt/
+env = DJANGO_SETTINGS_MODULE={{settings | mandatory}}
+master = true
+vacuum = true
+chmod-socket = 666
+processes = {{processes | mandatory}}
+module = {{wsgi_module | mandatory}}
+pythonpath = /projects/{{project_name | mandatory}}/src/

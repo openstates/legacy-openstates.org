@@ -11,3 +11,6 @@
       - build-essential
       - git
       - mercurial
+- name: install extra packages
+  apt: pkg={{item}}
+  with_items: extra_packages
