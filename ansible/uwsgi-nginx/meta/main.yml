@@ -1,0 +1,3 @@
+---
+dependencies:
+    - { role: ebs, ebs_path: "/projects/{{project_name}}" }

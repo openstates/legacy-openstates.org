@@ -1,7 +1,7 @@
 ---
 - name: Install Open Civic Data API
-  hosts: opencivicdata-db
+  hosts: opencivicdata-api
   user: ubuntu
   roles:
-      - { role: common,  hostname: ocdapi }
-      - { role: postgis, device_letter: g, volume_size: 50, dbuser: "ocdapi", dbpassword: "test", dbname: "ocdapi" }
+      #- { role: common,  hostname: ocdapi }
+      - { role: uwsgi-nginx, device_letter: f, volume_size: 50, project_name: ocdapi }
