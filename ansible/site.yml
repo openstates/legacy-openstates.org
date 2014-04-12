@@ -2,6 +2,7 @@
 - name: Install Open Civic Data API
   hosts: opencivicdata-api
   user: ubuntu
+  sudo: yes
   roles:
       #- { role: common,  hostname: ocdapi }
       - { role: uwsgi-nginx, device_letter: f, volume_size: 50, project_name: ocdapi, gitrepo: "git://github.com/opencivicdata/api.opencivicdata.org.git" }

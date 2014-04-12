@@ -1,17 +1,14 @@
 ---
 - name: install uwsgi and nginx
   apt: pkg={{item}} update_cache=yes
-  sudo: yes
   with_items:
       - uwsgi
       - nginx
 - name: remove nginx sites-enabled/default
   file: path=/etc/nginx/sites-enabled/default state=absent
-  sudo: yes
 
 - name: install needed Python packages
   apt: pkg={{item}} update_cache=yes
-  sudo: yes
   with_items:
       - python3
       - uwsgi-plugin-python3
@@ -19,26 +16,20 @@
       - python-virtualenv
 - name: add project user
   user: name={{project_name}} home=/projects/{{project_name}} shell=/bin/bash state=present
-  sudo: yes
 - name: chown user directory
   file: path=/projects/{{project_name}} owner={{project_name}}
-  sudo: yes
 - name: add directories
   file: path=/projects/{{project_name}}/{{item}} owner={{project_name}} state=directory
   with_items:
     - logs
     - data
-  sudo: yes
   sudo_user: "{{project_name}}"
 - name: create virtualenv
   command: virtualenv -p python3 /projects/{{project_name}}/virt creates=/projects/{{project_name}}/virt
-  sudo: yes
   sudo_user: "{{project_name}}"
 - name: checkout project
   git: repo={{gitrepo}} dest=/projects/{{project_name}}/src
-  sudo: yes
   sudo_user: "{{project_name}}"
 - name: install requirements
   pip: requirements=/projects/{{project_name}}/src/requirements.txt virtualenv=/projects/{{project_name}}/virt/
-  sudo: yes
   sudo_user: "{{project_name}}"

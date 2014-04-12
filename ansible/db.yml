@@ -2,6 +2,7 @@
 - name: Install Open Civic Data Postgres
   hosts: opencivicdata-db
   user: ubuntu
+  sudo: yes
   roles:
       - { role: common,  hostname: ocdapi }
       - { role: postgis, device_letter: g, volume_size: 50, dbuser: "ocdapi", dbpassword: "test", dbname: "ocdapi" }

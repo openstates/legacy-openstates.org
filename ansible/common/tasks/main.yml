@@ -1,16 +1,12 @@
 ---
 - name: write /etc/hosts
   template: src=hosts.j2 dest=/etc/hosts
-  sudo: yes
 - name: set hostname
   hostname: name={{hostname}}
-  sudo: yes
 - name: upgrade packages
   apt: upgrade=yes
-  sudo: yes
 - name: install base packages
   apt: pkg={{item}} update_cache=yes
-  sudo: yes
   with_items:
       - build-essential
       - git
