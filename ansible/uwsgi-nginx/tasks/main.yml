@@ -27,12 +27,18 @@
   file: path=/projects/{{project_name}}/{{item}} owner={{project_name}} state=directory
   with_items:
     - logs
-    - src
     - data
-    - .ssh
+  sudo: yes
+  sudo_user: "{{project_name}}"
+- name: create virtualenv
+  command: virtualenv -p python3 /projects/{{project_name}}/virt creates=/projects/{{project_name}}/virt
+  sudo: yes
+  sudo_user: "{{project_name}}"
+- name: checkout project
+  git: repo={{gitrepo}} dest=/projects/{{project_name}}/src
   sudo: yes
   sudo_user: "{{project_name}}"
 - name: install requirements
-  pip: extra_args="-p python3" requirements=requirements.txt virtualenv=/projects/{{project_name}}/virt/
+  pip: requirements=/projects/{{project_name}}/src/requirements.txt virtualenv=/projects/{{project_name}}/virt/
   sudo: yes
   sudo_user: "{{project_name}}"
