@@ -18,6 +18,8 @@
   template: src=nginx.j2 dest=/etc/nginx/sites-enabled/{{project_name}}
   notify:
     - restart nginx
+- name: make project dir
+  file: path=/projects/{{project_name}} state=directory
 - name: add project user
   user: name={{project_name}} home=/projects/{{project_name}} shell=/bin/bash state=present
 - name: chown user directory

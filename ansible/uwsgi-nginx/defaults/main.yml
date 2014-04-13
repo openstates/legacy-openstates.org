@@ -1,4 +1,5 @@
 ---
+no_ebs: no
 device_letter: f
 processes: 4
 port: 80

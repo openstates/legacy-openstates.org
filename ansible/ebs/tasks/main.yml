@@ -1,8 +1,8 @@
 ---
-- name: install XFS packages
-  apt: pkg=xfsprogs update_cache=yes
 - name: gather EC2 facts
   action: ec2_facts
+- name: install XFS packages
+  apt: pkg=xfsprogs update_cache=yes
 - name: create EC2 volume
   ec2_vol: device_name=/dev/sd{{device_letter}} volume_size={{volume_size}} region={{ansible_ec2_placement_region}} zone={{ansible_ec2_placement_availability_zone}} instance={{ansible_ec2_instance_id}} aws_access_key={{aws_key}} aws_secret_key={{aws_secret}}
 - name: format volume

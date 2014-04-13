@@ -3,8 +3,8 @@
   template: src=hosts.j2 dest=/etc/hosts
 - name: set hostname
   hostname: name={{hostname}}
-- name: upgrade packages
-  apt: upgrade=yes
+#- name: upgrade packages
+#  apt: upgrade=yes
 - name: install base packages
   apt: pkg={{item}} update_cache=yes
   with_items:
