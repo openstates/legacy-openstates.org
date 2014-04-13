@@ -5,6 +5,7 @@
 *.shx
 *.prj
 .thumb.png
+.vagrant/
 downloads/
 shapefiles/cd-111/
 shapefiles/cd-113/
