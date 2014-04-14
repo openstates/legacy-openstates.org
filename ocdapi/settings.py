@@ -6,6 +6,7 @@ def envvar(name, default=None):
     result = os.environ.get(name, default)
     if result is None:
         raise ImproperlyConfigured('missing required environment variable ' + name)
+    return result
 
 # env variables
 SECRET_KEY = envvar('SECRET_KEY')
