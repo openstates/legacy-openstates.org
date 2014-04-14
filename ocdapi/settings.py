@@ -1,6 +1,6 @@
 import os
 import datetime
-from django.exceptions import ImproperlyConfigured
+from django.core.exceptions import ImproperlyConfigured
 
 def envvar(name, default=None):
     result = os.environ.get(name, default)
