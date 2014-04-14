@@ -1,0 +1,19 @@
+---
+- name: Install Open Civic Data API
+  hosts: opencivicdata-api
+  user: ubuntu
+  sudo: yes
+  roles:
+      - role: common-roles/common
+        hostname: ocdapi
+        extra_packages: libpq-dev
+      - role: common-roles/ebs
+        device_letter: f
+        volume_size: 10
+        ebs_path: /projects/ocdapi/
+        when: use_ebs == True
+      - role: common-roles/django
+        project_name: ocdapi
+        gitrepo: "git://github.com/opencivicdata/api.opencivicdata.org.git"
+        settings: ocdapi.settings.production
+        wsgi_module: ocdapi.wsgi:application

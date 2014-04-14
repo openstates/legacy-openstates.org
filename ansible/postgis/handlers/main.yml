@@ -1,4 +1,0 @@
----
-- name: load postgis
-  command: psql {{dbname}} -c "CREATE EXTENSION postgis"
-  sudo_user: postgres

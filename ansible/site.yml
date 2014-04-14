@@ -1,15 +1,3 @@
 ---
-- name: Install Open Civic Data API
-  hosts: opencivicdata-api
-  user: ubuntu
-  sudo: yes
-  roles:
-      - role: common
-        hostname: ocdapi
-        extra_packages: libpq-dev
-      - role: uwsgi-nginx
-        volume_size: 50
-        project_name: ocdapi
-        gitrepo: "git://github.com/opencivicdata/api.opencivicdata.org.git"
-        settings: ocdapi.settings.production
-        wsgi_module: ocdapi.wsgi:application
+- include: api.yml
+- include: db.yml

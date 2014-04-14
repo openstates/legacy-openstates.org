@@ -4,5 +4,14 @@
   user: ubuntu
   sudo: yes
   roles:
-      - { role: common,  hostname: ocdapi }
-      - { role: postgis, device_letter: g, volume_size: 50, dbuser: "ocdapi", dbpassword: "test", dbname: "ocdapi" }
+      - role: common-roles/common
+        hostname: ocdapi
+      - role: common-roles/ebs
+        ebs_path: /var/lib/postgresql
+        device_letter: g
+        volume_size: 50
+        when: use_ebs == True
+      - role: common-roles/postgis
+        dbuser: "ocdapi"
+        dbpassword: "test"
+        dbname: "ocdapi"

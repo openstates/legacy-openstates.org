@@ -1,3 +1,0 @@
----
-dependencies:
-    - {role: ebs, ebs_path: /var/lib/postgresql, when: not no_ebs}
