@@ -12,4 +12,5 @@
   command: /projects/{{project_name}}/virt/bin/python manage.py loadshapefiles --settings=ocdapi.settings -osldl-13,sldu-13,cd-113,place-13,county-13 chdir=/projects/{{project_name}}/src
   environment: django_environment
 - name: loaddivisions
-  command: /projects/{{project_name}}/virt/bin/python manage.py loaddivisions --settings=ocdapi.settings chdir=/projects/{{project_name}}/src
+  command: /projects/{{project_name}}/virt/bin/python manage.py loaddivisions --quiet chdir=/projects/{{project_name}}/src
+  environment: django_environment
