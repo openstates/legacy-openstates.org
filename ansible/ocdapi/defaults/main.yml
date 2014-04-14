@@ -1,0 +1,6 @@
+---
+django_environment:
+  SECRET_KEY: not-so-secret
+  DATABASE_PASSWORD: test
+  DATABASE_NAME: ocdapi
+  DATABASE_USER: ocdapi

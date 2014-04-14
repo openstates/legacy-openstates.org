@@ -6,7 +6,10 @@
   roles:
       - role: common-roles/common
         hostname: ocdapi
-        extra_packages: libpq-dev
+        extra_packages:
+          - libpq-dev
+          - unzip
+          - gdal-bin
       - role: common-roles/ebs
         device_letter: f
         volume_size: 10
@@ -17,3 +20,5 @@
         gitrepo: "git://github.com/opencivicdata/api.opencivicdata.org.git"
         settings: ocdapi.settings.production
         wsgi_module: ocdapi.wsgi:application
+      - role: ocdapi
+        project_name: ocdapi
