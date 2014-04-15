@@ -4,6 +4,7 @@
   user: ubuntu
   sudo: yes
   roles:
+      - role: common-roles/common
       - role: common-roles/ebs
         ebs_path: /var/lib/postgresql
         device_letter: g
