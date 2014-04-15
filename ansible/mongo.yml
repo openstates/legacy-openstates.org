@@ -1,0 +1,12 @@
+---
+- name: Install Open Civic Data Mongo
+  hosts: opencivicdata-mongo
+  user: ubuntu
+  sudo: yes
+  roles:
+      - role: common-roles/ebs
+        ebs_path: /var/lib/mongodb
+        device_letter: m
+        volume_size: 200
+        when: use_ebs == True
+      - role: common-roles/mongo
