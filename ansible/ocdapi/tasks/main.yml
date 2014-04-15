@@ -1,4 +1,10 @@
 ---
+- name: link in /vagrant/imago (if it exists)
+  file: path=/projects/{{project_name}}/virt/src/imago state=absent
+  when: vagrant == True
+- name: link in /vagrant/imago (if it exists)
+  file: src=/vagrant-imago dest=/projects/{{project_name}}/virt/src/imago owner={{project_name}} group={{project_name}} state=link force=yes
+  when: vagrant == True
 - name: download shapefiles
   command: /projects/{{project_name}}/virt/bin/python scripts/download.py chdir=/projects/{{project_name}}/src creates=shapefiles/sldl-13
   sudo_user: "{{project_name}}"

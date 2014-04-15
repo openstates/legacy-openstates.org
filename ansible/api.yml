@@ -18,7 +18,6 @@
       - role: common-roles/django
         project_name: ocdapi
         gitrepo: "git://github.com/opencivicdata/api.opencivicdata.org.git"
-        settings: ocdapi.settings.production
         wsgi_module: ocdapi.wsgi:application
       - role: ocdapi
         project_name: ocdapi

@@ -10,7 +10,8 @@
         device_letter: g
         volume_size: 50
         when: use_ebs == True
-      - role: common-roles/postgis
+      - role: common-roles/postgres
         dbuser: "ocdapi"
         dbpassword: "test"
         dbname: "ocdapi"
+        extensions: ["postgis"]
