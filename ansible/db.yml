@@ -9,7 +9,6 @@
         ebs_path: /var/lib/postgresql
         device_letter: g
         volume_size: 50
-        when: use_ebs == True
       - role: common-roles/postgres
         dbuser: "ocdapi"
         dbpassword: "test"

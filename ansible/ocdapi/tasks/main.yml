@@ -1,22 +1,16 @@
 ---
-- name: link in /vagrant/imago (if it exists)
-  file: path=/projects/{{project_name}}/virt/src/imago state=absent
-  when: vagrant == True
-- name: link in /vagrant/imago (if it exists)
-  file: src=/vagrant-imago dest=/projects/{{project_name}}/virt/src/imago owner={{project_name}} group={{project_name}} state=link force=yes
-  when: vagrant == True
 - name: download shapefiles
-  command: /projects/{{project_name}}/virt/bin/python scripts/download.py chdir=/projects/{{project_name}}/src creates=shapefiles/sldl-13
+  command: /projects/{{project_name}}/virt/bin/python scripts/download.py chdir=/projects/{{project_name}}/src/api creates=shapefiles/sldl-13
   sudo_user: "{{project_name}}"
 - name: syncdb
-  command: /projects/{{project_name}}/virt/bin/python manage.py syncdb --settings=ocdapi.settings --noinput chdir=/projects/{{project_name}}/src
+  command: /projects/{{project_name}}/virt/bin/python manage.py syncdb --settings=ocdapi.settings --noinput chdir=/projects/{{project_name}}/src/api
   environment: django_environment
 - name: migrate
-  command: /projects/{{project_name}}/virt/bin/python manage.py migrate --settings=ocdapi.settings chdir=/projects/{{project_name}}/src
+  command: /projects/{{project_name}}/virt/bin/python manage.py migrate --settings=ocdapi.settings chdir=/projects/{{project_name}}/src/api
   environment: django_environment
 - name: loadshapefiles
-  command: /projects/{{project_name}}/virt/bin/python manage.py loadshapefiles --settings=ocdapi.settings -osldl-13,sldu-13,cd-113,place-13,county-13 chdir=/projects/{{project_name}}/src
+  command: /projects/{{project_name}}/virt/bin/python manage.py loadshapefiles --settings=ocdapi.settings -osldl-13,sldu-13,cd-113,place-13,county-13 chdir=/projects/{{project_name}}/src/api
   environment: django_environment
 - name: loaddivisions
-  command: /projects/{{project_name}}/virt/bin/python manage.py loaddivisions --quiet chdir=/projects/{{project_name}}/src
+  command: /projects/{{project_name}}/virt/bin/python manage.py loaddivisions --quiet chdir=/projects/{{project_name}}/src/api
   environment: django_environment

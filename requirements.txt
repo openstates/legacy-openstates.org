@@ -9,4 +9,3 @@ south
 raven!=4.1
 -e git://github.com/jamesturk/represent-boundaries.git#egg=boundaries
 -e git://github.com/sunlightlabs/django-locksmith.git@python3#egg=django-locksmith
--e git://github.com/opencivicdata/imago.git#egg=imago

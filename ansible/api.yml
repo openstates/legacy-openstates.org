@@ -14,10 +14,15 @@
         device_letter: f
         volume_size: 10
         ebs_path: /projects/ocdapi/
-        when: use_ebs == True
       - role: common-roles/django
         project_name: ocdapi
-        gitrepo: "git://github.com/opencivicdata/api.opencivicdata.org.git"
+        device_letter: f
+        volume_size: 10
+        git_repositories:
+          - repo: "git://github.com/opencivicdata/api.opencivicdata.org.git"
+            dir: api
+          - repo: "git://github.com/opencivicdata/imago.git"
+            dir: imago
         wsgi_module: ocdapi.wsgi:application
       - role: ocdapi
         project_name: ocdapi

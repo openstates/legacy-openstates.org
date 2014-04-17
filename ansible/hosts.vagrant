@@ -1,3 +1,3 @@
-opencivicdata-db     ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222 ansible_ssh_user=vagrant use_ebs=no
-opencivicdata-mongo  ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222 ansible_ssh_user=vagrant use_ebs=no
-opencivicdata-api    ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222 ansible_ssh_user=vagrant use_ebs=no do_checkout=no
+opencivicdata-db     ansible_ssh_host=10.42.2.100 ansible_ssh_user=vagrant
+opencivicdata-mongo  ansible_ssh_host=10.42.2.100 ansible_ssh_user=vagrant
+opencivicdata-api    ansible_ssh_host=10.42.2.100 ansible_ssh_user=vagrant
