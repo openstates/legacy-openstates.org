@@ -378,9 +378,10 @@ def import_all(*abbrs):
 
 if __name__ == '__main__':
     # import_scores(*sys.argv[1:])
-    import sunlight.services.openstates.service
-    service_url = 'http://localhost:8000/api/v1'
+    # import sunlight.services.openstates.service
+    # service_url = 'http://localhost:8000/api/v1'
     logging.basicConfig(level=logging.DEBUG)
     socket.setdefaulttimeout(5)
-    # mongo.reports.drop()
+    mongo.reports.drop()
+    # import sys.argv
     import_all()
