@@ -120,12 +120,13 @@
                     var graphnode = $("#bar_chart svg")[0];
                     var width = 900;
 
+                    var y_domain = Math.max(100, eff_stats.passed_own || 100);
                     var chart = nv.models.multiBarHorizontalChart()
                                   .margin({top: 30, right: 100, bottom: 30, left: 100})
                                   .width(width)
                                   .showValues(true)
                                   .showControls(false)
-                                  .yDomain([0, eff_stats.passed_own || 100])
+                                  .yDomain([0, y_domain])
                                   .x(function(d) { return d.label })
                                   .y(function(d) { return d.value })
                                   .tooltipContent(false);

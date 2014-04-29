@@ -17,11 +17,7 @@ if settings.MONGO_PASSWORD:
     mongo.authenticate(settings.MONGO_USER, settings.MONGO_PASSWORD)
 
 
-logging.basicConfig(level=logging.DEBUG)
-
-# Bypass Tim's...improvements...to the varnish config.
-import sunlight.services.openstates.service
-service_url = 'http://localhost:8000/api/v1'
+# logging.basicConfig(level=logging.DEBUG)
 
 
 class CachedAttr(object):
