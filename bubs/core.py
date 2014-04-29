@@ -19,6 +19,10 @@ if settings.MONGO_PASSWORD:
 
 logging.basicConfig(level=logging.DEBUG)
 
+# Bypass Tim's...improvements...to the varnish config.
+import sunlight.services.openstates.service
+service_url = 'http://localhost:8000/api/v1'
+
 
 class CachedAttr(object):
     '''Computes attr value and caches it in the instance.'''

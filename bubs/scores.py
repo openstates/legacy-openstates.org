@@ -85,8 +85,8 @@ class ScoreCalculator(object):
 
         if not G.nodes():
             # Known offenders: CO, AR, CT, ID, and others.
-            # Reuturn all zeroes.
-            # return dict.fromkeys(ids, 0)
+            # Reuturn all ones.
+            return dict.fromkeys(ids, 1)
             data = dict(abbr=self.abbr, chamber=self.chamber)
             msg = ("Can't generate PageRank scores due to lack of secondary "
                    "sponsorship data: %r.")
@@ -365,16 +365,21 @@ def import_all(*abbrs):
             except DataQualityError as exc:
                 logging.exception(exc)
                 logging.error('No party data: skipping %r' % ([abbr, chamber, term],))
+                # import pdb; pdb.set_trace()
             except TooFewBillsError as exc:
                 logging.exception(exc)
                 logging.error('Too few bills found: skipping %r' % ([abbr, chamber, term],))
+                # import pdb; pdb.set_trace()
             except rpy2.rinterface.RRuntimeError as exc:
                 logging.exception(exc)
                 logging.error('R error: skipping %r' % ([abbr, chamber, term],))
+                # import pdb; pdb.set_trace()
 
 
 if __name__ == '__main__':
     # import_scores(*sys.argv[1:])
+    import sunlight.services.openstates.service
+    service_url = 'http://localhost:8000/api/v1'
     logging.basicConfig(level=logging.DEBUG)
     socket.setdefaulttimeout(5)
     # mongo.reports.drop()

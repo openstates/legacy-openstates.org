@@ -56,10 +56,14 @@ def report():
             point['legislator']['photo_url'] = url
     report['points'] = json.dumps(points)
 
-    report_meta = mongo.reports.find(fields=('abbr', 'chamber', 'term'))
+    fields = ('abbr', 'chamber', 'term')
+    report_meta = list(mongo.reports.find(fields=fields))
+    for rpt in report_meta:
+        rpt.pop('_id')
+    selected = dict(zip(fields, (abbr, chamber, term)))
     return render_template('report.html',
         report=report, report_meta=report_meta,
-        minx=minx - 0.1, maxx=maxx + 0.1)
+        minx=minx - 0.1, maxx=maxx + 0.1, selected=selected)
 
 
 @app.route("/")

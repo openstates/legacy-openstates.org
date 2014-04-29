@@ -21,7 +21,8 @@
       <select name="meta">
         <option value="">Choose a jurisdiction</option>
         {% for meta in report_meta %}
-        <option value="{{meta.abbr}},{{meta.chamber}},{{meta.term}}">{{meta.abbr}}, {{meta.chamber}}, {{meta.term}}</option>
+        <option value="{{meta.abbr}},{{meta.chamber}},{{meta.term}}"
+        {% if meta == selected %}selected{% endif %}>{{meta.abbr}}, {{meta.chamber}}, {{meta.term}}</option>
         {% endfor %}
       </select>
       <button type='submit'>Submit</button>
@@ -78,7 +79,7 @@
   $('#bar_chart').hide();
 
   // The bubble chart.
-  data = {{report.points|safe}}
+  data = {{report.points|safe}};
 
   // Preload the images to avoid lag.
   $(data).each(function(i, series){
@@ -124,7 +125,7 @@
                                   .width(width)
                                   .showValues(true)
                                   .showControls(false)
-                                  .yDomain([0, 100])
+                                  .yDomain([0, eff_stats.passed_own || 100])
                                   .x(function(d) { return d.label })
                                   .y(function(d) { return d.value })
                                   .tooltipContent(false);
