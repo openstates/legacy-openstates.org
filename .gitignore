@@ -20,3 +20,5 @@ billy/tests/cover
 coverage.sh
 billy_local.py
 .python_history
+*/settings/local.py
+*.sqlite3
