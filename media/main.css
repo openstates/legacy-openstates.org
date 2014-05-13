@@ -239,11 +239,12 @@ a.tip:hover { color: #d6ac04; }
 
 
 /* header */
+.branding-bar_container {width: 940px; margin: 0 auto;}
 #searchform { float: right; width: 400px; margin-top: 30px;
  }
 
 #searchAddressform { width: ; margin-top: 5px; }
-header#mainHeader { background: url(images/bg_header.jpg) top left no-repeat; min-height: 226px;}
+header#mainHeader { background: url(images/bg_header.jpg) top left no-repeat; min-height: 226px; margin-top: 8px;}
 .home header#mainHeader { margin-bottom: 40px;}
 
 #mainHeader h1 { width: 414px; height: 46px; padding-top: 27px; float: left; padding-right:100px; padding-bottom:64px}
