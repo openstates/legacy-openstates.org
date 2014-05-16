@@ -89,7 +89,7 @@
       });
     });
 
-  var height = 300, width = 500;
+  var height = 300, width = 600;
   var chart = nv.models.scatterChart()
                 .margin({top: 22, right: 50, bottom: 1, left: 100})
                 .showDistX(true)
@@ -119,7 +119,7 @@
                     ];
                     html = $(html);
                     var graphnode = $("#bar_chart svg")[0];
-                    var width = 500;
+                    var width = 600;
 
                     var y_domain = Math.max(100, eff_stats.passed_own || 100);
                     var chart = nv.models.multiBarHorizontalChart()
