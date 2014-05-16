@@ -17,28 +17,16 @@
 <body>
   <div class="container">
 
-<div class="btn-group">
-  <div class="btn-group">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-      {{selected.abbr}}, {{selected.chamber}}, {{selected.term}}
-      <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu">
-      {% for meta in report_meta %}
-      <li><a href="{{url_for('report_slblog')}}?meta={{meta.abbr}},{{meta.chamber}},{{meta.term}}">{{meta.abbr}}, {{meta.chamber}}, {{meta.term}}</a></li>
-      {% endfor %}
-      </ul>
-    </ul>
-  </div>
-</div>
-
-    <div class="btn-group">
-      <ul class="dropdown-menu">
+    <form method="GET" action="/report" >
+      <select name="meta">
+        <option value="">Choose a jurisdiction</option>
         {% for meta in report_meta %}
-        <li><a href="{{url_for('report_slblog')}}?meta={{meta.abbr}},{{meta.chamber}},{{meta.term}}">{{meta.abbr}}, {{meta.chamber}}, {{meta.term}}</a></li>
+        <option value="{{meta.abbr}},{{meta.chamber}},{{meta.term}}"
+        {% if meta == selected %}selected{% endif %}>{{meta.abbr}}, {{meta.chamber}}, {{meta.term}}</option>
         {% endfor %}
-      </ul>
-    </div>
+      </select>
+      <button type='submit'>Submit</button>
+    </form>
 
     <div class="sunlighty sunlighty-blog">
       <div class="chart-title">
