@@ -3,7 +3,7 @@
 }
 
 #area_chart {
-  height: 450px;
+  height: 300px;
 }
 
 #bar_chart {
@@ -36,6 +36,11 @@ sunlighty svg circle.nv-legend-symbol {
 .sunlighty {
   background-color: #EFECEA;
   width: 900px;
+}
+
+.sunlighty-blog {
+  background-color: #EFECEA;
+  width: 600px;
 }
 
 .sunlighty .tick line {

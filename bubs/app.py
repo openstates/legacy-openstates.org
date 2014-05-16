@@ -17,6 +17,15 @@ app.secret_key = settings.SECRET_KEY
 
 @app.route("/report")
 def report():
+    return _report(template_name='report.html')
+
+
+@app.route("/report_slblog")
+def report_slblog():
+    return _report(template_name='report_sunlight.html')
+
+
+def _report(template_name):
     meta = request.values.get('meta')
     abbr, chamber, term = meta.split(',')
     spec = dict(abbr=abbr, chamber=chamber, term=term)
@@ -61,7 +70,7 @@ def report():
     for rpt in report_meta:
         rpt.pop('_id')
     selected = dict(zip(fields, (abbr, chamber, term)))
-    return render_template('report.html',
+    return render_template(template_name,
         report=report, report_meta=report_meta,
         minx=minx - 0.1, maxx=maxx + 0.1, selected=selected)
 

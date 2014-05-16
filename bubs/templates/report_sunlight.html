@@ -29,7 +29,7 @@
       <button type='submit'>Submit</button>
     </form>
 
-    <div class="sunlighty">
+    <div class="sunlighty sunlighty-blog">
       <div class="chart-title">
         <span class="pull-right">
           <img src="{{url_for('static', filename='img/sunlight.png')}}"/>
@@ -39,10 +39,10 @@
           Based on ideal point estimates, cosponsorship PageRanks, and bill passage.
         </div>
       </div>
-      <div id="bar_chart" class="sunlighty">
+      <div id="bar_chart" class="sunlighty-blog">
         <svg></svg>
       </div>
-      <div id="bubble_chart" class="sunlighty">
+      <div id="bubble_chart" class="sunlighty-blog">
         <svg></svg>
       </div>
       <div class="chart-footer">
@@ -91,7 +91,7 @@
 
   var height = 300, width = 600;
   var chart = nv.models.scatterChart()
-                .margin({top: 22, right: 50, bottom: 12, left: 100})
+                .margin({top: 22, right: 50, bottom: 1, left: 100})
                 .showDistX(true)
                 .showDistY(true)
                 .xDomain([{{minx}}, {{maxx}}])
@@ -119,7 +119,7 @@
                     ];
                     html = $(html);
                     var graphnode = $("#bar_chart svg")[0];
-                    var width = 900;
+                    var width = 600;
 
                     var y_domain = Math.max(100, eff_stats.passed_own || 100);
                     var chart = nv.models.multiBarHorizontalChart()
