@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<head>
+{% extends "base.html" %}
+
+{% block extra_head %}
   <script src="{{url_for('static', filename='js/jquery-1.10.2.min.js')}}"></script>
   <script src="{{url_for('static', filename='js/d3.v3.js')}}"></script>
   <script src="{{url_for('static', filename='js/nv.d3.js')}}"></script>
@@ -13,8 +13,9 @@
   <link href="{{url_for('static', filename='css/site.css')}}" rel="stylesheet">
   <script src="http://use.typekit.com/blp6kvr.js"></script>
   <script>try{Typekit.load();}catch(e){}</script>
-</head>
-<body>
+{% endblock extra_head %}
+
+{% block content %}
   <div class="container">
     <h1>PSCL Demo</h1>
     <form method="GET" action="/report" >
@@ -51,7 +52,6 @@
       </div>
     </div>
   </div>
-</body>
 
 <!-- The legislator template -->
 <script type="text/html" id="leg_template">
@@ -133,7 +133,7 @@
 
                     d3.select(graphnode)
                       .datum(data)
-                      .transition().duration(500).call(chart);
+                      .transition().duration(200).call(chart);
 
                     nv.utils.windowResize(chart.update);
                     nv.addGraph(chart);
@@ -161,3 +161,4 @@
 
 })();
 </script>
+{% endblock content %}

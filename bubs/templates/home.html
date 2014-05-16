@@ -1,8 +1,5 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<head>
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
   <form method="GET" action="/report" >
     <select name="meta">
       <option value="">Choose a jurisdiction</option>
@@ -12,5 +9,4 @@
     </select>
     <button type='submit'>Submit<button>
   </form>
-</body>
-</html>
+{% endblock %}
