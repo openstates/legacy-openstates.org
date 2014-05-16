@@ -17,10 +17,25 @@
 <body>
   <div class="container">
 
+<div class="btn-group">
+  <div class="btn-group">
+    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+      {{selected.abbr}}, {{selected.chamber}}, {{selected.term}}
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      {% for meta in report_meta %}
+      <li><a href="{{url_for('report_slblog')}}?meta={{meta.abbr}},{{meta.chamber}},{{meta.term}}">{{meta.abbr}}, {{meta.chamber}}, {{meta.term}}</a></li>
+      {% endfor %}
+      </ul>
+    </ul>
+  </div>
+</div>
+
     <div class="btn-group">
       <ul class="dropdown-menu">
         {% for meta in report_meta %}
-        <li><a href="{{meta.abbr}},{{meta.chamber}},{{meta.term}}">{{meta.abbr}}, {{meta.chamber}}, {{meta.term}}</a></li>
+        <li><a href="{{url_for('report_slblog')}}?meta={{meta.abbr}},{{meta.chamber}},{{meta.term}}">{{meta.abbr}}, {{meta.chamber}}, {{meta.term}}</a></li>
         {% endfor %}
       </ul>
     </div>
@@ -85,11 +100,7 @@
       });
     });
 
-<<<<<<< HEAD
   var height = 400, width = 680;
-=======
-  var height = 300, width = 600;
->>>>>>> 83da938a45c058e5e01a0576fc9c197eeccb1a74
   var chart = nv.models.scatterChart()
                 .margin({top: 22, right: 50, bottom: 1, left: 100})
                 .showDistX(true)
@@ -119,11 +130,8 @@
                     ];
                     html = $(html);
                     var graphnode = $("#bar_chart svg")[0];
-<<<<<<< HEAD
+
                     var width = 680;
-=======
-                    var width = 600;
->>>>>>> 83da938a45c058e5e01a0576fc9c197eeccb1a74
 
                     var y_domain = Math.max(100, eff_stats.passed_own || 100);
                     var chart = nv.models.multiBarHorizontalChart()
@@ -138,7 +146,7 @@
 
                     d3.select(graphnode)
                       .datum(data)
-                      .transition().duration(500).call(chart);
+                      .transition().duration(200).call(chart);
 
                     nv.utils.windowResize(chart.update);
                     nv.addGraph(chart);
