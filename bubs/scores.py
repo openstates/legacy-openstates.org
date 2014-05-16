@@ -19,7 +19,7 @@ from core import (
 
 
 response_cache.enable('mongo')
-response_cache.logger.setLevel(10)
+response_cache.logger.setLevel(100)
 
 
 class DataQualityError(Exception):
@@ -345,8 +345,8 @@ def import_all(*abbrs):
         if abbrs and state['abbreviation'] not in abbrs:
             continue
         abbr = state['abbreviation']
-        if abbr in ('co', 'ar', 'ct', 'al', 'dc', 'id'):
-            continue
+#        if abbr in ('co', 'ar', 'ct', 'al', 'dc', 'id'):
+#            continue
         meta = openstates.state_metadata(abbr)
         for chamber in meta['chambers']:
             latest_term = sorted(meta['terms'], key=itemgetter('start_year'))
@@ -380,8 +380,8 @@ if __name__ == '__main__':
     # import_scores(*sys.argv[1:])
     # import sunlight.services.openstates.service
     # service_url = 'http://localhost:8000/api/v1'
-    logging.basicConfig(level=logging.DEBUG)
+    logging.basicConfig(level=logging.ERROR)
     socket.setdefaulttimeout(5)
-    mongo.reports.drop()
+    #mongo.reports.drop()
     # import sys.argv
     import_all()
