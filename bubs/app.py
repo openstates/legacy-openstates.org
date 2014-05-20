@@ -81,5 +81,15 @@ def home():
     return render_template('home.html', report_meta=report_meta)
 
 
+@app.route("/_wget_index/")
+def wget_index():
+    '''An index view for wget -m purposes.
+    '''
+    fields = ('abbr', 'chamber', 'term')
+    report_meta = list(mongo.reports.find(fields=fields))
+    return render_template('wget_index.html', report_meta=report_meta)
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)
