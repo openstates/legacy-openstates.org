@@ -1,3 +1,0 @@
-opencivicdata-db     ansible_ssh_host=10.42.2.100 ansible_ssh_user=vagrant
-opencivicdata-mongo  ansible_ssh_host=10.42.2.100 ansible_ssh_user=vagrant
-opencivicdata-api    ansible_ssh_host=10.42.2.100 ansible_ssh_user=vagrant

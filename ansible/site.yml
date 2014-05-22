@@ -1,4 +1,0 @@
----
-- include: db.yml
-- include: mongo.yml
-- include: api.yml
