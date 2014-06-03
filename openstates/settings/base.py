@@ -97,7 +97,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SUNLIGHT_AUTH_BASE_URL = 'https://login.sunlightfoundation.com/'
-SOCIAL_AUTH_SUNLIGHT_KEY = 'testapp'
+SOCIAL_AUTH_SUNLIGHT_KEY = 'openstates'
 #SOCIAL_AUTH_SUNLIGHT_SECRET = 'set in local settings'
 SUNLIGHT_AUTH_SCOPE = []
 
