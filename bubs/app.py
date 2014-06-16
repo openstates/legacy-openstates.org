@@ -25,6 +25,11 @@ def report_slblog():
     return _report(template_name='report_sunlight.html')
 
 
+@app.route("/report_mainetoday")
+def report_maintoday():
+    return _report(template_name='report_mainetoday.html')
+
+
 def _report(template_name):
     meta = request.values.get('meta')
     abbr, chamber, term = meta.split(',')
