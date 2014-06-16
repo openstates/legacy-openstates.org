@@ -25,9 +25,15 @@ def report_slblog():
     return _report(template_name='report_sunlight.html')
 
 
+@app.route("/report_mainetoday")
+def report_maintoday():
+    return _report(template_name='report_mainetoday.html')
+
+
 def _report(template_name):
     meta = request.values.get('meta')
     abbr, chamber, term = meta.split(',')
+    abbr = abbr.lower()
     spec = dict(abbr=abbr, chamber=chamber, term=term)
     report = mongo.reports.find_one(spec)
     report['state'] = abbr
@@ -67,8 +73,10 @@ def _report(template_name):
 
     fields = ('abbr', 'chamber', 'term')
     report_meta = list(mongo.reports.find(fields=fields))
+    report_meta.sort(key=operator.itemgetter('abbr'))
     for rpt in report_meta:
         rpt.pop('_id')
+        rpt['abbr'] = rpt['abbr'].upper()
     selected = dict(zip(fields, (abbr, chamber, term)))
     return render_template(template_name,
         report=report, report_meta=report_meta,
