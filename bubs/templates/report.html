@@ -23,7 +23,7 @@
         <option value="">Choose a jurisdiction</option>
         {% for meta in report_meta %}
         <option value="{{meta.abbr}},{{meta.chamber}},{{meta.term}}"
-        {% if meta == selected %}selected{% endif %}>{{meta.abbr}}, {{meta.chamber}}, {{meta.term}}</option>
+        {% if meta == selected %}selected{% endif %}>{{meta.abbr|upper}}, {{meta.chamber}}, {{meta.term}}</option>
         {% endfor %}
       </select>
       <button type='submit'>Submit</button>
