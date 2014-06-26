@@ -1,5 +1,6 @@
 import os
 import datetime
+import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
 
 def envvar(name, default=None):
@@ -12,15 +13,10 @@ def envvar(name, default=None):
 SECRET_KEY = envvar('SECRET_KEY')
 RAVEN_DSN = envvar('RAVEN_DSN', '')
 ALLOWED_HOSTS = envvar('ALLOWED_HOSTS', '*').split(',')
-DATABASE_HOST = envvar('DATABASE_HOST', 'localhost')
-DATABASE_NAME = envvar('DATABASE_NAME', 'api')
-DATABASE_USER = envvar('DATABASE_USER', 'api')
-DATABASE_PASSWORD = envvar('DATABASE_PASSWORD', '')
-IMAGO_MONGO_URI = envvar('IMAGO_MONGO_URI', 'mongodb://localhost')
-LOCKSMITH_MONGO_HOST = envvar('LOCKSMITH_MONGO_HOST', IMAGO_MONGO_URI)
+DATABASES = {'default': dj_database_url.config(os.environ.get('DATABASE_URL', 'postgis://opencivicdata:test@10.42.2.101/opencivicdata'))}
 ELASTICSEARCH_HOST = envvar('ELASTICSEARCH_HOST', 'http://localhost:9200')
 TEMPLATE_DEBUG = DEBUG = envvar('DJANGO_DEBUG', 'False').lower() == 'true'
-USE_LOCKSMITH = envvar('USE_LOCKSMITH', 'False').lower() == 'true'
+USE_LOCKSMITH = envvar('USE_LOCKSMITH', 'false').lower() == 'true'
 if USE_LOCKSMITH:
     LOCKSMITH_SIGNING_KEY = envvar('LOCKSMITH_SIGNING_KEY')
 
@@ -61,23 +57,14 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sites',
-    'south',
     'boundaries',
+    'opencivicdata',
     'imago',
 )
 if RAVEN_DSN:
     INSTALLED_APPS += ('raven.contrib.django.raven_compat',)
     RAVEN_CONFIG = {'dsn': RAVEN_DSN}
 
-DATABASES = {
-    'default': {
-        'NAME': DATABASE_NAME,
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'HOST': DATABASE_HOST,
-        'USER': DATABASE_USER,
-        'PASSWORD': DATABASE_PASSWORD,
-    }
-}
 
 LOGGING = {
     'version': 1,
