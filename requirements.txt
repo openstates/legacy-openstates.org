@@ -1,6 +1,5 @@
 -e git://github.com/django/django.git@stable/1.7.x#egg=django
 psycopg2
-pymongo
 pyelasticsearch
 django-appconf
 pyshp
