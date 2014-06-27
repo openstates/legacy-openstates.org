@@ -52,6 +52,7 @@ ROOT_URLCONF = 'ocdapi.urls'
 TEMPLATE_DIRS = (
     os.path.abspath(os.path.join(os.path.dirname(__file__), 'templates')),
 )
+TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 INSTALLED_APPS = (
     'django.contrib.auth',
