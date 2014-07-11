@@ -39,6 +39,7 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
 )
 
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -56,6 +57,9 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
 INSTALLED_APPS = (
     'django.contrib.auth',
+    'django.contrib.admin',
+    'django.contrib.messages',
+    'django.contrib.sessions',
     'django.contrib.contenttypes',
     'django.contrib.sites',
     'boundaries',
