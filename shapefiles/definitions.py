@@ -98,6 +98,7 @@ boundaries.register('zcta-13',
                     file='zcta-13/',
                     name_func=boundaries.attr('ZCTA5CE10'),
                     id_func=geoid_tiger_namer,
+                    start_date=date(2012, 1, 1),
                     **defaults
                    )
 
@@ -107,6 +108,7 @@ boundaries.register('sldl-13',
                     file='sldl-13/',
                     name_func=tiger_namer,
                     id_func=geoid_tiger_namer,
+                    start_date=date(2012, 1, 1),
                     **defaults
                    )
 
@@ -115,6 +117,7 @@ boundaries.register('sldu-13',
                     file='sldu-13/',
                     name_func=tiger_namer,
                     id_func=geoid_tiger_namer,
+                    start_date=date(2012, 1, 1),
                     **defaults
                    )
 
@@ -124,6 +127,7 @@ boundaries.register('county-13',
                     encoding='latin-1',
                     name_func=tiger_namer,
                     id_func=geoid_tiger_namer,
+                    start_date=date(2012, 1, 1),
                     **defaults
                    )
 
@@ -132,6 +136,7 @@ boundaries.register('place-13',
                     file='place-13/',
                     name_func=tiger_namer,
                     id_func=geoid_tiger_namer,
+                    start_date=date(2012, 1, 1),
                     encoding='latin-1',
                     **defaults
                    )
