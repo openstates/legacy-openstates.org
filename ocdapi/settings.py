@@ -111,8 +111,8 @@ LOGGING = {
 
 # locksmith stuff
 if USE_LOCKSMITH:
-    INSTALLED_APPS += ('locksmith.mongoauth',)
-    MIDDLEWARE_CLASSES += ('locksmith.mongoauth.middleware.APIKeyMiddleware',)
+    INSTALLED_APPS += ('locksmith.auth',)
+    MIDDLEWARE_CLASSES += ('locksmith.auth.middleware.APIKeyMiddleware',)
     LOCKSMITH_REGISTRATION_URL = 'http://sunlightfoundation.com/api/accounts/register/#ocd'
     LOCKSMITH_HUB_URL = 'http://sunlightfoundation.com/api/analytics/'
     LOCKSMITH_API_NAME = 'opencivicdata'
