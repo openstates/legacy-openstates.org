@@ -62,6 +62,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.contenttypes',
     'django.contrib.sites',
+    'django.contrib.staticfiles',
     'boundaries',
     'opencivicdata',
     'imago',
