@@ -64,7 +64,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.staticfiles',
     'boundaries',
-    'opencivicdata',
+    'opencivicdata.apps.BaseConfig',
     'imago',
 )
 if RAVEN_DSN:
