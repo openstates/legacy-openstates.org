@@ -1,10 +1,11 @@
-https://www.djangoproject.com/download/1.7c1/tarball/#egg=django
+https://www.djangoproject.com/download/1.7c2/tarball/#egg=django
 psycopg2
 pyelasticsearch
 django-appconf
 pyshp
 raven!=4.1
 dj-database-url
+opencivicdata-divisions
 
 -e git://github.com/opencivicdata/pupa.git#egg=pupa
 
