@@ -121,7 +121,7 @@ LOGGING = {
 
 # locksmith stuff
 if USE_LOCKSMITH:
-    INSTALLED_APPS += ('locksmith.auth',)
+    INSTALLED_APPS += ('locksmith.auth.apps.LocksmithAuthConfig',)
     MIDDLEWARE_CLASSES += ('locksmith.auth.middleware.APIKeyMiddleware',)
     LOCKSMITH_REGISTRATION_URL = 'http://sunlightfoundation.com/api/accounts/register/#ocd'
     LOCKSMITH_HUB_URL = 'http://sunlightfoundation.com/api/analytics/'
