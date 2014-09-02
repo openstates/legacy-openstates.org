@@ -6,6 +6,7 @@ pyshp
 raven!=4.1
 dj-database-url
 opencivicdata-divisions
+DjangoRestless
 
 -e git://github.com/opencivicdata/pupa.git#egg=pupa
 
