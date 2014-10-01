@@ -4,7 +4,7 @@ import os
 import glob
 
 fips = ('01', '02', '04', '05', '06', '08', '09', '10', '11', '12', '13', '15', '16', '17', '18',
-        '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31' ,'32', '33',
+        '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31' ,'32',  # '33',
         '34', '35', '36', '37', '38', '39', '40', '41', '42', '44', '45', '46', '47', '48', '49',
         '50', '51', '53', '54', '55', '56', '60', '66', '69', '72', '78')
 
@@ -78,6 +78,12 @@ def download_places():
     _extract_cwd("downloads/place-13")
 
 
+def download_nh():
+    _download_file("ftp://pubftp.nh.gov/OEP/NHSenateDists2012.zip", "downloads/nh-12")
+    _download_file("ftp://pubftp.nh.gov/OEP/NHHouseDists2012.zip", "downloads/nh-12")
+    _extract_cwd("downloads/nh-12")
+
+
 def download_cds():
     for fip in fips:
         _download_census_file("TIGERrd13_st", fip, "cd111", "13", "downloads/cd-111")
@@ -91,6 +97,7 @@ def download_zcta():
     _extract_cwd("downloads/zcta-13")
 
 if __name__ == '__main__':
+    download_nh()
     download_counties()
     download_places()
     download_cds()
