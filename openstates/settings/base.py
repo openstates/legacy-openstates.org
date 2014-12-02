@@ -87,7 +87,7 @@ INSTALLED_APPS = (
     'billy.web.admin',
     'billy.web.public',
     'locksmith.mongoauth',
-    'social.apps.django_app.default',
+    'social_auth',
     'markup_tags',
     'funfacts',
 )
@@ -97,8 +97,8 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SUNLIGHT_AUTH_BASE_URL = 'https://login.sunlightfoundation.com/'
-SOCIAL_AUTH_SUNLIGHT_KEY = 'openstates'
-#SOCIAL_AUTH_SUNLIGHT_SECRET = 'set in local settings'
+SUNLIGHT_AUTH_APP_ID = 'openstates'
+#SUNLIGHT_AUTH_SECRET = 'set in local settings'
 SUNLIGHT_AUTH_SCOPE = []
 
 LOGGING = {
