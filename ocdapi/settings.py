@@ -10,7 +10,7 @@ def envvar(name, default=None):
     return result
 
 # env variables
-SECRET_KEY = envvar('SECRET_KEY')
+SECRET_KEY = envvar('SECRET_KEY', 'ITSASECRET')
 RAVEN_DSN = envvar('RAVEN_DSN', '')
 ALLOWED_HOSTS = envvar('ALLOWED_HOSTS', '*').split(',')
 DATABASES = {'default': dj_database_url.config(default='postgis://opencivicdata:test@10.42.2.101/opencivicdata')}
@@ -130,28 +130,62 @@ if USE_LOCKSMITH:
 BOUNDARIES_SHAPEFILES_DIR = 'shapefiles'
 IMAGO_COUNTRY = 'us'
 IMAGO_BOUNDARY_MAPPINGS = {
-    'county-13': {'key': 'census_geoid',
-                  'start': datetime.date(1980,1,1),
-                  'prefix': 'place-',
+    'county-14': {'key': 'census_geoid',
+                  'start': datetime.date(2015,1,1),
+                  'prefix': 'county-',
                   'ignore': None,
                  },
-    'place-13': {'key': 'census_geoid',
-                 'start': datetime.date(1980,1,1),
-                  'prefix': 'place-',
+    'county-13': {'key': 'census_geoid',
+                  'start': datetime.date(1980,1,1),
+                  'end': datetime.date(2015,1,1),
+                  'prefix': 'county-',
+                  'ignore': None,
+                 },
+
+    'place-14': {'key': 'census_geoid',
+                 'start': datetime.date(2015,1,1),
+                 'prefix': 'place-',
                  'ignore': '.*CDP',
                 },
+    # 'place-13': {'key': 'census_geoid',
+    #              'start': datetime.date(1980,1,1),
+    #               'end': datetime.date(2015,1,1),
+    #               'prefix': 'place-',
+    #              'ignore': '.*CDP',
+    #             },
+
+    'sldl-14': {'key': 'census_geoid',
+                'start': datetime.date(2015,1,1),
+                'prefix': 'sldl-',
+                'ignore': '.*ZZZ',
+               },
     'sldl-13': {'key': 'census_geoid',
                 'start': datetime.date(2012,1,1),
+                'end': datetime.date(2015,1,1),
                 'prefix': 'sldl-',
+                'ignore': '.*ZZZ',
+               },
+
+    'sldu-14': {'key': 'census_geoid',
+                'start': datetime.date(2015,1,1),
+                'prefix': 'sldu-',
                 'ignore': '.*ZZZ',
                },
     'sldu-13': {'key': 'census_geoid',
                 'start': datetime.date(2012,1,1),
+                'end': datetime.date(2015,1,1),
                 'prefix': 'sldu-',
                 'ignore': '.*ZZZ',
                },
+
+    'cd-114': {'key': 'census_geoid',
+               'start': datetime.date(2015,1,1),
+               'prefix': 'cd-',
+               'ignore': None,
+              },
     'cd-113': {'key': 'census_geoid',
                'start': datetime.date(2012,1,1),
+               'end': datetime.date(2015,1,1),
                'prefix': 'cd-',
                'ignore': None,
               },

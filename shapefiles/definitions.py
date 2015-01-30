@@ -64,7 +64,7 @@ class index_namer(object):
 
 
 CENSUS_URL = 'http://www.census.gov/geo/maps-data/data/tiger.html'
-LAST_UPDATE = date(2013, 1, 1)
+LAST_UPDATE = date(2015, 1, 28)
 defaults = dict(last_updated=LAST_UPDATE,
                 domain='United States',
                 authority='US Census Bureau',
@@ -76,6 +76,14 @@ defaults = dict(last_updated=LAST_UPDATE,
 
 
 # congressional districts
+boundaries.register('cd-114',
+                    singular='cd-114',
+                    file='cd-114/',
+                    name_func=tiger_namer,
+                    id_func=geoid_tiger_namer,
+                    **defaults
+                   )
+
 boundaries.register('cd-113',
                     singular='cd-113',
                     file='cd-113/',
@@ -93,15 +101,33 @@ boundaries.register('cd-111',
                    )
 
 # Zip Code Tabulation Areas
+boundaries.register('zcta-14',
+                    singular='zcta-14',
+                    file='zcta-14/',
+                    name_func=boundaries.attr('ZCTA5CE10'),
+                    id_func=geoid_tiger_namer,
+                    start_date=date(2015, 1, 1),
+                    **defaults
+                   )
+
 boundaries.register('zcta-13',
                     singular='zcta-13',
                     file='zcta-13/',
                     name_func=boundaries.attr('ZCTA5CE10'),
                     id_func=geoid_tiger_namer,
                     start_date=date(2012, 1, 1),
+                    end_date=date(2015, 1, 1),
                     **defaults
                    )
 
+boundaries.register('sldl-14',
+                    singular='sldl-14',
+                    file='sldl-14/',
+                    name_func=tiger_namer,
+                    id_func=geoid_tiger_namer,
+                    start_date=date(2015, 1, 1),
+                    **defaults
+                   )
 
 boundaries.register('sldl-13',
                     singular='sldl-13',
@@ -109,6 +135,16 @@ boundaries.register('sldl-13',
                     name_func=tiger_namer,
                     id_func=geoid_tiger_namer,
                     start_date=date(2012, 1, 1),
+                    end_date=date(2015, 1, 1),
+                    **defaults
+                   )
+
+boundaries.register('sldu-14',
+                    singular='sldu-14',
+                    file='sldu-14/',
+                    name_func=tiger_namer,
+                    id_func=geoid_tiger_namer,
+                    start_date=date(2015, 1, 1),
                     **defaults
                    )
 
@@ -118,6 +154,17 @@ boundaries.register('sldu-13',
                     name_func=tiger_namer,
                     id_func=geoid_tiger_namer,
                     start_date=date(2012, 1, 1),
+                    end_date=date(2015, 1, 1),
+                    **defaults
+                   )
+
+boundaries.register('county-14',
+                    singular='county-14',
+                    file='county-14/',
+                    encoding='latin-1',
+                    name_func=tiger_namer,
+                    id_func=geoid_tiger_namer,
+                    start_date=date(2015, 1, 1),
                     **defaults
                    )
 
@@ -128,6 +175,17 @@ boundaries.register('county-13',
                     name_func=tiger_namer,
                     id_func=geoid_tiger_namer,
                     start_date=date(2012, 1, 1),
+                    end_date=date(2015, 1, 1),
+                    **defaults
+                   )
+
+boundaries.register('place-14',
+                    singular='place-14',
+                    file='place-14/',
+                    name_func=tiger_namer,
+                    id_func=geoid_tiger_namer,
+                    start_date=date(2015, 1, 1),
+                    encoding='latin-1',
                     **defaults
                    )
 
@@ -137,6 +195,7 @@ boundaries.register('place-13',
                     name_func=tiger_namer,
                     id_func=geoid_tiger_namer,
                     start_date=date(2012, 1, 1),
+                    end_date=date(2015, 1, 1),
                     encoding='latin-1',
                     **defaults
                    )
