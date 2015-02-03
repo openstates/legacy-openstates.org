@@ -18,3 +18,13 @@ def test_ne_scottsbluff():
     assert 'ocd-division/country:us/state:ne/sldu:48' in get_divisions_for(SCOTTSBLUFF)
 
     # assert get_divisions_for(SCOTTSBLUFF, SESSION_2013) == get_divisions_for(SCOTTSBLUFF)
+
+def test_pittsburgh_redistricting():
+    ''' https://sunlightfoundation.supportbee.com/tickets/3956255 '''
+    
+    ADDRESS = {'lat': 40.495, 'lon': -80.053}
+    assert 'ocd-division/country:us/state:pa/sldl:20' in get_divisions_for(ADDRESS)
+    assert 'ocd-division/country:us/state:pa/sldl:42' in get_divisions_for(ADDRESS)
+
+    # assert 'ocd-division/country:us/state:pa/sldl:16' get_divisions_for(ADDRESS, SESSION_2013)
+    # assert 'ocd-division/country:us/state:pa/sldl:42' get_divisions_for(ADDRESS, SESSION_2013)
