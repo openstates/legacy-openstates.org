@@ -22,9 +22,9 @@ def test_ne_scottsbluff():
 def test_pittsburgh_redistricting():
     ''' https://sunlightfoundation.supportbee.com/tickets/3956255 '''
     
-    ADDRESS = {'lat': 40.495, 'lon': -80.053}
+    ADDRESS = {'lat': 40.4958, 'lon': -80.0530}
     assert 'ocd-division/country:us/state:pa/sldl:20' in get_divisions_for(ADDRESS)
-    assert 'ocd-division/country:us/state:pa/sldl:42' in get_divisions_for(ADDRESS)
+    assert 'ocd-division/country:us/state:pa/sldu:42' in get_divisions_for(ADDRESS)
 
     # assert 'ocd-division/country:us/state:pa/sldl:16' get_divisions_for(ADDRESS, SESSION_2013)
-    # assert 'ocd-division/country:us/state:pa/sldl:42' get_divisions_for(ADDRESS, SESSION_2013)
+    # assert 'ocd-division/country:us/state:pa/sldu:42' get_divisions_for(ADDRESS, SESSION_2013)
