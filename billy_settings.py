@@ -24,7 +24,7 @@ BILLY_PARTY_DETAILS = {
     'Republican/Democratic': {'plural_noun': 'Republican/Democratic'},   # VT
 }
 
-BOUNDARY_SERVICE_SETS = 'sldl,sldu'
+BOUNDARY_SERVICE_SETS = 'sldl-14,sldu-14'
 BOUNDARY_SERVICE_URL = ''
 
 BILLY_ENABLE_DOCUMENT_VIEW = {
