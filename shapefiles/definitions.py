@@ -72,6 +72,7 @@ defaults = dict(last_updated=LAST_UPDATE,
                 license_URL=CENSUS_URL,
                 data_url=CENSUS_URL,
                 notes='',
+                extra='{}',
                )
 
 
