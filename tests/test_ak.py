@@ -14,9 +14,9 @@ def test_juneau_upper_redistricting():
 def test_anchorage_lower_redistricting():
     point = {'lat': 61.207, 'lon': -149.814}
     assert 'ocd-division/country:us/state:ak/sldu:19' in get_divisions_for(point)
-    # assert 'ocd-division/country:us/state:ak/sldu:22' in get_divisions_for(point, SESSION_2013)
+    # assert 'ocd-division/country:us/state:ak/sldl:22' in get_divisions_for(point, SESSION_2013)
 
 def test_juneau_lower_redistricting():
     point = {'lat': 58.422, 'lon': -134.444}
     assert 'ocd-division/country:us/state:ak/sldl:34' in get_divisions_for(point)
-    # assert 'ocd-division/country:us/state:ak/sldu:3' in get_divisions_for(point, SESSION_2012)
+    # assert 'ocd-division/country:us/state:ak/sldl:3' in get_divisions_for(point, SESSION_2012)
