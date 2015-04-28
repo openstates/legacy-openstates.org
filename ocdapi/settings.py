@@ -189,4 +189,10 @@ IMAGO_BOUNDARY_MAPPINGS = {
     #            'prefix': 'cd-',
     #            'ignore': '.*ZZ',
     #           },
+
+    'nh-12': {'key': 'census_geoid_14',
+              'start': datetime.date(2013,1,1),
+              'prefix': 'sldl-',
+              'ignore': '.*zzz'
+             },
 }

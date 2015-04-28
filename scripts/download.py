@@ -99,8 +99,7 @@ def download_places():
         _extract_cwd(x)
 
 
-def download_nh():
-    _download_file("ftp://pubftp.nh.gov/OEP/NHSenateDists2012.zip", "downloads/nh-12")
+def download_nh_floterial():
     _download_file("ftp://pubftp.nh.gov/OEP/NHHouseDists2012.zip", "downloads/nh-12")
     _extract_cwd("downloads/nh-12")
 
@@ -132,7 +131,7 @@ def download_zcta():
 
 
 if __name__ == '__main__':
-    download_nh()
+    download_nh_floterial()
     download_counties()
     download_places()
     download_cds()

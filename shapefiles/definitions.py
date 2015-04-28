@@ -4,6 +4,7 @@ Configuration describing the shapefiles to be loaded.
 from django.contrib.gis.gdal.error import OGRIndexError
 from datetime import date
 import boundaries
+import os
 
 
 state_fips = {
@@ -53,6 +54,68 @@ def geoid_tiger_namer(feature):
     return geoid
 
 
+def nh_12_namer(feature):
+    '''
+    New Hampshire's floterial district shapefiles have only one field:
+    an abbreviated district name ("AA#" format). This has to be
+    crosswalked to useful information.
+
+    The crosswalk is roughly based on this Census file:
+    www2.census.gov/geo/docs/maps-data/data/NH_2012_Floterials.txt
+    '''
+
+    abbr = feature.get('NHHouse201')
+    # There are two shapefiles that don't correspond to any floterial
+    # These need unique IDs, which end with 'zzz' so that they'll be ignored
+    if not abbr:
+        import datetime
+        unique_key = datetime.datetime.now()
+        return "{}zzz".format(unique_key)
+
+    path = os.path.join(
+        os.path.abspath(os.getcwd()),
+        'shapefiles',
+        'nh_12_crosswalk.csv'
+    )
+
+    with open(path, 'r') as f:
+        # Due to a bug in `boundaries`, need to `import csv` here
+        import csv
+        reader = list(csv.DictReader(f))
+        (row, ) = [x for x in reader if x['NHHouse201'] == abbr]
+
+        STATE_ABBREV = 'NH'
+        name = row['NAMELSAD']
+        geoid = row['GEOID']
+
+    resp = "{0} {1} {2}".format(STATE_ABBREV, name, geoid)
+    return resp
+
+
+def geoid_nh_12_namer(feature):
+    abbr = feature.get('NHHouse201')
+    if not abbr:
+        import datetime
+        unique_key = datetime.datetime.now()
+        return "{}zzz".format(unique_key)
+
+    path = os.path.join(
+        os.path.abspath(os.getcwd()),
+        'shapefiles',
+        'nh_12_crosswalk.csv'
+    )
+
+    with open(path, 'r') as f:
+        # Due to a bug in `boundaries`, need to `import csv` here
+        import csv
+        reader = list(csv.DictReader(f))
+        (row, ) = [x for x in reader if x['NHHouse201'] == abbr]
+
+        geoid = row['GEOID']
+
+    return geoid
+
+
 class index_namer(object):
     def __init__(self, prefix):
         self.prefix = prefix
@@ -64,7 +127,7 @@ class index_namer(object):
 
 
 CENSUS_URL = 'http://www.census.gov/geo/maps-data/data/tiger.html'
-LAST_UPDATE = date(2015, 1, 28)
+LAST_UPDATE = date(2015, 4, 24)
 defaults = dict(last_updated=LAST_UPDATE,
                 domain='United States',
                 authority='US Census Bureau',
@@ -199,4 +262,20 @@ boundaries.register('place-13',
                     end_date=date(2015, 1, 1),
                     encoding='latin-1',
                     **defaults
+                   )
+
+boundaries.register('nh-12',
+                    singular='nh-12',
+                    file='nh-12/',
+                    name_func=nh_12_namer,
+                    id_func=geoid_nh_12_namer,
+                    start_date=date(2013, 1, 1),
+                    last_updated=LAST_UPDATE,
+                    domain='United States',
+                    authority='NH Office of Energy and Planning',
+                    source_url='http://www.nh.gov/oep/planning/services/gis/political-districts.htm',
+                    license_URL='http://www.nh.gov/oep/planning/services/gis/political-districts.htm',
+                    data_url='ftp://pubftp.nh.gov/OEP/NHHouseDists2012.zip',
+                    notes='',
+                    extra='{}',
                    )
