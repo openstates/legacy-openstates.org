@@ -10,5 +10,5 @@ DjangoRestless
 
 -e git://github.com/opencivicdata/pupa.git#egg=pupa
 
--e git://github.com/jamesturk/represent-boundaries.git#egg=boundaries
+represent-boundaries
 -e git://github.com/sunlightlabs/django-locksmith.git@python3#egg=django-locksmith
