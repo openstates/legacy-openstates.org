@@ -99,10 +99,26 @@ def download_places():
         _extract_cwd(x)
 
 
-def download_nh():
-    _download_file("ftp://pubftp.nh.gov/OEP/NHSenateDists2012.zip", "downloads/nh-12")
-    _download_file("ftp://pubftp.nh.gov/OEP/NHHouseDists2012.zip", "downloads/nh-12")
-    _extract_cwd("downloads/nh-12")
+def download_nh_floterial():
+    # The New Hampshire server is temporarily down, so use a mirrored ZIP file
+    # Check here for updates:
+    # https://www.nh.gov/oep/planning/services/gis/political-districts.htm
+    # _download_file("ftp://pubftp.nh.gov/OEP/NHHouseDists2012.zip", "downloads/nh-12")
+    _download_file("https://s3.amazonaws.com/opencivicdata/mirror/NHHouseDists2012.zip", "downloads/nh-12")
+
+    # Only want the floterial file, not the main district file
+    pop = os.path.abspath(os.getcwd())
+    os.chdir("downloads/nh-12")
+    dirname = os.path.basename(os.getcwd())
+
+    for f in glob.glob('*.zip'):
+        os.system('unzip -o %s' % f)
+
+    for path in _list_files("dbf", "prj", "shp", "xml", "shx"):
+        if "NHHouse2012Float" in path:
+            os.renames(path, "../../shapefiles/{dirname}/{path}".format(**locals()))
+
+    os.chdir(pop)
 
 
 def download_cds():
@@ -132,7 +148,7 @@ def download_zcta():
 
 
 if __name__ == '__main__':
-    download_nh()
+    download_nh_floterial()
     download_counties()
     download_places()
     download_cds()
