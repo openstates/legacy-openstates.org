@@ -18,7 +18,7 @@ $(document).ready(function() {
   $.pjax.defaults.scrollTo = false;
 
   // Initialize the calendar.
-  $("#calendar").calendarWidget({month: {{event.when.month}},
+  $("#calendar").calendarWidget({month: {{event.when.month}}-1,
                                  year: {{event.when.year}}});
 
   // Kill the unused nav buttons.
