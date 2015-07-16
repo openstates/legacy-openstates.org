@@ -5,7 +5,6 @@ def test_ak_zcta_99801_redistricting():
     ''' https://sunlightfoundation.supportbee.com/tickets/4308139 '''
 
     ZCTA_CENTER = {'lat': 57.65, 'lon': -134.00}
-    assert 'ocd-division/country:us/state:ak/sldl:34' in get_divisions_for(ZCTA_CENTER)
     assert 'ocd-division/country:us/state:ak/sldl:35' in get_divisions_for(ZCTA_CENTER)
 
     # assert 'ocd-division/country:us/state:ak/sldl:31' in get_divisions_for(ZCTA_CENTER, SESSION_2013)
