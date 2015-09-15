@@ -1,4 +1,6 @@
 import os
+from billy_local import SECRET_KEY
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -43,7 +45,8 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'boh2w74##xm+*25ybdk6dmyj2$c)v%nl!sp7zlg$fp+e!q47#('
+# importing this only to prevent accidental exposure!
+#SECRET_KEY = 'not_so_secret'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -129,3 +132,4 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login/sunlight/'
 
 LOCKSMITH_REGISTRATION_URL = 'http://services.sunlightlabs.com/accounts/register/'
+
