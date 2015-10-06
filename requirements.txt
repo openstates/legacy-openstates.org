@@ -1,11 +1,11 @@
-Django
+Django<1.7
 django-storages
 markdown
 docutils
 django-pjax
 psycopg2
 raven
--e hg+https://bitbucket.org/jespern/django-piston#egg=django-piston
--e git://github.com/sunlightlabs/django-locksmith.git#egg=django-locksmith
--e git://github.com/sunlightlabs/billy.git#egg=billy
+django-piston
+django-locksmith
+billy
 -e git://github.com/sunlightlabs/django-sunlightauth.git#egg=django-sunlightauth
