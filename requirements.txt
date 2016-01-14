@@ -1,4 +1,4 @@
-Django
+Django<1.7
 django-storages
 markdown
 docutils
