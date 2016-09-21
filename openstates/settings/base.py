@@ -61,7 +61,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
-    'locksmith.mongoauth.middleware.APIKeyMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -89,20 +88,8 @@ INSTALLED_APPS = (
     'billy.web.api',
     'billy.web.admin',
     'billy.web.public',
-    'locksmith.mongoauth',
-    'social.apps.django_app.default',
     'markup_tags',
-    'funfacts',
 )
-
-AUTHENTICATION_BACKENDS = (
-    'sunlightauth.backends.SunlightBackend',
-)
-
-SUNLIGHT_AUTH_BASE_URL = 'https://login.sunlightfoundation.com/'
-SOCIAL_AUTH_SUNLIGHT_KEY = 'openstates'
-#SOCIAL_AUTH_SUNLIGHT_SECRET = 'set in local settings'
-SUNLIGHT_AUTH_SCOPE = []
 
 LOGGING = {
     'version': 1,
@@ -130,6 +117,3 @@ LOGGING = {
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login/sunlight/'
-
-LOCKSMITH_REGISTRATION_URL = 'http://services.sunlightlabs.com/accounts/register/'
-

@@ -28,11 +28,6 @@ urlpatterns = patterns('',
     (r'^api/events/$', RedirectView.as_view(url='http://sunlightlabs.github.io/openstates-api/events.html')),
     (r'^api/districts/$', RedirectView.as_view(url='http://sunlightlabs.github.io/openstates-api/districts.html')),
 
-
-    # locksmith & sunlightauth
-    (r'^api/locksmith/', include('locksmith.mongoauth.urls')),
-    (r'', include('sunlightauth.urls')),
-
     (r'^api/', include('billy.web.api.urls')),
     (r'^admin/', include('billy.web.admin.urls')),
     (r'^djadmin/', include(admin.site.urls)),

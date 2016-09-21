@@ -1,10 +1,8 @@
 from base import *
- 
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
- 
-USE_LOCKSMITH = False
- 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
