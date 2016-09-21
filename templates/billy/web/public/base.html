@@ -11,7 +11,6 @@
     <meta property="og:type" content="cause">
     <meta property="og:image" content="{% static 'images/fbshare.jpg' %}">
     <meta property="og:site_name" content="Open States">
-    <script>var _sf_startpt=(new Date()).getTime()</script>
     <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}?withbanner" />
     <link rel="stylesheet" type="text/css" href="{% static 'select2-2.0/select2.css' %}"/>
 
@@ -25,33 +24,22 @@
     <script src="https://s3.amazonaws.com/assets.sunlightfoundation.com/social/scripts/simple-socialite-pack.min.js"></script>
     {% block headblock %}{% endblock %}
 
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-1265484-77', 'openstates.org');
-ga('send', 'pageview');
-ga('create', 'UA-48789618-1', 'openstates.org', {'name': 'global'});
-ga('global.send', 'pageview');
-</script>
-
 </head>
 
 <body
     class="{% block bodyclass %}{% endblock %}"
     id="{% block body_id %}{% endblock %}">
-    <!--[if lt IE 9]>
-    <p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p>
-    <![endif]-->
 
     <header id="mainHeader">
         <div id="login" class="tip">
+            &nbsp;
+            {% comment %}
             {% if request.user.is_authenticated %}
             {{request.user.first_name|default:request.user}} | <a href="{% url 'user_favorites' %}">View your favorites</a> or <a href="{% url 'logout' %}">sign out</a>
             {% else %}
                 <a href="/login/sunlight/?next={{request.get_full_path}}">Login or Sign up</a>
-            {% endif %}
+                {% endif %}
+            {% endcomment %}
         </div>
         <form action="/{{abbr|default:'all'}}/search/" method="get" id="searchform">
             <input class="transparent search" type="search" name="search_text" id="id_q" placeholder="{% if abbr and abbr != 'all' %} {% blocktrans with metadata.name as state_name %} Search {{state_name}} for bills or legislators {% endblocktrans %} {% else %} {% blocktrans with abbr|upper as state_name %} Search for bills or legislators across all states {% endblocktrans %} {% endif %}">
