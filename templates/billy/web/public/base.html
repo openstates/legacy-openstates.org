@@ -23,21 +23,6 @@
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <script src="{% static 'js/jquery.calendar-widget.js' %}"></script>
     <script src="https://s3.amazonaws.com/assets.sunlightfoundation.com/social/scripts/simple-socialite-pack.min.js"></script>
-
-    <!-- Branding bar -->
-    <link rel="stylesheet" href="https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.4/css/brandingbar.css">
-    <link rel="stylesheet" href="https://sunlight-cdn.s3.amazonaws.com/sf-icons/0.2/css/sf-icons.css">
-    <!-- Branding bar end -->
-
-    <!--[if IE 8]>
-    <link rel="stylesheet" type="text/css" href="{% static 'ie8.css' %}"/>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <script src="{% static 'js/jquery-placehold.min.js' %}"></script>
-    <script>
-     // add placeholders
-     $("input, textarea").placehold();
-    </script>
-    <![endif]-->
     {% block headblock %}{% endblock %}
 
 <script>
@@ -59,8 +44,6 @@ ga('global.send', 'pageview');
     <!--[if lt IE 9]>
     <p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p>
     <![endif]-->
-
-    <div class="branding-bar" data-bb-brandingbar="true" data-bb-property-id="sunlightlabs-awesome"></div>
 
     <header id="mainHeader">
         <div id="login" class="tip">
@@ -150,7 +133,6 @@ ga('global.send', 'pageview');
                             </ul>
                         </dd>
 
-
                     </dl>
                 </div>
                 <h4 class="withTip footerheaders noCap">{% trans "Like This Project and Want to Discover Others Like It?" %}</h4>
@@ -165,31 +147,4 @@ ga('global.send', 'pageview');
             </div>
         </footer>
     </div>
-
-<!-- Branding bar -->
-<script src="https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.4/js/brandingbar.min.js.gz"></script>
-<!--[if IE 8]>
-    <script src="https://sunlight-cdn.s3.amazonaws.com/sf-icons/0.3/js/sf-icons.js"></script>
-<![endif]-->
-<!-- Branding bar end -->
-
-<script>
-  /* chartbeat */
-  var _sf_async_config = { uid: 980, domain: 'openstates.org' };
-  (function() {
-    function loadChartbeat() {
-      window._sf_endpt = (new Date()).getTime();
-      var e = document.createElement('script');
-      e.setAttribute('language', 'javascript');
-      e.setAttribute('type', 'text/javascript');
-      e.setAttribute('src',
-        (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
-        "js/chartbeat.js");
-      document.body.appendChild(e);
-    };
-    var oldonload = window.onload;
-    window.onload = (typeof window.onload != 'function') ?
-      loadChartbeat : function() { oldonload(); loadChartbeat(); };
-  })();
-</script>
 </body>

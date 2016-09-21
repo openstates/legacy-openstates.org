@@ -244,7 +244,7 @@ a.tip:hover { color: #d6ac04; }
  }
 
 #searchAddressform { width: ; margin-top: 5px; }
-header#mainHeader { background: url(images/bg_header.jpg) top left no-repeat; min-height: 226px; margin-top: 8px;}
+header#mainHeader { background: url(images/bg_header.jpg) top left no-repeat; min-height: 226px; margin-top: 8px; margin-top: 53px;}
 .home header#mainHeader { margin-bottom: 40px;}
 
 #mainHeader h1 { width: 414px; height: 46px; padding-top: 27px; float: left; padding-right:100px; padding-bottom:64px}
@@ -1493,32 +1493,6 @@ div.noPad .favorite {
 
 table.withFilter{
     clear:both;
-}
-
-/* Sunlight Hat */
-
-.hatWrap {
-    background: url("images/hat.jpg") repeat-x scroll center top transparent;
-    height: 53px;
-}
-
-.hatWrap div.contentWrapper {
-    margin-top: 0;
-    overflow: visible;
-    width:940px;
-    margin-right: auto;
-    margin-left: auto;
-}
-
-.productOf {
-    background: url("images/productof.jpg") no-repeat scroll center top transparent;
-    display: block;
-    float: right;
-    height: 29px;
-    margin-right: 10px;
-    margin-top: 6px;
-    text-indent: -99999em;
-    width: 218px;
 }
 
 
