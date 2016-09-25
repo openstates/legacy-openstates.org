@@ -16,6 +16,7 @@ urlpatterns = patterns('',
     (r'^categorization/$', TemplateView.as_view(template_name='flat/categorization.html')),
     (r'^csv_downloads/$', TemplateView.as_view(template_name='flat/csv_downloads.html')),
     (r'^reportcard/$', TemplateView.as_view(template_name='flat/reportcard.html')),
+    (r'^tos/$', TemplateView.as_view(template_name='flat/tos.html')),
     (r'^map_svg/$', TemplateView.as_view(template_name='flat/openstatesmap.svg')),
 
     # api docs
