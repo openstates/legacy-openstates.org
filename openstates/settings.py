@@ -1,13 +1,19 @@
 import os
-from billy_local import SECRET_KEY
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+
+if os.environ.get('DEBUG', 'true').lower() == 'false':
+    DEBUG = False
+    TEMPLATE_DEBUG = DEBUG
+    ALLOWED_HOSTS = ['*']
+    SECRET_KEY = os.environ['SECRET_KEY']
+else:
+    DEBUG = True
+    ALLOWED_HOSTS = ['*']
+    SECRET_KEY = os.environ.get('SECRET_KEY', 'debug-secret-key')
+
 
 ADMINS = (
-    ('James Turk', 'jturk@sunlightfoundation.com'),
-    ('Thom Neale', 'tneale@sunlightfoundation.com'),
-    ('Paul Tagliamonte', 'paultag@sunlightfoundation.com'),
+    ('James Turk', 'james.p.turk@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -19,7 +25,7 @@ DATABASES = {
     }
 }
 
-TIME_ZONE = 'UTC'  # or 'America/New_York'?
+TIME_ZONE = 'UTC'
 LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
 
@@ -43,10 +49,8 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Make this unique, and don't share it with anybody.
-# importing this only to prevent accidental exposure!
-#SECRET_KEY = 'not_so_secret'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -65,6 +69,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -80,6 +85,7 @@ TEMPLATE_DIRS = (
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.humanize',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
