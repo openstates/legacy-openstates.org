@@ -37,7 +37,7 @@
             {% if request.user.is_authenticated %}
             {{request.user.first_name|default:request.user}} | <a href="{% url 'user_favorites' %}">View your favorites</a> or <a href="{% url 'logout' %}">sign out</a>
             {% else %}
-                <a href="/login/sunlight/?next={{request.get_full_path}}">Login or Sign up</a>
+                <a href="#">Login or Sign up</a>
                 {% endif %}
             {% endcomment %}
         </div>
@@ -87,8 +87,8 @@
     <div id="footerWrapper">
         <footer>
             <div id="footerLt">
-                <p>{% trans 'Our <a href="http://sunlightfoundation.com/legal/privacy/">privacy policy</a> details how personally identifiable information that is collected on our websites is handled. Read our <a href="http://sunlightfoundation.com/legal/terms/">terms of service</a>' %}.</p>
-                <p>{% trans 'This work by <a href="http://sunlightfoundation.com">Sunlight Foundation</a>, unless <a href="/about/">otherwise noted</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution 3.0 United States License</a>.' %}</p>
+                <p>{% trans 'Our <a href="/privacy/">privacy policy</a> details how personally identifiable information that is collected on our websites is handled.' %}</p>
+                <p>{% trans 'This work, unless otherwise noted, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution 3.0 United States License</a>.' %}</p>
             </div>
             <div id="footerRt">
                 <div id="recources">
@@ -108,15 +108,12 @@
                                 <li><a href="http://sunlightlabs.github.io/openstates-api/">{% trans 'API' %}</a></li>
                                 <li><a href="/downloads/">{% trans 'Bulk Downloads' %}</a></li>
                                 <li><a href="http://python-sunlight.readthedocs.org/">{% trans 'Python Client Library' %}</a></li>
-                                <li><a href="http://sunlight.atlassian.net">{% trans 'Issue Tracker' %}</a></li>
                             </ul>
                         </dd>
                         <dt class="clear">{% trans 'Contribute:' %}</dt>
                         <dd>
                             <ul>
-                                <li><a href="/contributing/">{% trans "Contributor&rsquo;s Guide" %}</a></li>
-                                <li><a href="http://github.com/sunlightlabs/openstates/">{% trans 'Code on GitHub' %}</a></li>
-                                <li><a href="http://readthedocs.org/docs/billy/en/latest/scrapers.html">{% trans 'Writing Scrapers' %}</a></li>
+                                <li><a href="http://github.com/openstates/">{% trans 'Code on GitHub' %}</a></li>
                             </ul>
                         </dd>
 
