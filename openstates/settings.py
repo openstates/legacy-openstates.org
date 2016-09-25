@@ -78,7 +78,7 @@ ROOT_URLCONF = 'openstates.urls'
 WSGI_APPLICATION = 'openstates.wsgi.application'
 
 TEMPLATE_DIRS = (
-    os.path.abspath(os.path.join(os.path.dirname(__file__), '../..', 'templates')),
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'templates')),
 )
 
 INSTALLED_APPS = (
