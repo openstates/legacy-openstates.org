@@ -22,3 +22,4 @@ billy_local.py
 .python_history
 */settings/local.py
 *.sqlite3
+collected_static/
