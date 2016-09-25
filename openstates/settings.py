@@ -40,16 +40,16 @@ DATE_FORMAT = 'Y-m-d'
 TIME_FORMAT = 'H:i:s'
 DATETIME_FORMAT = 'Y-m-d H:i:s'
 
-STATIC_ROOT = os.path.join(os.path.dirname(__file__), '../..', 'collected_static')
+STATIC_ROOT = os.path.join(os.path.dirname(__file__), '..', 'collected_static')
 STATIC_URL = '/media/'
 STATICFILES_DIRS = (
-    os.path.abspath(os.path.join(os.path.dirname(__file__), '../..', 'media')),
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'media')),
 )
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 
 # List of callables that know how to import templates from various sources.
@@ -69,7 +69,6 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -85,7 +84,6 @@ TEMPLATE_DIRS = (
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.humanize',
-    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
