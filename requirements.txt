@@ -1,6 +1,4 @@
 Django<1.7
-markdown
-docutils
 django-pjax
 psycopg2
 whitenoise<3

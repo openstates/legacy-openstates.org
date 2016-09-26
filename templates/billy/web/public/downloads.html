@@ -8,38 +8,35 @@
 {% block flatpage %}
 <h2> {% trans "Bulk Downloads" %} </h2>
 
-{% rest %}
 Because it is often convenient to get all of a state's data for testing or offline use, we provide bulk downloads of our data.
 
 We currently offer bulk data in two formats, JSON and CSV.
 
 
-JSON Archives
-=============
+<h3>JSON Archives</h3>
 
 The data contained in these downloads is in the same format as that obtained via the
-`API <http://sunlightlabs.github.io/openstates-api/>`_. (Refer to those pages for specifics on file formats.)
+<a href="http://sunlightlabs.github.io/openstates-api/">API</a>. (Refer to those pages for specifics on file formats.)
 
 These downloads are not intended as a replacement for using the API.  The
 main deficit you'll notice is that they lag up to a month (but usually not more)
 behind the current data.  This makes them useful for general research
 purposes or initializing a database that will then be kept up to date
-via regular calls.  If you'd like more current data please use the `API <http://sunlightlabs.github.io/openstates-api/>`_.
+via regular calls.  If you'd like more current data please use the API.
 
-CSV Archives
-============
+<h3>
+    CSV Archives
+</h3>
 
 In addition to the JSON archives, we now also have CSV downloads available.
 
-`Documentation on the CSV bulk files </csv_downloads/>`_.
+<a href="/csv_downloads/">Documentation on the CSV bulk files</a>.
 
 Like the JSON archives, these aren't intended as a replacement for the API.
 In addition to being older than the data provided via the API CSV files
 do not reflect extra fields that the JSON files are able to include. This
 is due to an inherent limitation of the CSV format. If extra fields are
-required you should use the JSON downloads or `API <http://sunlightlabs.github.io/openstates-api/>`_.
-
-{% endrest %}
+required you should use the JSON downloads or API.
 
 <h3> Downloads </h3>
 <table id="download_list">
