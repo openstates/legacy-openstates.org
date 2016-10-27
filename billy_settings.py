@@ -1,10 +1,8 @@
 import os
 
-from os.path import abspath, dirname, join
-
-MONGO_HOST = 'localhost'
-MONGO_PORT = 27017
-MONGO_DATABASE = 'fiftystates'
+MONGO_HOST = os.environ.get('MONGO_HOST', 'localhost')
+MONGO_PORT = os.environ.get('MONGO_PORT', 27017)
+MONGO_DATABASE = os.environ.get('MONGO_DATABASE', 'fiftystates')
 
 BILLY_PARTY_DETAILS = {
     # reminder: think through Singular, Plural, Adjective
@@ -81,8 +79,3 @@ BILLY_ENABLE_DOCUMENT_VIEW = {
     'wv': False,
     'wv': False
 }
-
-try:
-    from billy_local import *
-except ImportError:
-    print('no billy local')

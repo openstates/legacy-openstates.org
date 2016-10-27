@@ -6,7 +6,7 @@
 
 {% block title %}{% trans "Open States: discover politics in your state" %}{% endblock %}
 {% block description %}{% trans "Follow politics in your state legislature. Find your legislators, see how they vote and browse bills, committees and events." %} {% endblock %}
-{% block share_options %} data-twitter-options="title=Open%20States:%20discover%20politics%20in%20your%20state%20with%20@OpenStates%20from%20@SunFoundation" {% endblock %}
+{% block share_options %} data-twitter-options="title=Open%20States:%20discover%20politics%20in%20your%20state%20with%20@OpenStates%20from%20@openstates" {% endblock %}
 
 {% block headblock %}
 <script src="{% static 'js/d3.v3.min.js' %}"></script>
@@ -51,7 +51,7 @@
 	        		<a href="/all/bills/">{% trans "Search upcoming legislation" %}</a>
 	        	</li>
 	        	<li>
-	        		<a href="/favorites/">{% trans "Track bill progress" %}</a>
+	        		{% trans "Track bill progress" %}
 	        	</li>
 	        </ul>
         </div>
@@ -79,10 +79,6 @@
             </div>
         </div>
         <div class="sidebar fourCol colRt">
-            <div class="module" >
-                <h4 id="appBox" class="tipSm">{% trans "Want the app?" %}</h4>
-                <p>{% trans 'Explore Open States on your iPhone or iPad.' %} <a href="https://itunes.apple.com/us/app/open-states/id500672932?mt=8">{% trans 'Download the free app.' %}</a></p>
-    	    </div>
             <div class="module" >
                 <h4 id="videoBox" class="tipSm">{% trans "Learn more:" %}</h4>
                 <iframe width="230" height="140" src="http://www.youtube.com/embed/lHKbMg1tPsg?rel=0"></iframe>

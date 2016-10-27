@@ -12,11 +12,11 @@ urlpatterns = patterns('',
     (r'^about/$', TemplateView.as_view(template_name='flat/about.html')),
     (r'^methodology/$', TemplateView.as_view(template_name='flat/methodology.html')),
     (r'^contributing/$', TemplateView.as_view(template_name='flat/contributing.html')),
-    (r'^thanks/$', TemplateView.as_view(template_name='flat/thanks.html')),
     (r'^contact/$', TemplateView.as_view(template_name='flat/contact.html')),
     (r'^categorization/$', TemplateView.as_view(template_name='flat/categorization.html')),
     (r'^csv_downloads/$', TemplateView.as_view(template_name='flat/csv_downloads.html')),
     (r'^reportcard/$', TemplateView.as_view(template_name='flat/reportcard.html')),
+    (r'^tos/$', TemplateView.as_view(template_name='flat/tos.html')),
     (r'^map_svg/$', TemplateView.as_view(template_name='flat/openstatesmap.svg')),
 
     # api docs
@@ -27,11 +27,6 @@ urlpatterns = patterns('',
     (r'^api/legislators/$', RedirectView.as_view(url='http://sunlightlabs.github.io/openstates-api/legislators.html')),
     (r'^api/events/$', RedirectView.as_view(url='http://sunlightlabs.github.io/openstates-api/events.html')),
     (r'^api/districts/$', RedirectView.as_view(url='http://sunlightlabs.github.io/openstates-api/districts.html')),
-
-
-    # locksmith & sunlightauth
-    (r'^api/locksmith/', include('locksmith.mongoauth.urls')),
-    (r'', include('sunlightauth.urls')),
 
     (r'^api/', include('billy.web.api.urls')),
     (r'^admin/', include('billy.web.admin.urls')),

@@ -1,13 +1,19 @@
 import os
-from billy_local import SECRET_KEY
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
+
+if os.environ.get('DEBUG', 'true').lower() == 'false':
+    DEBUG = False
+    TEMPLATE_DEBUG = DEBUG
+    ALLOWED_HOSTS = ['*']
+    SECRET_KEY = os.environ['SECRET_KEY']
+else:
+    DEBUG = True
+    ALLOWED_HOSTS = ['*']
+    SECRET_KEY = os.environ.get('SECRET_KEY', 'debug-secret-key')
+
 
 ADMINS = (
-    ('James Turk', 'jturk@sunlightfoundation.com'),
-    ('Thom Neale', 'tneale@sunlightfoundation.com'),
-    ('Paul Tagliamonte', 'paultag@sunlightfoundation.com'),
+    ('James Turk', 'james.p.turk@gmail.com'),
 )
 
 MANAGERS = ADMINS
@@ -19,7 +25,7 @@ DATABASES = {
     }
 }
 
-TIME_ZONE = 'UTC'  # or 'America/New_York'?
+TIME_ZONE = 'UTC'
 LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
 
@@ -34,19 +40,17 @@ DATE_FORMAT = 'Y-m-d'
 TIME_FORMAT = 'H:i:s'
 DATETIME_FORMAT = 'Y-m-d H:i:s'
 
-STATIC_ROOT = os.path.join(os.path.dirname(__file__), '../..', 'collected_static')
+STATIC_ROOT = os.path.join(os.path.dirname(__file__), '..', 'collected_static')
 STATIC_URL = '/media/'
 STATICFILES_DIRS = (
-    os.path.abspath(os.path.join(os.path.dirname(__file__), '../..', 'media')),
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'media')),
 )
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-# Make this unique, and don't share it with anybody.
-# importing this only to prevent accidental exposure!
-#SECRET_KEY = 'not_so_secret'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -61,7 +65,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
-    'locksmith.mongoauth.middleware.APIKeyMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -75,7 +78,7 @@ ROOT_URLCONF = 'openstates.urls'
 WSGI_APPLICATION = 'openstates.wsgi.application'
 
 TEMPLATE_DIRS = (
-    os.path.abspath(os.path.join(os.path.dirname(__file__), '../..', 'templates')),
+    os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'templates')),
 )
 
 INSTALLED_APPS = (
@@ -89,20 +92,8 @@ INSTALLED_APPS = (
     'billy.web.api',
     'billy.web.admin',
     'billy.web.public',
-    'locksmith.mongoauth',
-    'social.apps.django_app.default',
     'markup_tags',
-    'funfacts',
 )
-
-AUTHENTICATION_BACKENDS = (
-    'sunlightauth.backends.SunlightBackend',
-)
-
-SUNLIGHT_AUTH_BASE_URL = 'https://login.sunlightfoundation.com/'
-SOCIAL_AUTH_SUNLIGHT_KEY = 'openstates'
-#SOCIAL_AUTH_SUNLIGHT_SECRET = 'set in local settings'
-SUNLIGHT_AUTH_SCOPE = []
 
 LOGGING = {
     'version': 1,
@@ -129,7 +120,3 @@ LOGGING = {
 }
 
 LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = '/login/sunlight/'
-
-LOCKSMITH_REGISTRATION_URL = 'http://services.sunlightlabs.com/accounts/register/'
-

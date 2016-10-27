@@ -11,7 +11,6 @@
     <meta property="og:type" content="cause">
     <meta property="og:image" content="{% static 'images/fbshare.jpg' %}">
     <meta property="og:site_name" content="Open States">
-    <script>var _sf_startpt=(new Date()).getTime()</script>
     <link rel="stylesheet" type="text/css" href="{% static 'main.css' %}?withbanner" />
     <link rel="stylesheet" type="text/css" href="{% static 'select2-2.0/select2.css' %}"/>
 
@@ -23,52 +22,24 @@
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
     <script src="{% static 'js/jquery.calendar-widget.js' %}"></script>
     <script src="https://s3.amazonaws.com/assets.sunlightfoundation.com/social/scripts/simple-socialite-pack.min.js"></script>
-
-    <!-- Branding bar -->
-    <link rel="stylesheet" href="https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.4/css/brandingbar.css">
-    <link rel="stylesheet" href="https://sunlight-cdn.s3.amazonaws.com/sf-icons/0.2/css/sf-icons.css">
-    <!-- Branding bar end -->
-
-    <!--[if IE 8]>
-    <link rel="stylesheet" type="text/css" href="{% static 'ie8.css' %}"/>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <script src="{% static 'js/jquery-placehold.min.js' %}"></script>
-    <script>
-     // add placeholders
-     $("input, textarea").placehold();
-    </script>
-    <![endif]-->
     {% block headblock %}{% endblock %}
-
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-1265484-77', 'openstates.org');
-ga('send', 'pageview');
-ga('create', 'UA-48789618-1', 'openstates.org', {'name': 'global'});
-ga('global.send', 'pageview');
-</script>
 
 </head>
 
 <body
     class="{% block bodyclass %}{% endblock %}"
     id="{% block body_id %}{% endblock %}">
-    <!--[if lt IE 9]>
-    <p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p>
-    <![endif]-->
-
-    <div class="branding-bar" data-bb-brandingbar="true" data-bb-property-id="sunlightlabs-awesome"></div>
 
     <header id="mainHeader">
         <div id="login" class="tip">
+            &nbsp;
+            {% comment %}
             {% if request.user.is_authenticated %}
             {{request.user.first_name|default:request.user}} | <a href="{% url 'user_favorites' %}">View your favorites</a> or <a href="{% url 'logout' %}">sign out</a>
             {% else %}
-                <a href="/login/sunlight/?next={{request.get_full_path}}">Login or Sign up</a>
-            {% endif %}
+                <a href="#">Login or Sign up</a>
+                {% endif %}
+            {% endcomment %}
         </div>
         <form action="/{{abbr|default:'all'}}/search/" method="get" id="searchform">
             <input class="transparent search" type="search" name="search_text" id="id_q" placeholder="{% if abbr and abbr != 'all' %} {% blocktrans with metadata.name as state_name %} Search {{state_name}} for bills or legislators {% endblocktrans %} {% else %} {% blocktrans with abbr|upper as state_name %} Search for bills or legislators across all states {% endblocktrans %} {% endif %}">
@@ -116,9 +87,8 @@ ga('global.send', 'pageview');
     <div id="footerWrapper">
         <footer>
             <div id="footerLt">
-                <a class="textReplace" id="sunlight" href="http://www.sunlightfoundation.com">Sunlight Foundation</a>
-                <p>{% trans 'Our <a href="http://sunlightfoundation.com/legal/privacy/">privacy policy</a> details how personally identifiable information that is collected on our websites is handled. Read our <a href="http://sunlightfoundation.com/legal/terms/">terms of service</a>' %}.</p>
-                <p>{% trans 'This work by <a href="http://sunlightfoundation.com">Sunlight Foundation</a>, unless <a href="/about/">otherwise noted</a>, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution 3.0 United States License</a>.' %}</p>
+                <p>{% trans 'Our <a href="/tos/">terms of service</a> details how personally identifiable information that is collected on our websites is handled.' %}</p>
+                <p>{% trans 'This work, unless otherwise noted, is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution 3.0 United States License</a>.' %}</p>
             </div>
             <div id="footerRt">
                 <div id="recources">
@@ -138,58 +108,28 @@ ga('global.send', 'pageview');
                                 <li><a href="http://sunlightlabs.github.io/openstates-api/">{% trans 'API' %}</a></li>
                                 <li><a href="/downloads/">{% trans 'Bulk Downloads' %}</a></li>
                                 <li><a href="http://python-sunlight.readthedocs.org/">{% trans 'Python Client Library' %}</a></li>
-                                <li><a href="http://sunlight.atlassian.net">{% trans 'Issue Tracker' %}</a></li>
                             </ul>
                         </dd>
                         <dt class="clear">{% trans 'Contribute:' %}</dt>
                         <dd>
                             <ul>
-                                <li><a href="/contributing/">{% trans "Contributor&rsquo;s Guide" %}</a></li>
-                                <li><a href="http://github.com/sunlightlabs/openstates/">{% trans 'Code on GitHub' %}</a></li>
-                                <li><a href="http://readthedocs.org/docs/billy/en/latest/scrapers.html">{% trans 'Writing Scrapers' %}</a></li>
+                                <li><a href="http://github.com/openstates/">{% trans 'Code on GitHub' %}</a></li>
                             </ul>
                         </dd>
 
-
                     </dl>
                 </div>
-                <h4 class="withTip footerheaders noCap">{% trans "Like This Project and Want to Discover Others Like It?" %}</h4>
-                <span class="tip">{% trans "Join the Sunlight Foundation&rsquo;s open government community to learn more" %}</span>
-                <form action="http://organizing.sunlightfoundation.com/page/s/open-states" method="post" id="submit">
-                    <input type="text" name="email" placeholder="{% trans 'your email address' %}">
-                    <input type="text" name="zip" placeholder="{% trans 'your zip code' %}">
-                    <button type="submit">
-                        <span>{% trans "SignUp" %}</span>
-                    </button>
-                </form>
             </div>
         </footer>
     </div>
-
-<!-- Branding bar -->
-<script src="https://sunlight-cdn.s3.amazonaws.com/brandingbar/0.4/js/brandingbar.min.js.gz"></script>
-<!--[if IE 8]>
-    <script src="https://sunlight-cdn.s3.amazonaws.com/sf-icons/0.3/js/sf-icons.js"></script>
-<![endif]-->
-<!-- Branding bar end -->
-
 <script>
-  /* chartbeat */
-  var _sf_async_config = { uid: 980, domain: 'openstates.org' };
-  (function() {
-    function loadChartbeat() {
-      window._sf_endpt = (new Date()).getTime();
-      var e = document.createElement('script');
-      e.setAttribute('language', 'javascript');
-      e.setAttribute('type', 'text/javascript');
-      e.setAttribute('src',
-        (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
-        "js/chartbeat.js");
-      document.body.appendChild(e);
-    };
-    var oldonload = window.onload;
-    window.onload = (typeof window.onload != 'function') ?
-      loadChartbeat : function() { oldonload(); loadChartbeat(); };
-  })();
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-84709685-1', 'auto');
+  ga('send', 'pageview');
 </script>
 </body>
+</html>
