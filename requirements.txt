@@ -1,16 +1,13 @@
-Django>=1.8
+Django<=1.10
 psycopg2
 pyelasticsearch
 django-appconf
 pyshp
-raven!=4.1
 dj-database-url
 opencivicdata-divisions
 DjangoRestless
 
 -e git://github.com/opencivicdata/pupa.git#egg=pupa
+-e git://github.com/opencivicdata/imago.git#egg=imago
 
 represent-boundaries
--e git://github.com/sunlightlabs/django-locksmith.git@python3#egg=django-locksmith
-
--e git://github.com/sunlightlabs/waterfall.git#egg=waterfall

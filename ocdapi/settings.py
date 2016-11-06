@@ -13,13 +13,9 @@ def envvar(name, default=None):
 SECRET_KEY = envvar('SECRET_KEY', 'ITSASECRET')
 RAVEN_DSN = envvar('RAVEN_DSN', '')
 ALLOWED_HOSTS = envvar('ALLOWED_HOSTS', '*').split(',')
-DATABASES = {'default': dj_database_url.config(default='postgis://opencivicdata:test@10.42.2.101/opencivicdata')}
+DATABASES = {'default': dj_database_url.config(default='postgis://openstates:test@localhost/openstates')}
 ELASTICSEARCH_HOST = envvar('ELASTICSEARCH_HOST', 'http://localhost:9200')
 TEMPLATE_DEBUG = DEBUG = envvar('DJANGO_DEBUG', 'False').lower() == 'true'
-USE_LOCKSMITH = envvar('USE_LOCKSMITH', 'false').lower() == 'true'
-if USE_LOCKSMITH:
-    LOCKSMITH_SIGNING_KEY = envvar('LOCKSMITH_SIGNING_KEY')
-
 
 # settings we don't override
 TIME_ZONE = 'America/New_York'
@@ -119,14 +115,6 @@ LOGGING = {
         },
     }
 }
-
-# locksmith stuff
-if USE_LOCKSMITH:
-    INSTALLED_APPS += ('locksmith.auth.apps.LocksmithAuthConfig',)
-    MIDDLEWARE_CLASSES += ('locksmith.auth.middleware.APIKeyMiddleware',)
-    LOCKSMITH_REGISTRATION_URL = 'http://sunlightfoundation.com/api/accounts/register/#ocd'
-    LOCKSMITH_HUB_URL = 'http://sunlightfoundation.com/api/analytics/'
-    LOCKSMITH_API_NAME = 'opencivicdata'
 
 BOUNDARIES_SHAPEFILES_DIR = 'shapefiles'
 IMAGO_COUNTRY = 'us'
