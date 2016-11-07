@@ -21,6 +21,12 @@ import os
 # os.environ["DJANGO_SETTINGS_MODULE"] = "newapi.settings"
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ocdapi.settings")
 
+try:
+    import newrelic.agent
+    newrelic.agent.initialize('/home/ocdapi/newrelic.ini')
+except Exception as e:
+    print("newrelic couldn't be initialized:", e)
+
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION
 # setting points here.
