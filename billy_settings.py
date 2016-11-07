@@ -3,6 +3,8 @@ import os
 MONGO_HOST = os.environ.get('MONGO_HOST', 'localhost')
 MONGO_PORT = os.environ.get('MONGO_PORT', 27017)
 MONGO_DATABASE = os.environ.get('MONGO_DATABASE', 'fiftystates')
+BOUNDARY_SERVICE_URL = os.environ.get('BOUNDARY_SERVICE_URL', 'http://localhost:9000/')
+API_KEY = 'na'
 
 BILLY_PARTY_DETAILS = {
     # reminder: think through Singular, Plural, Adjective
@@ -23,7 +25,6 @@ BILLY_PARTY_DETAILS = {
 }
 
 BOUNDARY_SERVICE_SETS = 'sldl-14,sldu-14'
-BOUNDARY_SERVICE_URL = ''
 
 BILLY_ENABLE_DOCUMENT_VIEW = {
     'ak': True,
