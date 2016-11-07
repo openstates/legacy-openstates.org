@@ -5,6 +5,7 @@ MONGO_PORT = os.environ.get('MONGO_PORT', 27017)
 MONGO_DATABASE = os.environ.get('MONGO_DATABASE', 'fiftystates')
 BOUNDARY_SERVICE_URL = os.environ.get('BOUNDARY_SERVICE_URL', 'http://localhost:9000/')
 API_KEY = 'na'
+API_BASE_URL = os.environ.get('API_BASE_URL', 'http://localhost:8000/api/v1/')
 
 BILLY_PARTY_DETAILS = {
     # reminder: think through Singular, Plural, Adjective
