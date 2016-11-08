@@ -13,7 +13,7 @@ def envvar(name, default=None):
 SECRET_KEY = envvar('SECRET_KEY', 'ITSASECRET')
 RAVEN_DSN = envvar('RAVEN_DSN', '')
 ALLOWED_HOSTS = envvar('ALLOWED_HOSTS', '*').split(',')
-DATABASES = {'default': dj_database_url.config(default='postgis://openstates:test@localhost/openstates')}
+DATABASES = {'default': dj_database_url.config(default='postgis://openstates:test@localhost/openstates', conn_max_age=600)}
 ELASTICSEARCH_HOST = envvar('ELASTICSEARCH_HOST', 'http://localhost:9200')
 TEMPLATE_DEBUG = DEBUG = envvar('DJANGO_DEBUG', 'False').lower() == 'true'
 
