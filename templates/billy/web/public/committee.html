@@ -49,7 +49,7 @@ $(document).ready(function() {
         <tbody>
             {% for obj, legislator in committee.members_objects %}
                 <tr class="{% cycle 'even' 'odd' %}">
-                    <td><img class="legImgSmall" src="http://static.openstates.org/photos/xsmall/{{ obj.leg_id }}.jpg" onerror="img_error(this);" /></td>
+                    <td><img class="legImgSmall" src="https://s.openstates.org/photos/xsmall/{{ obj.leg_id }}.jpg" onerror="img_error(this);" /></td>
                     {% if legislator %}
                         <td><a href="{{ legislator.get_absolute_url }}">
                                 {% if committee.chamber == "joint" %}{{legislator.title}}{% endif %}
