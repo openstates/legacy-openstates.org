@@ -72,7 +72,7 @@ def _report(template_name):
     report['points'] = json.dumps(points)
 
     fields = ('abbr', 'chamber', 'term')
-    report_meta = list(mongo.reports.find(fields=fields))
+    report_meta = list(mongo.reports.find(projection=fields))
     report_meta.sort(key=operator.itemgetter('abbr'))
     for rpt in report_meta:
         rpt.pop('_id')
