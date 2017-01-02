@@ -7,7 +7,7 @@ BOUNDARY_SERVICE_URL = os.environ.get('BOUNDARY_SERVICE_URL', 'http://localhost:
 API_KEY = 'na'
 API_BASE_URL = os.environ.get('API_BASE_URL', 'http://localhost:8000/api/v1/')
 
-BILLY_PARTY_DETAILS = {
+PARTY_DETAILS = {
     # reminder: think through Singular, Plural, Adjective
     'Democratic': {'noun': 'Democrat', 'abbreviation': 'D'},
     'Republican': {'abbreviation': 'R'},
@@ -27,7 +27,8 @@ BILLY_PARTY_DETAILS = {
 
 BOUNDARY_SERVICE_SETS = 'sldl-14,sldu-14'
 
-BILLY_ENABLE_DOCUMENT_VIEW = {
+# disabled, re-enable after evaluating again
+_ENABLE_DOCUMENT_VIEW = {
     'ak': True,
     'al': True,
     'ar': False,    # revisit
