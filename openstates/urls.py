@@ -10,6 +10,7 @@ urlpatterns = patterns('',
 
     # flat pages
     (r'^about/$', TemplateView.as_view(template_name='flat/about.html')),
+    (r'^funding/$', TemplateView.as_view(template_name='flat/funding.html')),
     (r'^methodology/$', TemplateView.as_view(template_name='flat/methodology.html')),
     (r'^contributing/$', TemplateView.as_view(template_name='flat/contributing.html')),
     (r'^contact/$', TemplateView.as_view(template_name='flat/contact.html')),
