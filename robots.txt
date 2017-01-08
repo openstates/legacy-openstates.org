@@ -2,4 +2,3 @@ User-agent: *
 Disallow: /admin/
 Disallow: /api/v1/
 Disallow: /get_district/
-Disallow: /2015/bills/sr0061/versions/sr0061.01.intr
