@@ -1,8 +1,8 @@
-Django<1.7
+Django<1.8
 django-pjax
 psycopg2
 whitenoise<3
--e hg+https://bitbucket.org/jespern/django-piston#egg=django-piston
+-e git://github.com/avanov/django-piston/#egg=django-piston
 -e git://github.com/sunlightlabs/billy.git#egg=billy
 
 newrelic
