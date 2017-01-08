@@ -1,8 +1,8 @@
 Django<1.9
 django-pjax
 psycopg2
-whitenoise<3
--e git://github.com/avanov/django-piston/#egg=django-piston
--e git://github.com/sunlightlabs/billy.git#egg=billy
+whitenoise
+-e git://github.com/openstates/django-piston/#egg=django-piston
+-e git://github.com/openstates/billy.git#egg=billy
 
 newrelic
