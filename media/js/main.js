@@ -13,42 +13,6 @@ $(document).ready( function() {
     doc.bind("keydown", "alt+l", function(){window.location = '/{{abbr}}/legislators/'});
     doc.bind("keydown", "alt+c", function(){window.location = '/{{abbr}}/committees/'});
     doc.bind("keydown", "esc", function(){$('#id_q').focus()});
-
-    // Favorite buttons.
-    $(".favorite-button").click(function(event){
-        var favorite_div = $(this).parent(),
-            favorite_msg = $(favorite_div).find('.favorite-message'),
-            favorite_btn = $(favorite_div).find('.favbutton'),
-            favorite_star = $(favorite_div).find('.star');
-
-        $.ajax({
-          type: 'POST',
-          url: '/favorites/set_favorite/',
-          data: favorite_div.data(),
-          dataType: 'json',
-          headers: {'X-CSRFToken': getCookie('csrftoken')},
-          success: function(){
-            //console.log("Favorite button got clicked.");
-            //console.log(favorite_div.data());
-            if (favorite_div.data('is_favorite')) {
-                favorite_star.removeClass('starOn');
-                favorite_star.addClass('starOff');
-                favorite_btn.text("Follow again");
-            } else {
-                favorite_star.removeClass('starOff');
-                favorite_star.addClass('starOn');
-                favorite_btn.text("Unfollow");
-                }
-            // Toggle is_favorite.
-            favorite_div.data('is_favorite', !favorite_div.data('is_favorite'));
-            },
-          error: function(){
-            favorite_msg.text("Ack! Something went wrong.");
-        }
-        });
-        event.preventDefault();
-    });
-
 });
 
 var clickable_rows = function(selector) {
@@ -227,33 +191,6 @@ var sort_func_asc = function(a,b) {
 };
 
 var sort_func_desc = function(a,b) { return sort_func_asc(b, a); };
-
-
-// Favorites notificactions.
-function setup_notification_radios() {
-    $('.notification-preference input[type="radio"]').change(function(){
-        var input = $(this),
-            on_off = input.attr('value'),
-            obj_type = input.closest('.notification-preference').data('obj_type');
-
-        $.ajax({
-              type: 'POST',
-              url: '/favorites/set_notification_preference/',
-              data: {'obj_type': obj_type, 'on_off': on_off},
-              dataType: 'json',
-              headers: {'X-CSRFToken': getCookie('csrftoken')},
-              success: function(){
-                var msg = $(".notification-preference .message-" + obj_type);
-                //console.log(obj_type + ' notifications ' + on_off);
-                msg.text(toTitleCase(obj_type) + ' notifications ' + on_off + '.');
-                },
-              error: function(){
-                var msg = $("notification-preference message-" + obj_type);
-                msg.text("Ack! Something went wrong.");
-            }
-            });
-    });
-}
 
 
 // Find your legislator.

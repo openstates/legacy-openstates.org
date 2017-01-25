@@ -46,13 +46,6 @@
     <header id="mainHeader">
         <div id="login" class="tip">
             &nbsp;
-            {% comment %}
-            {% if request.user.is_authenticated %}
-            {{request.user.first_name|default:request.user}} | <a href="{% url 'user_favorites' %}">View your favorites</a> or <a href="{% url 'logout' %}">sign out</a>
-            {% else %}
-                <a href="#">Login or Sign up</a>
-                {% endif %}
-            {% endcomment %}
         </div>
         <form action="/{{abbr|default:'all'}}/search/" method="get" id="searchform">
             <input class="transparent search" type="search" name="search_text" id="id_q" placeholder="{% if abbr and abbr != 'all' %} {% blocktrans with metadata.name as state_name %} Search {{state_name}} for bills or legislators {% endblocktrans %} {% else %} {% blocktrans with abbr|upper as state_name %} Search for bills or legislators across all states {% endblocktrans %} {% endif %}">
