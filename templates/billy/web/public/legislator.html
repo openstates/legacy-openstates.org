@@ -229,28 +229,6 @@
                 </div>
             </div>
             {% endif %}
-<!-- MEDIA -->
-        {% if legislator.active %}
-            {% if has_feed_entries %}
-            <div  id="media" class="fullWidth module clear">
-                <div class="clearfix">
-                    <h3 class="moduleTitle colLt">{% trans "Media" %}</h3>
-                    <a class="textReplace rssIcon colRt" href="{% url 'news_list_rss' abbr 'legislators' legislator.id legislator.slug %}">rss</a>
-                </div>
-                <h4>{% trans "News and Blog Coverage" %}</h4>
-
-                {% for obj in feed_entries %}
-                <div class="sixCol col{% cycle 'Lt' 'Rt' %}">
-                    {% include feed_entry_template %}
-                </div>
-                {% endfor %}
-
-                <div class="clear"></div>
-                {% if feed_entries_more_count %}
-                <a class="viewMore" href="{% url 'news_list' abbr 'legislators' legislator.id legislator.slug %}">{% trans "View" %} {{feed_entries_more_count|apnumber|capfirst}} {% trans "More News Items" %}</a>
-                {% endif %}
-            </div>
-            {% endif %}
 
 <!-- COMMITTEES -->
         <div id="committees" class="fullWidth module clear">
