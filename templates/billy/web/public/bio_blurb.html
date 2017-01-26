@@ -34,23 +34,3 @@
   {% endwith %}
 
   </p>
-  {% if "_yearly_contributions" in legislator %}
-    <div id="ie-chart-container">
-        <table>
-            <tbody>
-                <!-- FIXME: these numbers should come from db -->
-                {% for year, amount in legislator|underscore_field:"yearly_contributions" %}
-                    <tr> <td>{{year}}</td> <td>{{amount}}</td> </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-
-    {% endif %}
-{% if legislator.transparencydata_id %}
-    <p>
-    {% trans "For detailed campaign finance information visit " %}
-    <a href="https://influenceexplorer.com/politician/id/{{legislator.transparencydata_id}}?cycle=-1">Influence Explorer</a>.  Figures via the <a href="https://followthemoney.org">National Institute on Money in State Politics</a>.
-    </p>
-{% endif %}
-
