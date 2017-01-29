@@ -20,6 +20,9 @@ urlpatterns = patterns('',
     (r'^tos/$', TemplateView.as_view(template_name='flat/tos.html')),
     (r'^map_svg/$', TemplateView.as_view(template_name='flat/openstatesmap.svg')),
 
+    # donations
+    (r'^donate/$', 'donations.views.donate'),
+
     # api docs
     (r'^api/$', RedirectView.as_view(url='http://docs.openstates.org/api/', permanent=True)),
     (r'^api/metadata/$', RedirectView.as_view(url='http://docs.openstates.org/api/metadata.html', permanent=True)),
