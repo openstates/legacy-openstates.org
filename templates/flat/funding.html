@@ -11,82 +11,14 @@
             track what is happening in their state's capitol by aggregating information
             from all 50 states, Washington, D.C., and Puerto Rico. See our <a href="/about/">our about page</a> for more information.
 
-
-<script src="https://checkout.stripe.com/checkout.js"></script>
-
 <h3> Donate Today </h3>
 
+<p>
+Open States serves millions of API calls and thousands of web users daily and depends upon the generosity of donors to fund our work and expenses.  If you find Open States a valuable resource please consider donating today.
+</p>
 
-<button data-amount="2500" class="btn-stripe">$25</button>
-<button data-amount="5000" class="btn-stripe">$50</button>
-<button data-amount="7500" class="btn-stripe">$75</button>
-<button data-amount="10000" class="btn-stripe">$100</button>
-<button data-amount="25000" class="btn-stripe">$250</button>
+{% include "flat/_donate_form.html" %}
 
-<h3> Sign Up For a Recurring Donation </h3>
-
-<button data-amount="500" data-plan="monthly5" class="btn-stripe">$5</button>
-<button data-amount="1000" data-plan="monthly10" class="btn-stripe">$10</button>
-<button data-amount="2000" data-plan="monthly20" class="btn-stripe">$20</button>
-<button data-amount="5000" data-plan="monthly50" class="btn-stripe">$50</button>
-
-{% csrf_token %}
-
-<script>
-var amount = null;
-var plan = null;
-
-var handler = StripeCheckout.configure({
-    key: "pk_test_Lk6d1gfB0AWtFZUBGcHFSeFh",
-    image: "{% static '/media/images/openstates-hires.png' %}",
-    name: "Open States",
-    locale: 'auto',
-    zipCode: true,
-    token: function(token, a) {
-        console.log(token, a);
-        $.post('/donate/', {
-            stripeToken: token.id,
-            email: token.email,
-            csrfmiddlewaretoken: $('[name="csrfmiddlewaretoken"]').val(),
-            amount: amount,
-            plan: plan,
-        });
-    }
-});
-
-$('.btn-stripe').on('click', function() {
-    amount = $(this).data('amount');
-    plan = $(this).data('plan');
-
-    var printamount = amount/100;
-    var description;
-    var label;
-    if (plan) {
-        description = 'Recurring Donation of $' + printamount + '/mo.';
-        label = 'Recurring @';
-    } else {
-        description = 'Donate $' + printamount;
-        label = 'Donate';
-    }
-    handler.open({
-        description: description,
-        panelLabel: label,
-        amount: amount,
-    });
-    return false;
-});
-
-// Close Checkout on page navigation:
-window.addEventListener('popstate', function() {
-  handler.close();
-});
-</script>
-
-            <p><b>You can currently donate to Open States via our <a href="https://www.generosity.com/fundraising/open-states-general-support-fund/x/15330084">Generosity.com fundraiser</a>.</b></p>
-
-            <p>Open States is under the <a href="http://openmediafoundation.org/open-states">Open Media Foundation</a> umbrella via their <a href="https://en.wikipedia.org/wiki/Fiscal_sponsorship">fiscal sponsorship</a> program.  As such, contributions are tax-deductible.</p>
-
-            <p>If you'd like to discuss funding specific work please get in touch at <a href="mailto:funding@openstates.org">funding@openstates.org</a>.</p>
 
           <p> Thank you to all of our amazing donors! </p>
 
