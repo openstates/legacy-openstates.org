@@ -2,8 +2,18 @@
 {% load staticfiles %}
 {% load i18n %}
 {% load customtags %}
+{% load static from staticfiles %}
 
 {% block title %}{{metadata.name}} {{ chamber_title }}{% endblock %}
+
+{% block metablock %}
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@openstates">
+<meta name="twitter:title" content="{{ metadata.name }} {{chamber_title}} on Open States">
+<meta name="twitter:description" content="Learn more about {{ metadata.name }} {{chamber_title}} at Open States">
+<meta name="twitter:image" content="{% static 'images/fbshare.jpg' %}">
+
+{% endblock %}
 
 {% block description %}{{chamber_title}} {% trans "currently serving in" %} {{metadata.name}} {% endblock %}
 

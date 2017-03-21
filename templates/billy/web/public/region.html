@@ -3,9 +3,19 @@
 {% load staticfiles %}
 {% load i18n %}
 {# load funfacts #}
+{% load static from staticfiles %}
 
 {% block title %}{{metadata.legislature_name}}{% endblock %}
 {% block description %}{{metadata.legislature_name}}: {% trans "Keep up to date with bills, legislators, votes, committees and events." %} {% endblock %}
+
+{% block metablock %}
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@openstates">
+<meta name="twitter:title" content="The {{metadata.legislature_name}} on Open States">
+<meta name="twitter:description" content="{{metadata.legislature_name}}: {% trans 'Keep up to date with bills, legislators, votes, committees and events' %} at Open States">
+<meta name="twitter:image" content="{% static 'images/fbshare.jpg' %}">
+
+{% endblock %}
 
 {% block bodyclass %}{% endblock %}
 

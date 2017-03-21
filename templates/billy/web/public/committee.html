@@ -2,11 +2,20 @@
 {% load i18n %}
 {% load humanize %}
 {% load customtags %}
-
+{% load static from staticfiles %}
 
 {% block title %}
  {{committee.display_name}} ({{committee.chamber_name}}) -
   {{metadata.legislature_name}}
+{% endblock %}
+
+{% block metablock %}
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@openstates">
+<meta name="twitter:title" content="{{ metadata.legislature_name }} - {{ committee.display_name }} {% trans 'Committee' %}">
+<meta name="twitter:description" content="Learn more about the {{ metadata.legislature_name }} {{committee.chamber_name}} {{committee.display_name}} {% trans 'Committee' %} at Open States">
+<meta name="twitter:image" content="{% static 'images/fbshare.jpg' %}">
+
 {% endblock %}
 
 {% block description %}

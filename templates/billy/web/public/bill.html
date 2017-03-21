@@ -9,6 +9,14 @@
   {{bill.bill_id }} - {{metadata.display_name}} {{bill.session_details.display_name}}
 {% endblock %}
 
+{% block metablock %}
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@openstates">
+<meta name="twitter:title" content="{{metadata.display_name}} {{bill.chamber_name}} {{bill.type_string|title}} {{bill.bill_id}} on Open States">
+<meta name="twitter:description" content="{{bill.title}}">
+{% endblock %}
+
+
 {% block description %}
 {{metadata.display_name}} {{bill.chamber_name}} {{bill.type_string|title}} {{bill.bill_id}}: {{bill.title}}.
 {% endblock %}

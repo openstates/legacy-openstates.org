@@ -5,6 +5,14 @@
 {% load humanize %}
 {% load customtags %}
 
+{% block metablock %}
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@openstates">
+<meta name="twitter:title" content="{{legislator.full_name }}">
+<meta name="twitter:description" content="{{metadata.legislature_name}} &mdash; {% if legislator.active %} {{legislator.party}} &mdash; {{legislator.title}} &mdash; {# if first character of district is numeric, add 'District' #} from {% if legislator.district.0.isdigit %} {% trans 'District' %} {% endif %}{{legislator.district}} {% else %} {{legislator.full_name}} {% trans 'no longer serves in the' %} {{metadata.legislature_name}}.{% endif %} on Open States">
+<meta name="twitter:image" content="https://s.openstates.org/photos/small/{{legislator.leg_id}}.jpg">
+
+{% endblock %}
 
 {% block title %}
   {{legislator.full_name }} -
