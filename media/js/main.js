@@ -74,7 +74,51 @@ var pjax_setup = function(){
     });
 };
 
-var make_vote_charts = function(width, height, radius) {
+ var make_vote_charts = function(width, height) {
+   d3.selectAll('.vote-chart').each(function() {
+      var data = [];
+      d3.select(this).selectAll('table tbody tr').each(function() {
+        var vote = {};
+        vote.type = d3.select(this).select("td:first-child").text();
+        // get text then remove ratio from table
+        vote.count = d3.select(this).select("td:nth-child(3)").remove().text();
+
+        data.push(vote);
+      });
+        	
+     
+     var x = d3.scale.linear()
+               .domain([0, d3.max(data.map(function(d) { return d.count }))])
+               .range([0, width]);
+       
+     var barHeight = 20;
+     var chart = d3.select(this).insert('svg:svg', ':first-child')
+     					.attr("width", width)
+     					.attr("height", height); 
+       
+     var bar = chart.selectAll("g")
+                 .data(data).enter().append("g")
+                 .attr("transform", function(d, i) { 
+                    return "translate(0," + i * barHeight + ")"; 
+                 });
+
+     var color = {
+       "Yes": "#a3b56d",
+       "No": "#b85233",
+       "Other": "#dfdfd2"
+     }
+     
+     bar.append("rect")
+         .attr("width", function(d) { return x(d.count) })
+         .attr("height", barHeight - 1)
+         .attr("fill", function(d) { return color[d.type]});
+     
+     
+  });
+}
+
+/* Old graph, visualizes in pie chart form */
+var make_vote_charts_pie = function(width, height, radius) {
     d3.selectAll('.vote-chart').each(function() {
         var data = [];
         d3.select(this).selectAll('table tbody tr').each(function() {
