@@ -52,18 +52,32 @@ STATICFILES_FINDERS = (
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'templates')),
+        ],
+        'OPTIONS': {
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.contrib.messages.context_processors.messages',
+            ],
+            'loaders': [
+                ('django.template.loaders.cached.Loader', (
+                    'django.template.loaders.filesystem.Loader',
+                    'django.template.loaders.app_directories.Loader',
+                )),
+            ]
+        },
+    },
+]
 
-TEMPLATE_LOADERS = (
-    ('django.template.loaders.cached.Loader', (
-        'django.template.loaders.filesystem.Loader',
-        'django.template.loaders.app_directories.Loader',
-    )),
-)
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.request',
-    'django.contrib.auth.context_processors.auth',
-)
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -80,10 +94,6 @@ ROOT_URLCONF = 'openstates.urls'
 
 WSGI_APPLICATION = 'openstates.wsgi.application'
 
-TEMPLATE_DIRS = (
-    os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'templates')),
-)
-
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.humanize',
@@ -96,6 +106,7 @@ INSTALLED_APPS = (
     'billy.web.admin',
     'billy.web.public',
     'markup_tags',
+    'piston',
 )
 
 LOGGING = {
