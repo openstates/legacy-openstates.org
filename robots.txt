@@ -2,3 +2,5 @@ User-agent: *
 Disallow: /admin/
 Disallow: /api/v1/
 Disallow: /get_district/
+User-agent: googlecivicsapi
+Allow: /api/v1/
