@@ -10,10 +10,11 @@ else:
     DEBUG = True
     ALLOWED_HOSTS = ['*']
     SECRET_KEY = os.environ.get('SECRET_KEY', 'debug-secret-key')
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 ADMINS = (
-    ('James Turk', 'james.p.turk@gmail.com'),
+    ('James Turk', 'james@openstates.org'),
 )
 
 MANAGERS = ADMINS
@@ -107,7 +108,10 @@ INSTALLED_APPS = (
     'billy.web.public',
     'markup_tags',
     'piston',
+    'simplekeys',
 )
+
+DEFAULT_FROM_EMAIL = 'contact@openstates.org'
 
 LOGGING = {
     'version': 1,
