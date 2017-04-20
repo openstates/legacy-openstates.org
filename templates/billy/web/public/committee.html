@@ -123,13 +123,6 @@ $(document).ready(function() {
 </div>
 {% endif %}
 
-{% include "billy/web/public/developer_committee.html" %}
-{% if request.user|is_dev %}
-<div class="fullWidth module">
-    <h3 class="moduleTitle">{% trans "Developer ProTips" noop %}</h3>
-</div>
-{% endif %}
-
 {% with sources=committee.sources %}
     {% include "billy/web/public/sources.html" %}
 {% endwith %}
