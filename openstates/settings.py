@@ -1,4 +1,5 @@
 import os
+import dj_database_url
 
 
 if os.environ.get('DEBUG', 'true').lower() == 'false':
@@ -8,9 +9,9 @@ if os.environ.get('DEBUG', 'true').lower() == 'false':
     SECRET_KEY = os.environ['SECRET_KEY']
     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = os.environ['EMAIL_HOST']
-    EMAIL_PORT = os.environ['EMAIL_PORT']
     EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
     EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+    EMAIL_PORT = '587'
     EMAIL_USE_TLS = True
 else:
     DEBUG = True
@@ -19,18 +20,19 @@ else:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
+DATABASE_URL = os.environ.get(
+    'DATABASE_URL',
+    'sqlite:///' + os.path.join(os.path.dirname(__file__), 'openstates.sqlite3')
+)
+DATABASES = {'default': dj_database_url.parse(DATABASE_URL)}
+CONN_MAX_AGE = 60
+
+
 ADMINS = (
     ('James Turk', 'james@openstates.org'),
 )
 
 MANAGERS = ADMINS
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(os.path.dirname(__file__), 'openstates.sqlite3'),
-    }
-}
 
 TIME_ZONE = 'UTC'
 LANGUAGE_CODE = 'en-us'

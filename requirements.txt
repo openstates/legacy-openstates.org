@@ -1,5 +1,6 @@
 Django<1.10
 django-pjax
+dj-database-url
 django-simplekeys
 psycopg2
 whitenoise
