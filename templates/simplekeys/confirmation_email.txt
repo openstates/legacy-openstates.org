@@ -1,0 +1,16 @@
+{{ key.name }},
+
+Your Open States API key registration is almost done-
+
+Your new API key is: {{ key.key }}
+
+Please visit:
+
+{{ confirmation_url|safe }}
+
+to activate your key.
+
+By signing up for an API key you are consenting to our
+Terms of Service & Privacy Policy - https://openstates.org/tos/
+
+Thanks!
