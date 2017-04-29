@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="Contact your legislator">
+    <meta name="keywords" content="contact legislator">
+    <meta name="author" content="Sunlight Foundation">
+    <meta property="og:title" content="Let Freedom Ring" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Contact Your Legislator" />
+    <title>{% block title %}PSCL Demo{% endblock %}</title>
+
+    {% if debug %}
+      <script src="{{ url_for('static', filename='js/jquery-1.11.0.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+      {# <link rel="stylesheet" href="{{ url_for('static', filename='css/sfapp.css') }}"> #}
+    {% else %}
+      <script src="{{ url_for('static', filename='js/jquery-1.11.0.min.js') }}"></script>
+      <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+      <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+      {# <link rel="stylesheet" href="{% url_for('static', filename='css/sfapp.min.css' %}"> #}
+      <script type="text/javascript" src="//use.typekit.com/tab6neo.js"></script>
+      <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+      <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    {% endif %}
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/site.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='js/site/main.js') }}">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+    </style>
+    {% block extra_head %}
+    {% endblock %}
+  </head>
+  <body class="home">
+    <div class="container">
+      {% include "messages.html" %}
+      <div class="content">
+        {% block content %}
+        {% endblock content%}
+      </div><!-- /.content -->
+    </div><!-- /.container -->
+    <div id="footer">
+      <div class="container">
+        <br/>
+        <p class="text-muted">
+          A project of the Sunlight Foundation.
+        </p>
+      </div>
+    </div><!-- /.footer -->
+  </body>
+</html>
