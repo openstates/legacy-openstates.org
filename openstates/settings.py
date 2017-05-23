@@ -95,9 +95,17 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'simplekeys.middleware.SimpleKeysMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
+
+SIMPLEKEYS_ZONE_PATHS = [
+    ('/api/v1/legislators/geo/', 'geo'),
+    ('/api/v1/', 'default'),
+]
+SIMPLEKEYS_ERROR_NOTE = ('https://openstates.org/api/register/ for API key. '
+                         'contact@openstates.org to raise limits')
 
 ROOT_URLCONF = 'openstates.urls'
 
