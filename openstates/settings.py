@@ -28,11 +28,10 @@ DATABASES = {'default': dj_database_url.parse(DATABASE_URL)}
 CONN_MAX_AGE = 60
 
 
-ADMINS = (
-    ('James Turk', 'james@openstates.org'),
-)
-
-MANAGERS = ADMINS
+# ADMINS = (
+#     ('James Turk', 'james@openstates.org'),
+# )
+# MANAGERS = ADMINS
 
 TIME_ZONE = 'UTC'
 LANGUAGE_CODE = 'en-us'
