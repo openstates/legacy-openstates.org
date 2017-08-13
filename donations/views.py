@@ -1,5 +1,6 @@
 import os
 import stripe
+from django.conf import settings
 from django.views.decorators.http import require_POST
 from django.shortcuts import render
 
@@ -8,7 +9,7 @@ def donate(request):
     success = False
 
     if request.method == 'POST':
-        stripe.api_key = os.environ['STRIPE_API_KEY']
+        stripe.api_key = settings.STRIPE_SECRET_KEY
 
         metadata = {
             'source': request.POST.get('source', ''),

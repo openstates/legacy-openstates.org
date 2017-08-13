@@ -69,7 +69,7 @@ Open States serves millions of API calls and thousands of web users daily and de
 var amount = null;
 
 var handler = StripeCheckout.configure({
-    key: "pk_test_Lk6d1gfB0AWtFZUBGcHFSeFh",
+    key: "{{ STRIPE_PUBLIC_KEY }}",
     image: "{% static '/media/images/openstates-hires.png' %}",
     name: "Open States",
     locale: 'auto',
@@ -77,7 +77,6 @@ var handler = StripeCheckout.configure({
     token: function(token, a) {
         var name = $('#donor-name').val();
         var donation = $('input[name=donation]:checked').attr('id');
-        console.log(donation);
         const subscriptions = {
             'mo-500': 'monthly5',
             'mo-1000': 'monthly10',
@@ -89,7 +88,7 @@ var handler = StripeCheckout.configure({
             'yr-20000': 'yearly200',
             'yr-50000': 'yearly500',
         };
-        var plan = subscriptions[amount];
+        var plan = subscriptions[donation];
 
         $.post('/donate/', {
             stripeToken: token.id,
@@ -122,6 +121,8 @@ $('.btn-stripe').on('click', function() {
         } else {
             amount = amount * 100;
         }
+    } else {
+        amount = parseInt(amount);
     }
 
     var printamount = amount / 100;
