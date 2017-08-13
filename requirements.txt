@@ -7,4 +7,5 @@ whitenoise
 -e git://github.com/openstates/django-piston/#egg=django-piston
 -e git://github.com/openstates/billy.git#egg=billy
 
+stripe
 newrelic==2.84.0.64     # pinned because of breakage in May 2017

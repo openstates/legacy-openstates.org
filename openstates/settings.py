@@ -33,6 +33,49 @@ CONN_MAX_AGE = 60
 # )
 # MANAGERS = ADMINS
 
+# stripe
+STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY', '')
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', '')
+STRIPE_PLANS = [
+    {
+        'id': 'monthly5',
+        'description': '$5/month',
+    },
+    {
+        'id': 'monthly10',
+        'description': '$10/month',
+    },
+    {
+        'id': 'monthly20',
+        'description': '$20/month',
+    },
+    {
+        'id': 'monthly50',
+        'description': '$50/month',
+    },
+    {
+        'id': 'monthly100',
+        'description': '$100/month',
+    },
+    {
+        'id': 'yearly50',
+        'description': '$50/year',
+    },
+    {
+        'id': 'yearly100',
+        'description': '$100/year',
+    },
+    {
+        'id': 'yearly200',
+        'description': '$200/year',
+    },
+    {
+        'id': 'yearly500',
+        'description': '$500/year',
+    },
+]
+
+
 TIME_ZONE = 'UTC'
 LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
@@ -75,6 +118,7 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
+                'donations.context_processors.stripe_settings',
             ],
             'loaders': [
                 ('django.template.loaders.cached.Loader', (
