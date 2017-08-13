@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'^map_svg/$', TemplateView.as_view(template_name='flat/openstatesmap.svg')),
 
     # donations
-    (r'^donate/$', 'donations.views.donate'),
+    url(r'^donate/$', 'donations.views.donate'),
 
     # api docs
     url(r'^api/$', RedirectView.as_view(url='http://docs.openstates.org/en/latest/api/', permanent=True)),
