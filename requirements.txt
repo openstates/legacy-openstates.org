@@ -4,5 +4,5 @@ psycopg2
 whitenoise
 -e git://github.com/openstates/django-piston/#egg=django-piston
 -e git://github.com/openstates/billy.git#egg=billy
-
+stripe
 newrelic
