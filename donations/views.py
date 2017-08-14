@@ -34,6 +34,7 @@ def donate(request):
                 currency="usd",
                 description="Open States Donation",
                 metadata=metadata,
+                receipt_email=request.POST['email'],
             )
         success = True
 

@@ -1885,5 +1885,8 @@ div.donor-form label {
 .btn-stripe:active {
     background: #008cdd;
 }
-
-
+#container img.stripe-logo {
+    padding: 0 1em 1em 0;
+    border: 0;
+    float: left;
+}
