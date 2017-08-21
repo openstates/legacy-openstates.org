@@ -27,6 +27,11 @@ DATABASE_URL = os.environ.get(
 DATABASES = {'default': dj_database_url.parse(DATABASE_URL)}
 CONN_MAX_AGE = 60
 
+if 'RAVEN_DSN' in os.environ:
+    RAVEN_CONFIG = {
+        'dsn': os.environ['RAVEN_DSN']
+    }
+
 
 # ADMINS = (
 #     ('James Turk', 'james@openstates.org'),
@@ -168,7 +173,10 @@ INSTALLED_APPS = (
     'markup_tags',
     'piston',
     'simplekeys',
+    'raven.contrib.django.raven_compat',
 )
+
+
 
 DEFAULT_FROM_EMAIL = 'contact@openstates.org'
 

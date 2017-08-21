@@ -9,4 +9,6 @@ whitenoise
 
 stripe
 requests[security]
+
 newrelic==2.84.0.64     # pinned because of breakage in May 2017
+raven
