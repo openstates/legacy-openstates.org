@@ -2,17 +2,17 @@
 
 <script src="https://checkout.stripe.com/checkout.js"></script>
 
-<strong>TEST MODE, DONATIONS ARE NOT ACTIVE</strong>
-
 <p>
-Open States serves millions of API calls and thousands of web users daily and depends upon the generosity of donors to fund our work and expenses.  If you find Open States a valuable resource please consider donating today.
+    Open States serves millions of API calls and sees thousands of visitors daily without charging a dollar, we depend upon the generosity of donors to fund our work and expenses. 
+    Donations to Open States will allow the all-volunteer core team to continue to dedicate their time to maintaining and improving the project.
 </p>
+<p><strong>If you find Open States a valuable resource please consider donating today.</strong></p>
 
 <div class="donor-form">
+    <em>If you'd like to be credited on our donors page, please include your name.</em>
 <div>
     <label for="donor-name">Name:</label> <input id="donor-name" >
     <p>
-        <em>If you'd like to be credited on our donors page, please include your name.</em>
     </p>
 </div>
 
@@ -119,6 +119,7 @@ $('.btn-stripe').on('click', function() {
             return;
         }
         else if (amount < 5.0) {
+            alert("Due to merchant charges, we're currently not able to process donations smaller than $5.");
             return;
         } else {
             amount = amount * 100;
