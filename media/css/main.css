@@ -783,6 +783,11 @@ div.flatpage table#download_list { width: auto; }
 /* mapbox */
 .mapbox.leaflet-container  { background: transparent; }
 #container .mapbox img { padding: 0px; border: 0px; }
+.mapbox > button {
+    margin: 10px;
+    display: inline-block;
+    background-color: red;
+}
 
 h2#billSearchTitle { max-width: 100%; }
 ul#billSearchLongDesc { margin-bottom: 30px; margin-top: -15px;  }

@@ -12,9 +12,9 @@
 {% block headblock %}
 <link rel="canonical" href="{{metadata.get_absolute_url}}">
 <link rel="stylesheet" href="{% static 'maps/leaflet.css' %}" />
-<!--[if lte IE 8]><link rel="stylesheet" href="{% static 'maps/leaflet.ie.css' %}" /><![endif]-->
 <script src="{% static "maps/leaflet.js" %}"></script>
-<script src="{% static "maps/wax.leaf.min.js" %}"></script>
+<link rel="stylesheet" href="{% static 'maps/mapbox-gl.css' %}" />
+<script src="{% static 'maps/mapbox-gl.js' %}" />
 {% endblock %}
 
 {% block content %}
@@ -30,8 +30,11 @@
         <p class="tip">{% trans "Click on a district to view corresponding legislators." %}</p>
 
         <div class="sixCol colLtSm" id="maptip">
-            <div class="mapbox" id="mapbox-{{abbr}}" style="width: 100%; height: 400px"></div>
-            <span id="mbtooltip-{{abbr}}{{chamber.type}}"></span>
+            <div class="mapbox" id="map" style="width: 100%; height: 400px">
+                <p class="tip" style="display: inline-block;">Select chamber:</p>
+                <input type="button" class="map-layer-selector" data-hook="layer-selector" name="sldu" value="Upper" />
+                <input type=button class="map-layer-selector" data-hook="layer-selector" name="sldl" value="Lower" />
+            </div>
         </div>
 
         <div class="sixCol colLtSm centeredText bottomDash" id="totalLeg">
@@ -135,129 +138,123 @@
 
 <!-- mapbox interaction script -->
 <script>
-    var lower_url = 'https://a.tiles.mapbox.com/v3/sunlight.map-1c9njt8o,sunlight.{{metadata.abbr}}lower.jsonp';
-    var upper_url = 'https://a.tiles.mapbox.com/v3/sunlight.map-1c9njt8o,sunlight.{{metadata.abbr}}upper.jsonp';
-    var minMaxZooms = {
-        'ak': [3, 11],
-        'al': [6, 14],
-        'ar': [6, 14],
-        'az': [6, 13],
-        'ca': [5, 13],
-        'co': [6, 13],
-        'ct': [8, 15],
-        'dc': [11, 17],
-        'de': [8, 15],
-        'fl': [6, 13],
-        'ga': [6, 14],
-        'hi': [6, 12],
-        'ia': [6, 14],
-        'id': [5, 12],
-        'il': [6, 14],
-        'in': [6, 14],
-        'ks': [6, 14],
-        'ky': [6, 13],
-        'la': [6, 14],
-        'ma': [7, 15],
-        'md': [7, 14],
-        'me': [6, 13],
-        'mi': [6, 13],
-        'mn': [6, 13],
-        'mo': [6, 13],
-        'ms': [6, 14],
-        'mt': [5, 13],
-        'nc': [6, 14],
-        'nd': [6, 13],
-        'ne': [6, 13],
-        'nh': [7, 15],
-        'nj': [7, 15],
-        'nm': [6, 13],
-        'nv': [6, 13],
-        'ny': [6, 13],
-        'oh': [6, 14],
-        'ok': [6, 13],
-        'or': [6, 13],
-        'pa': [6, 14],
-        'pr': [7, 15],
-        'ri': [8, 15],
-        'sc': [7, 14],
-        'sd': [6, 13],
-        'tn': [6, 14],
-        'tx': [5, 12],
-        'ut': [6, 13],
-        'va': [6, 14],
-        'vt': [7, 14],
-        'wa': [6, 13],
-        'wi': [6, 13],
-        'wv': [6, 14],
-        'wy': [6, 13],
-    };
-    var mmzoom = minMaxZooms['{{metadata.abbr}}'];
-    if(!mmzoom) {
-        mmzoom = [5, 12];
-    }
-    var map = new L.Map('mapbox-{{metadata.abbr}}',
-            {attributionControl:true, minZoom: mmzoom[0], maxZoom: mmzoom[1]});
-    var layersControl = new L.Control.Layers(null, null, {collapsed: false});
-    var marker;
+    mapboxgl.accessToken = 'pk.eyJ1Ijoib3BlbnN0YXRlcyIsImEiOiJjaXprM25tM3cwNG9pMzNwNmFsdTQyZmRkIn0.B0xKvNzvXOSLfymGOBczIQ'
 
-    // check if state is in oneMapStates
-    var oneMap = ['nj', 'dc', 'ne', 'az', 'id', 'wa'].indexOf('{{metadata.abbr}}') !== -1;
-
-    map.attributionControl.setPrefix('');
-
-    if(!oneMap) {
-        map.addControl(layersControl);
-    }
-
-    var wax_cb = function(tilejson) {
-        // add to map
-        var layer = new wax.leaf.connector(tilejson);
-        map.addLayer(layer);
-        map.setView(new L.LatLng(tilejson.center[1], tilejson.center[0]),
-                    mmzoom[0]);
-
-        // add to control
-        var layerName;
-        if (tilejson.grids[0].indexOf('lower') != -1) {
-            layerName = 'lower';
-        } else {
-            layerName = 'upper';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/light-v9',
+        minZoom: 2,
+        maxZoom: 13
+    })
+    const bounds = JSON.parse('{{geo_bounds}}')
+    map.fitBounds(
+        bounds,
+        {
+            padding: 40,
+            animate: false
         }
-        layersControl.addBaseLayer(layer, layerName);
 
-        // add events
-        var container = $('#mbtooltip-{{metadata.abbr}}')[0];
-        var events = {};
-        events.on = function(arg) {
-            var selLayer = $('input[name="leaflet-base-layers"]:checked').parent().text().trimLeft();
-            if (selLayer === layerName) {
-                container.innerHTML = arg.data.NAMELSAD;
+    )
+
+    const DEFAULT_LAYER = 'sldu'
+    var displayedLayer = DEFAULT_LAYER
+
+    map.on('load', function () {
+        map.addLayer({
+            id: 'sld',
+            type: 'line',
+            source: {
+                type: 'vector',
+                url: 'mapbox://openstates.sld'
+            },
+            'source-layer': 'sld',
+            paint: {
+                'line-color': 'green',
+                'line-opacity': 0.2,
+                'line-width': 1.0
+            },
+            filter: ['==', 'type', displayedLayer]
+        })
+
+        // Need a separate, invisible fill layer in order to
+        // make the inside of state polygons click-able
+        map.addLayer({
+            id: 'sld-detect-click',
+            type: 'fill',
+            source: {
+                type: 'vector',
+                url: 'mapbox://openstates.sld'
+            },
+            'source-layer': 'sld',
+            paint: { 'fill-opacity': 0 },
+            filter: ['==', 'type', displayedLayer]
+        })
+
+        map.addLayer({
+            id: 'district-fill',
+            type: 'fill',
+            source: {
+                type: 'vector',
+                url: 'mapbox://openstates.sld'
+            },
+            'source-layer': 'sld',
+            paint: {
+                'fill-color': 'black',
+                'fill-opacity': 0.2,
+            },
+            filter: ['==', 'ocdid', 'DO NOT MATCH']
+        })
+
+        map.addLayer({
+            id: 'district-stroke',
+            type: 'line',
+            source: {
+                type: 'vector',
+                url: 'mapbox://openstates.sld'
+            },
+            'source-layer': 'sld',
+            paint: {
+                'line-color': 'black',
+                'line-opacity': 0.4,
+                'line-width': 2.0
+            },
+            filter: ['==', 'ocdid', 'DO NOT MATCH']
+        })
+
+        map.on('click', 'sld-detect-click', function(e) {
+            const ocdid = e.features[0].properties.ocdid
+            // This conditional is a little janky, because a state's
+            // abbreviation could match other parts of an OCDID string
+            // Maybe add state abbreviation into the tiles at some point
+            if (ocdid.includes('{{metadata.abbr}}')) {
+                // Display related legislators
+                const chamber = displayedLayer === 'sldu' ? 'upper' : 'lower'
+                var url = '/find_your_legislator/?abbr={{metadata.abbr}}&lat=' + e.lngLat.lat + '&lon=' + e.lngLat.lng + '&chamber=' + chamber;
+                $("#results_table").load(url);
+
+                // Highlight the district that was clicked
+                map.setFilter('district-fill', ['==', 'ocdid', ocdid])
+                map.setFilter('district-stroke', ['==', 'ocdid', ocdid])
             }
-        }
-        events.off = function(arg) {
-            var selLayer = $('input[name="leaflet-base-layers"]:checked').parent().text().trimLeft();
-            if (selLayer === layerName) {
-                container.innerHTML = "";
-            }
-        }
-        wax.leaf.interaction().map(map).tilejson(tilejson).on(events);
-    }
-    wax.tilejson(upper_url, wax_cb);
-    if(!oneMap) {
-        wax.tilejson(lower_url, wax_cb);
-    }
-    map.on('click', function(e) {
-        var url = '/find_your_legislator/?abbr={{metadata.abbr}}&lat=' + e.latlng.lat + '&lon=' + e.latlng.lng;
-        $("#results_table").load(url);
+        });
 
-        // create or move marker
-        if (!marker) {
-            marker = new L.Marker(e.latlng);
-            map.addLayer(marker);
-        } else {
-            marker.setLatLng(e.latlng);
-        }
-    });
+        document.querySelectorAll('[data-hook="layer-selector"]')
+            .forEach(function (b) {
+                b.addEventListener('click', function (e) {
+                    const selectedLayer = b.name
+                    if (selectedLayer !== displayedLayer) {
+                        displayedLayer = selectedLayer
+
+                        $("#results_table").empty()
+
+                        map.setFilter('sld', ['==', 'type', displayedLayer])
+                        map.setFilter('sld-detect-click', ['==', 'type', displayedLayer])
+                        map.setFilter('district-fill', ['==', 'ocdid', 'DO NOT MATCH'])
+                        map.setFilter('district-stroke', ['==', 'ocdid', 'DO NOT MATCH'])
+                    }
+                })
+            })
+    })
 </script>
 
 {% endblock %}
