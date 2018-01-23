@@ -100,11 +100,9 @@ def download_places():
 
 
 def download_nh_floterial():
-    # The New Hampshire server is temporarily down, so use a mirrored ZIP file
-    # Check here for updates:
-    # https://www.nh.gov/oep/planning/services/gis/political-districts.htm
-    # _download_file("ftp://pubftp.nh.gov/OEP/NHHouseDists2012.zip", "downloads/nh-12")
-    _download_file("https://s3.amazonaws.com/opencivicdata/mirror/NHHouseDists2012.zip", "downloads/nh-12")
+    # New Hampshire has a second set of boundaries, that aren't served by the Census
+    # Hosted here: https://www.nh.gov/oep/planning/services/gis/political-districts.htm
+    _download_file("ftp://pubftp.nh.gov/OEP/NHHouseDists2012.zip", "downloads/nh-12")
 
     # Only want the floterial file, not the main district file
     pop = os.path.abspath(os.getcwd())
