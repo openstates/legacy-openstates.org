@@ -117,7 +117,7 @@ class index_namer(object):
 
 
 CENSUS_URL = 'http://www.census.gov/geo/maps-data/data/tiger.html'
-LAST_UPDATE = date(2015, 4, 24)
+LAST_UPDATE = date(2018, 1, 24)
 defaults = dict(last_updated=LAST_UPDATE,
                 domain='United States',
                 authority='US Census Bureau',
@@ -129,137 +129,38 @@ defaults = dict(last_updated=LAST_UPDATE,
                )
 
 
-# congressional districts
-boundaries.register('cd-114',
-                    singular='cd-114',
-                    file='cd-114/',
-                    name_func=tiger_namer,
-                    id_func=geoid_tiger_namer,
-                    **defaults
-                   )
+FIRST_YEAR = 2013
+LAST_YEAR = 2017
+YEARS = range(FIRST_YEAR, LAST_YEAR + 1)
+for year in YEARS:
+    # Most types of Census data follow a common pattern
+    for type_ in ['sldu', 'sldl']:
+        boundary_info = dict(
+            slug='{}-{}'.format(type_, year % 2000),
+            singular='{}-{}'.format(type_, year % 2000),
+            file='{}-{}/'.format(type_, year % 2000),
+            name_func=tiger_namer,
+            id_func=geoid_tiger_namer,
+            # Although the Census files are published in the autumn,
+            # they take effect retroactively as of the start of their year
+            start_date=date(year, 1, 1),
+            end_date=date(year, 12, 31),
+            encoding='latin-1',
+            **defaults
+        )
+        if year == LAST_YEAR:
+            # This is the most recent information we have,
+            # so keep using it until the boundaries are updated
+            del boundary_info['end_date']
+        boundaries.register(**boundary_info)
 
-boundaries.register('cd-113',
-                    singular='cd-113',
-                    file='cd-113/',
-                    name_func=tiger_namer,
-                    id_func=geoid_tiger_namer,
-                    **defaults
-                   )
-
-boundaries.register('cd-111',
-                    singular='cd-111',
-                    file='cd-111/',
-                    name_func=tiger_namer,
-                    id_func=geoid_tiger_namer,
-                    **defaults
-                   )
-
-# Zip Code Tabulation Areas
-boundaries.register('zcta-14',
-                    singular='zcta-14',
-                    file='zcta-14/',
-                    name_func=boundaries.attr('ZCTA5CE10'),
-                    id_func=geoid_tiger_namer,
-                    start_date=date(2015, 1, 1),
-                    **defaults
-                   )
-
-boundaries.register('zcta-13',
-                    singular='zcta-13',
-                    file='zcta-13/',
-                    name_func=boundaries.attr('ZCTA5CE10'),
-                    id_func=geoid_tiger_namer,
-                    start_date=date(2012, 1, 1),
-                    end_date=date(2015, 1, 1),
-                    **defaults
-                   )
-
-boundaries.register('sldl-14',
-                    singular='sldl-14',
-                    file='sldl-14/',
-                    name_func=tiger_namer,
-                    id_func=geoid_tiger_namer,
-                    start_date=date(2015, 1, 1),
-                    **defaults
-                   )
-
-boundaries.register('sldl-13',
-                    singular='sldl-13',
-                    file='sldl-13/',
-                    name_func=tiger_namer,
-                    id_func=geoid_tiger_namer,
-                    start_date=date(2012, 1, 1),
-                    end_date=date(2015, 1, 1),
-                    **defaults
-                   )
-
-boundaries.register('sldu-14',
-                    singular='sldu-14',
-                    file='sldu-14/',
-                    name_func=tiger_namer,
-                    id_func=geoid_tiger_namer,
-                    start_date=date(2015, 1, 1),
-                    **defaults
-                   )
-
-boundaries.register('sldu-13',
-                    singular='sldu-13',
-                    file='sldu-13/',
-                    name_func=tiger_namer,
-                    id_func=geoid_tiger_namer,
-                    start_date=date(2012, 1, 1),
-                    end_date=date(2015, 1, 1),
-                    **defaults
-                   )
-
-boundaries.register('county-14',
-                    singular='county-14',
-                    file='county-14/',
-                    encoding='latin-1',
-                    name_func=tiger_namer,
-                    id_func=geoid_tiger_namer,
-                    start_date=date(2015, 1, 1),
-                    **defaults
-                   )
-
-boundaries.register('county-13',
-                    singular='county-13',
-                    file='county-13/',
-                    encoding='latin-1',
-                    name_func=tiger_namer,
-                    id_func=geoid_tiger_namer,
-                    start_date=date(2012, 1, 1),
-                    end_date=date(2015, 1, 1),
-                    **defaults
-                   )
-
-boundaries.register('place-14',
-                    singular='place-14',
-                    file='place-14/',
-                    name_func=tiger_namer,
-                    id_func=geoid_tiger_namer,
-                    start_date=date(2015, 1, 1),
-                    encoding='latin-1',
-                    **defaults
-                   )
-
-boundaries.register('place-13',
-                    singular='place-13',
-                    file='place-13/',
-                    name_func=tiger_namer,
-                    id_func=geoid_tiger_namer,
-                    start_date=date(2012, 1, 1),
-                    end_date=date(2015, 1, 1),
-                    encoding='latin-1',
-                    **defaults
-                   )
 
 boundaries.register('nh-12',
                     singular='nh-12',
                     file='nh-12/',
                     name_func=nh_12_namer,
                     id_func=geoid_nh_12_namer,
-                    start_date=date(2013, 1, 1),
+                    start_date=date(2012, 1, 1),
                     last_updated=LAST_UPDATE,
                     domain='United States',
                     authority='NH Office of Energy and Planning',

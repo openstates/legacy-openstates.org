@@ -179,8 +179,8 @@ def download_zcta():
 
 if __name__ == '__main__':
     download_nh_floterial()
-    download_counties()
-    download_places()
-    download_cds()
+    # download_counties()
+    # download_places()
+    # download_cds()
     download_state_leg_bounds()
     # download_zcta()
