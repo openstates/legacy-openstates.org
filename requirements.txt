@@ -1,13 +1,15 @@
-Django<=1.10
-psycopg2
-pyelasticsearch
-django-appconf
-pyshp
-dj-database-url
-opencivicdata-divisions
-DjangoRestless
+Django==1.9.11
+psycopg2==2.7
+pyelasticsearch==1.4
+django-appconf==1.0.2
+pyshp==1.2.10
+dj-database-url==0.4.2
+opencivicdata-divisions==2017.5.18
+opencivicdata-django==0.8.2
+DjangoRestless==0.0.10
 
--e git://github.com/opencivicdata/pupa.git#egg=pupa
--e git://github.com/opencivicdata/imago.git#egg=imago
+-e git://github.com/opencivicdata/pupa.git@0b30407a634773d6e3bf8fbf07b683e10ef87c8d#egg=pupa
+-e git://github.com/opencivicdata/imago.git@b0cc9379eec02358e25e075b006e6682f9c5fb10#egg=imago
 
-represent-boundaries
+represent-boundaries==0.7.5
+us==1.0.0

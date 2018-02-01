@@ -3,10 +3,10 @@
 import os
 import glob
 
-fips = ('01', '02', '04', '05', '06', '08', '09', '10', '11', '12', '13', '15', '16', '17', '18',
-        '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31' ,'32', '33',
-        '34', '35', '36', '37', '38', '39', '40', '41', '42', '44', '45', '46', '47', '48', '49',
-        '50', '51', '53', '54', '55', '56', '60', '66', '69', '72', '78')
+import us
+
+states = [s for s in us.STATES_AND_TERRITORIES if s not in us.OBSOLETE]
+fips = sorted([s.fips for s in states])
 
 
 def _download_file(URL, where):
@@ -47,16 +47,25 @@ def _extract_cwd(path=None):
 def _download_census_file(top, fips, what, year, where):
 
     if year == "13":
-        URL = ("ftp://ftp2.census.gov/geo/tiger/{top}/{fips}/tl_rd{year}_{fips}_{what}.zip"
+        URL = ("https://www2.census.gov/geo/tiger/{top}/{fips}/tl_rd{year}_{fips}_{what}.zip"
               ).format(**{"year": year, "what": what, "fips": fips, "top": top})
     else:
-        URL = ("ftp://ftp2.census.gov/geo/tiger/{top}/{WHAT}/tl_{year}_{fips}_{what}.zip").format(
+        URL = ("https://www2.census.gov/geo/tiger/{top}/{WHAT}/tl_{year}_{fips}_{what}.zip").format(
             **{ "year": year, "what": what, "WHAT": what.upper(), "fips": fips, "top": top, })
 
     _download_file(URL, where)
 
 def download_state_leg_bounds():
     for fip in fips:
+        _download_census_file("TIGER2017", fip, "sldl", "2017", "downloads/sldl-17")
+        _download_census_file("TIGER2017", fip, "sldu", "2017", "downloads/sldu-17")
+
+        _download_census_file("TIGER2016", fip, "sldl", "2016", "downloads/sldl-16")
+        _download_census_file("TIGER2016", fip, "sldu", "2016", "downloads/sldu-16")
+
+        _download_census_file("TIGER2015", fip, "sldl", "2015", "downloads/sldl-15")
+        _download_census_file("TIGER2015", fip, "sldu", "2015", "downloads/sldu-15")
+
         _download_census_file("TIGER2014", fip, "sldl", "2014", "downloads/sldl-14")
         _download_census_file("TIGER2014", fip, "sldu", "2014", "downloads/sldu-14")
 
@@ -67,6 +76,9 @@ def download_state_leg_bounds():
         _download_census_file("TIGER2012", fip, "sldu", "2012", "downloads/sldu-12")
 
     for x in [
+            "downloads/sldl-17", "downloads/sldu-17",
+            "downloads/sldl-16", "downloads/sldu-16",
+            "downloads/sldl-15", "downloads/sldu-15",
             "downloads/sldl-14", "downloads/sldu-14",
             "downloads/sldl-13", "downloads/sldu-13",
             "downloads/sldl-12", "downloads/sldu-12"
@@ -75,12 +87,18 @@ def download_state_leg_bounds():
 
 
 def download_counties():
-    _download_file("ftp://ftp2.census.gov/geo/tiger/TIGER2014/COUNTY/tl_2014_us_county.zip", "downloads/county-14")
+    _download_file("https://www2.census.gov/geo/tiger/TIGER2017/COUNTY/tl_2017_us_county.zip", "downloads/county-17")
+    _download_file("https://www2.census.gov/geo/tiger/TIGER2016/COUNTY/tl_2016_us_county.zip", "downloads/county-16")
+    _download_file("https://www2.census.gov/geo/tiger/TIGER2015/COUNTY/tl_2015_us_county.zip", "downloads/county-15")
+    _download_file("https://www2.census.gov/geo/tiger/TIGER2014/COUNTY/tl_2014_us_county.zip", "downloads/county-14")
     
     for fip in fips:
         _download_census_file("TIGERrd13_st", fip, "county10", "13", "downloads/county-13")
     
     for x in [
+            "downloads/county-17",
+            "downloads/county-16",
+            "downloads/county-15",
             "downloads/county-14",
             "downloads/county-13"
             ]:
@@ -89,10 +107,16 @@ def download_counties():
 
 def download_places():
     for fip in fips:
+        _download_census_file("TIGER2017", fip, "place", "2017", "downloads/place-17")
+        _download_census_file("TIGER2016", fip, "place", "2016", "downloads/place-16")
+        _download_census_file("TIGER2015", fip, "place", "2015", "downloads/place-15")
         _download_census_file("TIGER2014", fip, "place", "2014", "downloads/place-14")
         _download_census_file("TIGERrd13_st", fip, "place10", "13", "downloads/place-13")
     
     for x in [
+            "downloads/place-17",
+            "downloads/place-16",
+            "downloads/place-15",
             "downloads/place-14",
             "downloads/place-13"
             ]:
@@ -100,11 +124,9 @@ def download_places():
 
 
 def download_nh_floterial():
-    # The New Hampshire server is temporarily down, so use a mirrored ZIP file
-    # Check here for updates:
-    # https://www.nh.gov/oep/planning/services/gis/political-districts.htm
-    # _download_file("ftp://pubftp.nh.gov/OEP/NHHouseDists2012.zip", "downloads/nh-12")
-    _download_file("https://s3.amazonaws.com/opencivicdata/mirror/NHHouseDists2012.zip", "downloads/nh-12")
+    # New Hampshire has a second set of boundaries, that aren't served by the Census
+    # Hosted here: https://www.nh.gov/oep/planning/services/gis/political-districts.htm
+    _download_file("ftp://pubftp.nh.gov/OEP/NHHouseDists2012.zip", "downloads/nh-12")
 
     # Only want the floterial file, not the main district file
     pop = os.path.abspath(os.getcwd())
@@ -122,13 +144,15 @@ def download_nh_floterial():
 
 
 def download_cds():
-    _download_file("ftp://ftp2.census.gov/geo/tiger/TIGER2014/CD/tl_2014_us_cd114.zip", "downloads/cd-114")
+    _download_file("https://www2.census.gov/geo/tiger/TIGER2017/CD/tl_2017_us_cd115.zip", "downloads/cd-115")
+    _download_file("https://www2.census.gov/geo/tiger/TIGER2015/CD/tl_2015_us_cd114.zip", "downloads/cd-114")
 
     for fip in fips:
         _download_census_file("TIGERrd13_st", fip, "cd113", "13", "downloads/cd-113")
         _download_census_file("TIGERrd13_st", fip, "cd111", "13", "downloads/cd-111")
     
     for x in [
+            "downloads/cd-115",
             "downloads/cd-114",
             "downloads/cd-113",
             "downloads/cd-111"
@@ -137,10 +161,16 @@ def download_cds():
 
 
 def download_zcta():
-    _download_file("ftp://ftp2.census.gov/geo/tiger/TIGER2014/ZCTA5/tl_2014_us_zcta510.zip", "downloads/zcta-14")
-    _download_file("ftp://ftp2.census.gov/geo/tiger/TIGERrd13_st/nation/tl_rd13_us_zcta510.zip", "downloads/zcta-13")
+    _download_file("https://www2.census.gov/geo/tiger/TIGER2017/ZCTA5/tl_2017_us_zcta510.zip", "downloads/zcta-17")
+    _download_file("https://www2.census.gov/geo/tiger/TIGER2016/ZCTA5/tl_2016_us_zcta510.zip", "downloads/zcta-16")
+    _download_file("https://www2.census.gov/geo/tiger/TIGER2015/ZCTA5/tl_2015_us_zcta510.zip", "downloads/zcta-15")
+    _download_file("https://www2.census.gov/geo/tiger/TIGER2014/ZCTA5/tl_2014_us_zcta510.zip", "downloads/zcta-14")
+    _download_file("https://www2.census.gov/geo/tiger/TIGERrd13_st/nation/tl_rd13_us_zcta510.zip", "downloads/zcta-13")
     
     for x in [
+            "downloads/zcta-17",
+            "downloads/zcta-16",
+            "downloads/zcta-15",
             "downloads/zcta-14",
             "downloads/zcta-13"
             ]:
@@ -149,8 +179,8 @@ def download_zcta():
 
 if __name__ == '__main__':
     download_nh_floterial()
-    download_counties()
-    download_places()
-    download_cds()
+    # download_counties()
+    # download_places()
+    # download_cds()
     download_state_leg_bounds()
     # download_zcta()
