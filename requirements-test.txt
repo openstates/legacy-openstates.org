@@ -1,2 +1,1 @@
 pytest
--e git://github.com/opencivicdata/python-opencivicdata-api#egg=opencivicdata.api
