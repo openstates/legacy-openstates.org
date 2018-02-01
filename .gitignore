@@ -4,6 +4,7 @@
 .thumb.png
 .vagrant/
 .cache/
+.DS_Store
 
 # Downloaded files
 downloads/
