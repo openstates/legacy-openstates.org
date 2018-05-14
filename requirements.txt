@@ -1,7 +1,7 @@
 Django<1.10
 django-pjax
 dj-database-url
-django-simplekeys==0.5.0
+django-simplekeys==0.5.1
 psycopg2
 whitenoise
 -e git://github.com/openstates/django-piston/#egg=django-piston
