@@ -25,13 +25,13 @@ urlpatterns = [
     url(r'^donate/$', 'donations.views.donate'),
 
     # api docs
-    url(r'^api/$', RedirectView.as_view(url='http://docs.openstates.org/en/latest/api/', permanent=True)),
-    url(r'^api/metadata/$', RedirectView.as_view(url='http://docs.openstates.org/en/latest/api/metadata.html', permanent=True)),
-    url(r'^api/bills/$', RedirectView.as_view(url='http://docs.openstates.org/en/latest/api/bills.html', permanent=True)),
-    url(r'^api/committees/$', RedirectView.as_view(url='http://docs.openstates.org/en/latest/api/committees.html', permanent=True)),
-    url(r'^api/legislators/$', RedirectView.as_view(url='http://docs.openstates.org/en/latest/api/legislators.html', permanent=True)),
-    url(r'^api/events/$', RedirectView.as_view(url='http://docs.openstates.org/en/latest/api/events.html', permanent=True)),
-    url(r'^api/districts/$', RedirectView.as_view(url='http://docs.openstates.org/en/latest/api/districts.html', permanent=True)),
+    url(r'^api/$', RedirectView.as_view(url='https://docs.openstates.org/en/latest/api/', permanent=True)),
+    url(r'^api/metadata/$', RedirectView.as_view(url='https://docs.openstates.org/en/latest/api/metadata.html', permanent=True)),
+    url(r'^api/bills/$', RedirectView.as_view(url='https://docs.openstates.org/en/latest/api/bills.html', permanent=True)),
+    url(r'^api/committees/$', RedirectView.as_view(url='https://docs.openstates.org/en/latest/api/committees.html', permanent=True)),
+    url(r'^api/legislators/$', RedirectView.as_view(url='https://docs.openstates.org/en/latest/api/legislators.html', permanent=True)),
+    url(r'^api/events/$', RedirectView.as_view(url='https://docs.openstates.org/en/latest/api/events.html', permanent=True)),
+    url(r'^api/districts/$', RedirectView.as_view(url='https://docs.openstates.org/en/latest/api/districts.html', permanent=True)),
 
     url(r'^api/register/$', RegistrationView.as_view(
         confirmation_url='/api/confirm/',

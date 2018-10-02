@@ -11,6 +11,6 @@ Terms of Service & Privacy Policy - https://openstates.org/tos/
 
 Also, please keep in mind Open States is a nonprofit resource driven by
 volunteers.  Please consider giving credit or donating to support continued
-development and server costs: https://www.generosity.com/fundraising/open-states-general-support-fund/x/15330084
+development and server costs: https://openstates.org/donate/
 
 Thanks!
