@@ -40,7 +40,6 @@ urlpatterns = [
     url(r'^api/confirm/$', ConfirmationView.as_view()),
 
     url(r'^api/', include('billy.web.api.urls')),
-    url(r'^admin/', include('billy.web.admin.urls')),
     url(r'^djadmin/', include(admin.site.urls)),
     url(r'^', include('billy.web.public.urls')),
 ]

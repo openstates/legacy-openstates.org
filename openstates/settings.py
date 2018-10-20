@@ -168,7 +168,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.sites',
     'billy.web.api',
-    'billy.web.admin',
     'billy.web.public',
     'markup_tags',
     'piston',

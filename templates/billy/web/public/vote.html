@@ -21,8 +21,6 @@
     <script src="{% static 'js/d3.v3.min.js' %}"></script>
     <script>
     $(document).ready(function(){
-        var doc = $(document);
-        doc.bind("keydown", "alt+j", function(){window.location = '{{vote.get_admin_json_url}}'});
         make_vote_charts(200, 150, 60);
         });
     </script>
