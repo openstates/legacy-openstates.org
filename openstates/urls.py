@@ -12,11 +12,7 @@ urlpatterns = [
     # flat pages
     url(r'^about/$', TemplateView.as_view(template_name='flat/about.html')),
     url(r'^funding/$', TemplateView.as_view(template_name='flat/funding.html')),
-    url(r'^methodology/$', TemplateView.as_view(template_name='flat/methodology.html')),
-    url(r'^contributing/$', TemplateView.as_view(template_name='flat/contributing.html')),
     url(r'^contact/$', TemplateView.as_view(template_name='flat/contact.html')),
-    url(r'^categorization/$', TemplateView.as_view(template_name='flat/categorization.html')),
-    url(r'^csv_downloads/$', TemplateView.as_view(template_name='flat/csv_downloads.html')),
     url(r'^reportcard/$', TemplateView.as_view(template_name='flat/reportcard.html')),
     url(r'^tos/$', TemplateView.as_view(template_name='flat/tos.html')),
     url(r'^map_svg/$', TemplateView.as_view(template_name='flat/openstatesmap.svg')),
@@ -24,7 +20,7 @@ urlpatterns = [
     # donations
     url(r'^donate/$', 'donations.views.donate'),
 
-    # api docs
+    # redirects
     url(r'^api/$', RedirectView.as_view(url='https://docs.openstates.org/en/latest/api/', permanent=True)),
     url(r'^api/metadata/$', RedirectView.as_view(url='https://docs.openstates.org/en/latest/api/metadata.html', permanent=True)),
     url(r'^api/bills/$', RedirectView.as_view(url='https://docs.openstates.org/en/latest/api/bills.html', permanent=True)),
@@ -32,6 +28,11 @@ urlpatterns = [
     url(r'^api/legislators/$', RedirectView.as_view(url='https://docs.openstates.org/en/latest/api/legislators.html', permanent=True)),
     url(r'^api/events/$', RedirectView.as_view(url='https://docs.openstates.org/en/latest/api/events.html', permanent=True)),
     url(r'^api/districts/$', RedirectView.as_view(url='https://docs.openstates.org/en/latest/api/districts.html', permanent=True)),
+    url(r'^contributing/$', RedirectView.as_view(url='https://docs.openstates.org/en/latest/contributing/index.html', permanent=True)),
+    url(r'^csv_downloads/$', RedirectView.as_view(url='https://docs.openstates.org/en/latest/data/legacy-csv.html', permanent=True)),
+    url(r'^downloads/$', RedirectView.as_view(url='https://docs.openstates.org/en/latest/data/index.html', permanent=True)),
+    url(r'^methodology/$', RedirectView.as_view(url='https://docs.openstates.org/en/latest/infrastructure/index.html', permanent=True)),
+    url(r'^categorization/$', RedirectView.as_view(url='https://docs.openstates.org/en/latest/api/categorization.html', permanent=True)),
 
     url(r'^api/register/$', RegistrationView.as_view(
         confirmation_url='/api/confirm/',
