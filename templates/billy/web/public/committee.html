@@ -68,58 +68,6 @@ $(document).ready(function() {
     </table>
 </div>
 
-{% if events|length > 0 %}
-<div class="fullWidth module">
-    <h3 class="moduleTitle">{% trans "Events" %}</h3>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>{% trans "Description" %}</th>
-                <th>{% trans "Date" %}</th>
-                <th>{% trans "Attendees" %}</th>
-                <th>{% trans "Location" %}</th>
-                <th>{% trans "Bills" %}</th>
-            </tr>
-        </thead>
-        <tbody>
-{% for event in events %}
-            <tr class="{% cycle odd,even %}">
-                <td><a href="{% url 'event' abbr event|underscore_field:"id" %}" >{{event.description}}</a></td>
-                <td>{{event.when|naturaltime}}</td>
-                <td>{% for participant in event.participants %}
-                        {% if participant.participant_type == 'legislator' %}
-                            {% if participant.id %}
-<a href="{% url 'legislator_noslug' abbr participant.id %}"
-    >{{participant.participant}}</a>
-                            {% else %}
-                                {{participant.participant}}
-                            {% endif %}
-                        {% elif participant.participant_type == 'committee' %}
-                            {% if participant.id %}
-<a href="{% url 'committee' abbr participant.id %}"
-    >{{participant.participant}}</a>
-                            {% else %}
-                                {{participant.participant}}
-                            {% endif %}
-                        {% endif %}
-                    {% endfor %}</td>
-
-                <td>{{event.location}}</td>
-                <td>{% for bill in event.related_bills %}
-                        {% if bill.bill_id %}
-                        <a href="{% url 'bill_noslug' abbr bill.id %}"
-                            >{{bill.bill_id}}</a>{% if not forloop.last %}{% ifequal forloop.revcounter 2 %} and {% else %}, {% endifequal %}
-                            {% endif %}
-                        {% else %}
-{{bill|underscore_field:"scraped_bill_id"}}
-                        {% endif %}
-                    {% endfor %}</td>
-            </tr>
-{% endfor %}
-        </tbody>
-    </table>
-</div>
-{% endif %}
 
 {% with sources=committee.sources %}
     {% include "billy/web/public/sources.html" %}

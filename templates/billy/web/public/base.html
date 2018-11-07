@@ -67,9 +67,6 @@
                 <li {% if nav_active == "legislators" %}class="active"{% endif %}><a href="{% url 'legislators' abbr %}">{% trans "Legislators" %}</a></li>
                 <li {% if nav_active == "bills" %}class="active"{% endif %}><a href="{% url 'bills' abbr %}">{% trans "Bills" %}</a></li>
                 <li {% if nav_active == "committees" %}class="active"{% endif %}><a href="{% url 'committees' abbr %}">{% trans "Committees" %}</a></li>
-                {% if "events" in metadata.feature_flags %}
-                    <li {% if nav_active == "events" %}class="active"{% endif %}><a href="{% url 'events' abbr %}">{% trans "Events" %}</a></li>
-                {% endif %}
             </ul>
         </nav>
         {% endif %}
