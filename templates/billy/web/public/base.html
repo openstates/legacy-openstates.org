@@ -36,7 +36,11 @@
     class="{% block bodyclass %}{% endblock %}"
     id="{% block body_id %}{% endblock %}">
 
-    <!-- <div id="emergency"> </div> -->
+    <div id="emergency">
+        With the votes counted, the work of updating our data &amp; tools for 2019 begins.
+        <br />
+        We're aiming to raise $10,000 to fund this vital work between now and the start of the 2019 sessions, please <b><a href="/donate/">contribute today</a>!</b>
+    </div>
 
     <header id="mainHeader">
         <div id="login" class="tip">
@@ -63,9 +67,6 @@
                 <li {% if nav_active == "legislators" %}class="active"{% endif %}><a href="{% url 'legislators' abbr %}">{% trans "Legislators" %}</a></li>
                 <li {% if nav_active == "bills" %}class="active"{% endif %}><a href="{% url 'bills' abbr %}">{% trans "Bills" %}</a></li>
                 <li {% if nav_active == "committees" %}class="active"{% endif %}><a href="{% url 'committees' abbr %}">{% trans "Committees" %}</a></li>
-                {% if "events" in metadata.feature_flags %}
-                    <li {% if nav_active == "events" %}class="active"{% endif %}><a href="{% url 'events' abbr %}">{% trans "Events" %}</a></li>
-                {% endif %}
             </ul>
         </nav>
         {% endif %}
