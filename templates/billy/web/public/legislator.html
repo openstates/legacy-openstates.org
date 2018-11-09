@@ -328,8 +328,8 @@
 <script>
     mapboxgl.accessToken = 'pk.eyJ1Ijoib3BlbnN0YXRlcyIsImEiOiJjamU0ZnVibHExNmVnMzRycTFkMnR0cjZkIn0.nE772hhH8i1ij-ae2p0E7g';
 
-    $.getJSON('/get_district/{{district_id}}/', function(payload) {
-        const reversedCoordinates = payload.bbox.map(coords => coords.reverse())
+    $.getJSON('https://data.openstates.org/boundaries/2018/{{district_id}}.json', function(payload) {
+        // const reversedCoordinates = payload.extent.map(coords => coords.reverse())
 
         var map = new mapboxgl.Map({
             container: 'map',
@@ -338,7 +338,7 @@
             maxZoom: 13,
             interactive: false
         }).fitBounds(
-            reversedCoordinates,
+            payload.extent,
             {
                 padding: 40,
                 animate: false
