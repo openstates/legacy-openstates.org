@@ -97,7 +97,7 @@ TIME_FORMAT = 'H:i:s'
 DATETIME_FORMAT = 'Y-m-d H:i:s'
 
 STATIC_ROOT = os.path.join(os.path.dirname(__file__), '..', 'collected_static')
-STATIC_URL = '/media/'
+STATIC_URL = 'https://legacy.openstates.org/media/'
 STATICFILES_DIRS = (
     os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'media')),
 )
