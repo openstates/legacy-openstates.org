@@ -3,18 +3,20 @@ import os
 import pymongo
 from django.template.defaultfilters import slugify
 
-SERVER = 'https://openstates.org'
+SERVER = 'http://localhost:9999'
 BASE = 'html/'
 
 db = pymongo.MongoClient()['fiftystates']
 
 
 def flatten(url):
-    resp = requests.get(SERVER + url)
-    assert resp.status_code == 200
     filename = os.path.join(BASE, url.lstrip('/'), 'index.html')
     if os.path.exists(filename):
         print('skipping', filename)
+        return
+    resp = requests.get(SERVER + url)
+    if resp.status_code != 200:
+        print('broken', url)
         return
     try:
         os.makedirs(os.path.dirname(filename))
@@ -56,7 +58,7 @@ def flatten_votes():
         flatten(f'/{state}/votes/{v["_id"]}/')
 
 
-flatten_basics()
+# flatten_basics()
 # flatten_legislators()
 # flatten_bills()
-# flatten_votes()
+flatten_votes()
