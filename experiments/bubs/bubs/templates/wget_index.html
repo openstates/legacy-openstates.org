@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<html>
+<body>
+<ul>
+    {% for meta in report_meta %}
+    <li>
+    <a href="{{url_for('report_slblog')}}?meta={{meta.abbr}},{{meta.chamber}},{{meta.term}}">{{meta.abbr}},{{meta.chamber}},{{meta.term}}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
