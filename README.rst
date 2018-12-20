@@ -1,6 +1,5 @@
-This repository is just the OpenStates.org website config and templates- you're probably looking
-for something else:
+This project contains the code/etc. that used to power openstates.org.
 
-* `Open States Scrapers <https://github.com/openstates/openstates/>`_
-* `Open States API <https://openstates.org/api/>`_
-* `Open State Project Discourse <https://discourse.openstates.org>`_
+* experiments/ - experiments by the Open States team from 2011-2014
+* geo.openstates.org/ - the old Open States geo service
+* logos/ - the old Open States logos

@@ -1,0 +1,22 @@
+# Python, editor, and other temp files
+*.pyc
+*.swp
+.thumb.png
+.vagrant/
+.cache/
+.DS_Store
+
+# Downloaded files
+downloads/
+shapefiles/*/*.dbf
+shapefiles/*/*.prj
+shapefiles/*/*.shp
+shapefiles/*/*.shp.ea.iso.xml
+shapefiles/*/*.shp.iso.xml
+shapefiles/*/*.shp.xml
+shapefiles/*/*.shx
+
+# Configuration files
+ocdapi/settings/local.py
+ocdapi/settings/production.py
+hosts.production

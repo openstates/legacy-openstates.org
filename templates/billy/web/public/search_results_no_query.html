@@ -10,16 +10,5 @@
 {% endif %}
 
 {% block content %}
-    <div style="width: 50%; margin: 0px auto;">
-        <h1>{% trans "Search the site" %}</h1>
-        <div style="float: left;">
-        <form action="/{{abbr|default:'all'}}/search/" method="get" id="searchform">
-            <input class="transparent" type="search" name="search_text" id="id_q">
-            <button type="submit">
-                <span>{% trans "Search" %}</span>
-            </button>
-        </form>
-        </div>
-    </div>
-
+    Search is disabled as we migrate to a new system for 2019, it will return soon.
 {% endblock %}

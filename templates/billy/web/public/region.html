@@ -51,15 +51,6 @@
                     </ul>
                  </li>
                  {% endfor %}
-
-                 {# if unicameral, put the committee listing here too #}
-                 {% if chambers|length == 1 %}
-                 <li class="noDash">
-                    <a href="{% url 'committees' metadata.abbr %}">
-                        <h4 class="titleNumber bigNumber withTip">{{chambers.0.committees_count}}<span>{% trans "Committees" %}</span></h4>
-                    </a>
-                </li>
-                {% endif %}
             </ul>
         </div>
 
@@ -68,35 +59,6 @@
         </div>
         <div class="clear"></div>
     </div>
-
-{% include "billy/web/public/developer_state.html" %}
-
-    {# hide committees module if unicameral #}
-    {% if chambers|length > 1 %}
-    <div class="fullWidth module clearfix">
-        <h3 class="moduleTitle">{% trans "Committees" %}</h3>
-            {% if  joint_committee_count %}
-                <ul class="inlineThirds centeredText">
-            {% else %}
-                {# was Halves, but CSS was broken #}
-                <ul class="inlineHalves centeredText">
-            {% endif %}
-
-            {% for chamber in chambers %}
-                <a href="{% url 'committees' abbr %}?chamber={{chamber.type}}">
-                <li class="{% cycle 'one' 'two' %} titleNumber bigNumber withTip">
-                {{ chamber.committees_count }}<span>{{ chamber.name }} {% trans "Committees" %}</span></li>
-                </a>
-            {% endfor %}
-            {% if  joint_committee_count %}
-            <a href="{% url 'committees' abbr %}?chamber=joint">
-                <li class="three titleNumber bigNumber withTip">{{ joint_committee_count }}<span>{% trans "Joint Committees" %}</span></li>
-            </a>
-            {% endif %}
-        </ul>
-    </div>
-    {% endif %}
-
 
 <!-- bills -->
     <div class="fullWidth moduleNoBorder clearfix">
