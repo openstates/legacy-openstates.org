@@ -1,0 +1,260 @@
+{% extends "billy/web/public/base.html" %}
+{% load customtags %}
+{% load staticfiles %}
+{% load i18n %}
+{# load funfacts #}
+
+{% block title %}{{metadata.legislature_name}}{% endblock %}
+{% block description %}{{metadata.legislature_name}}: {% trans "Keep up to date with bills, legislators, votes, and committees." %} {% endblock %}
+
+{% block bodyclass %}{% endblock %}
+
+{% block headblock %}
+<link rel="canonical" href="{{metadata.get_absolute_url}}">
+<link rel="stylesheet" href="{% static 'maps/leaflet.css' %}" />
+<script src="{% static "maps/leaflet.js" %}"></script>
+<link rel="stylesheet" href="{% static 'maps/mapbox-gl.css' %}" />
+<script src="{% static 'maps/mapbox-gl.js' %}" />
+{% endblock %}
+
+{% block content %}
+    <div class="fullWidth">
+        <div id="stateimg-{{metadata.abbr}}" class="stateTitle">
+            <h2 class="withTip">{{metadata.legislature_name}}</h2>
+            <p>{# funfact metadata.abbr #}</p>
+        </div>
+    </div>
+
+    <div class="fullWidth module clear">
+        <h3 class="moduleTitle">{% trans "Legislators" %}</h3>
+        <p class="tip">{% trans "Click on a district to view corresponding legislators." %}</p>
+
+        <div class="sixCol colLtSm" id="maptip">
+            <div class="mapbox" id="map" style="width: 100%; height: 400px">
+                <p class="tip" style="display: inline-block;">Select chamber:</p>
+                <input type="button" class="map-layer-selector" data-hook="layer-selector" name="sldu" value="Upper" />
+                <input type=button class="map-layer-selector" data-hook="layer-selector" name="sldl" value="Lower" />
+            </div>
+        </div>
+
+        <div class="sixCol colLtSm centeredText bottomDash" id="totalLeg">
+            <ul class="inlineHalves">
+                {% for chamber in chambers %}
+                 <li class="withDash">
+                    <a href="{% url 'legislators' metadata.abbr %}?chamber={{chamber.type}}">
+                        <h4 class="titleNumber bigNumber withTip">{{ chamber.legislators.count }}<span>{{ chamber.title }}s</span></h4>
+                    </a>
+                    <ul class="tip noSpace">
+                        {% for party, count in chamber.legislators.party_counts.items %}
+                        <li>{{ count }} {{party|party_noun:count}}</li>
+                        {% endfor %}
+                    </ul>
+                 </li>
+                 {% endfor %}
+
+                 {# if unicameral, put the committee listing here too #}
+                 {% if chambers|length == 1 %}
+                 <li class="noDash">
+                    <a href="{% url 'committees' metadata.abbr %}">
+                        <h4 class="titleNumber bigNumber withTip">{{chambers.0.committees_count}}<span>{% trans "Committees" %}</span></h4>
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <div class="sixCol colRt">
+            <div id="results_table"> </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+{% include "billy/web/public/developer_state.html" %}
+
+    {# hide committees module if unicameral #}
+    {% if chambers|length > 1 %}
+    <div class="fullWidth module clearfix">
+        <h3 class="moduleTitle">{% trans "Committees" %}</h3>
+            {% if  joint_committee_count %}
+                <ul class="inlineThirds centeredText">
+            {% else %}
+                {# was Halves, but CSS was broken #}
+                <ul class="inlineHalves centeredText">
+            {% endif %}
+
+            {% for chamber in chambers %}
+                <a href="{% url 'committees' abbr %}?chamber={{chamber.type}}">
+                <li class="{% cycle 'one' 'two' %} titleNumber bigNumber withTip">
+                {{ chamber.committees_count }}<span>{{ chamber.name }} {% trans "Committees" %}</span></li>
+                </a>
+            {% endfor %}
+            {% if  joint_committee_count %}
+            <a href="{% url 'committees' abbr %}?chamber=joint">
+                <li class="three titleNumber bigNumber withTip">{{ joint_committee_count }}<span>{% trans "Joint Committees" %}</span></li>
+            </a>
+            {% endif %}
+        </ul>
+    </div>
+    {% endif %}
+
+
+<!-- bills -->
+    <div class="fullWidth moduleNoBorder clearfix">
+        <h3 class="moduleTitle">{% trans "Bills" %}</h3>
+        {% for chamber in chambers %}
+            {# only show chamber if we have multiple chambers #}
+            <div class="module clearfix">
+                {% if chambers|length > 1 %}
+                    <h3 class="clear">{{ chamber.name }}</h3>
+                {% endif %}
+                <div class="fiveCol colLt">
+                    {% include "billy/web/public/_recently_passed.html" %}
+                </div>
+                <div class="fiveCol colRt">
+                    {% include "billy/web/public/_recently_introduced.html" %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="fullWidth module">
+        <h3 class="moduleTitle">{% trans "Available Sessions" %}</h3>
+        <table>
+            <thead> <tr> <th>{% trans "Session" %}</th> <th>{% trans "Bills" %}</th> </tr> </thead>
+            <tbody>
+                {% for session in sessions %}
+                {% if session.bill_count %}
+                    <tr class="{% cycle 'odd' 'even' %}">
+                       <td>{{session.name}}</td>
+                       <td><a href="{% url 'bills' abbr %}?session={{session.id}}">{{session.bill_count}} {% trans "bills" %}</a></td>
+                   </tr>
+                {% endif %}
+                {% endfor %}
+        </table>
+    </div>
+
+    {% include "billy/web/public/sources.html" %}
+
+
+<!-- mapbox interaction script -->
+<script>
+    mapboxgl.accessToken = 'pk.eyJ1Ijoib3BlbnN0YXRlcyIsImEiOiJjamU0ZnVibHExNmVnMzRycTFkMnR0cjZkIn0.nE772hhH8i1ij-ae2p0E7g';
+
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/light-v9',
+        minZoom: 2,
+        maxZoom: 13
+    })
+    const bounds = JSON.parse('{{geo_bounds}}')
+    map.fitBounds(
+        bounds,
+        {
+            padding: 40,
+            animate: false
+        }
+
+    )
+
+    const DEFAULT_LAYER = 'sldu'
+    var displayedLayer = DEFAULT_LAYER
+
+    map.on('load', function () {
+        map.addLayer({
+            id: 'sld',
+            type: 'line',
+            source: {
+                type: 'vector',
+                url: 'mapbox://openstates.sld'
+            },
+            'source-layer': 'sld',
+            paint: {
+                'line-color': 'green',
+                'line-opacity': 0.2,
+                'line-width': 1.0
+            },
+            filter: ['==', 'type', displayedLayer]
+        })
+
+        // Need a separate, invisible fill layer in order to
+        // make the inside of state polygons click-able
+        map.addLayer({
+            id: 'sld-detect-click',
+            type: 'fill',
+            source: {
+                type: 'vector',
+                url: 'mapbox://openstates.sld'
+            },
+            'source-layer': 'sld',
+            paint: { 'fill-opacity': 0 },
+            filter: ['==', 'type', displayedLayer]
+        })
+
+        map.addLayer({
+            id: 'district-fill',
+            type: 'fill',
+            source: {
+                type: 'vector',
+                url: 'mapbox://openstates.sld'
+            },
+            'source-layer': 'sld',
+            paint: {
+                'fill-color': 'black',
+                'fill-opacity': 0.2,
+            },
+            filter: ['==', 'ocdid', 'DO NOT MATCH']
+        })
+
+        map.addLayer({
+            id: 'district-stroke',
+            type: 'line',
+            source: {
+                type: 'vector',
+                url: 'mapbox://openstates.sld'
+            },
+            'source-layer': 'sld',
+            paint: {
+                'line-color': 'black',
+                'line-opacity': 0.4,
+                'line-width': 2.0
+            },
+            filter: ['==', 'ocdid', 'DO NOT MATCH']
+        })
+
+        map.on('click', 'sld-detect-click', function(e) {
+            const ocdid = e.features[0].properties.ocdid
+            // This conditional is a little janky, because a state's
+            // abbreviation could match other parts of an OCDID string
+            // Maybe add state abbreviation into the tiles at some point
+            if (ocdid.includes('{{metadata.abbr}}')) {
+                // Display related legislators
+                const chamber = displayedLayer === 'sldu' ? 'upper' : 'lower'
+                var url = '/find_your_legislator/?abbr={{metadata.abbr}}&lat=' + e.lngLat.lat + '&lon=' + e.lngLat.lng + '&chamber=' + chamber;
+                $("#results_table").load(url);
+
+                // Highlight the district that was clicked
+                map.setFilter('district-fill', ['==', 'ocdid', ocdid])
+                map.setFilter('district-stroke', ['==', 'ocdid', ocdid])
+            }
+        });
+
+        document.querySelectorAll('[data-hook="layer-selector"]')
+            .forEach(function (b) {
+                b.addEventListener('click', function (e) {
+                    const selectedLayer = b.name
+                    if (selectedLayer !== displayedLayer) {
+                        displayedLayer = selectedLayer
+
+                        $("#results_table").empty()
+
+                        map.setFilter('sld', ['==', 'type', displayedLayer])
+                        map.setFilter('sld-detect-click', ['==', 'type', displayedLayer])
+                        map.setFilter('district-fill', ['==', 'ocdid', 'DO NOT MATCH'])
+                        map.setFilter('district-stroke', ['==', 'ocdid', 'DO NOT MATCH'])
+                    }
+                })
+            })
+    })
+</script>
+
+{% endblock %}

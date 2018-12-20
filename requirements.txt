@@ -1,0 +1,14 @@
+Django<1.10
+django-pjax
+dj-database-url
+django-simplekeys==0.5.1
+psycopg2
+whitenoise
+-e git://github.com/openstates/django-piston/#egg=django-piston
+-e git://github.com/openstates/billy.git#egg=billy
+
+stripe
+requests[security]
+
+newrelic==2.84.0.64     # pinned because of breakage in May 2017
+raven

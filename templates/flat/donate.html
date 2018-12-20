@@ -1,0 +1,20 @@
+{% extends "billy/web/public/base.html" %}
+{% load static %}
+
+{% block title %}Open States: Donate{% endblock %}
+
+{% block content %}
+<div id="about">
+  <div class="module fullWidth clearfix" >
+    <h2>Donate</h2>
+
+    {% if success %}
+    <div class="success">
+      Thank you for your donation!  You should receive an email receipt shortly, if you don't please email <a href="mailto:funding@openstates.org">funding@openstates.org</a>.
+    </div>
+    {% endif %}
+
+  {% include "flat/_donate_form.html" %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,141 @@
+{% extends "flat/flatpage.html" %}
+{% load markup_tags %}
+
+{% block title %} Open States CSV Downloads {% endblock %}
+
+{% block flatpage %}
+<h2> CSV Downloads </h2>
+
+<p>Let us know if you find these files useful, any feedback is welcome via the <a class="reference external" href="https://groups.google.com/group/fifty-state-project">Open States Google Group</a>.</p>
+<p>See <a class="reference external" href="/downloads/">downloads</a> for information on bulk downloads for each state.</p>
+<div class="section" id="obtaining-csv-downloads">
+<h3>Obtaining CSV Downloads</h3>
+<p>The latest CSV dump can be obtained via the <a class="reference external" href="/downloads/">downloads page</a></p>
+<p>For each state we provide a .zip file containing several CSV files.</p>
+<p>The following CSV files exist:</p>
+<div class="section" id="legislators-csv">
+<h4>legislators.csv</h4>
+<p>Basic information on legislators.</p>
+<ul class="simple">
+<li><tt class="docutils literal">leg_id</tt>: Open States ID for legislator</li>
+<li><tt class="docutils literal">full_name</tt></li>
+<li><tt class="docutils literal">first_name</tt></li>
+<li><tt class="docutils literal">middle_name</tt></li>
+<li><tt class="docutils literal">last_name</tt></li>
+<li><tt class="docutils literal">suffixes</tt></li>
+<li><tt class="docutils literal">nickname</tt></li>
+<li><tt class="docutils literal">active</tt>: True or False</li>
+<li><tt class="docutils literal">state</tt>: if active, state for current role</li>
+<li><tt class="docutils literal">chamber</tt>: if active, chamber for current role</li>
+<li><tt class="docutils literal">district</tt>: if active, district for current role</li>
+<li><tt class="docutils literal">party</tt>: if active, party for current role</li>
+<li><tt class="docutils literal">votesmart_id</tt>: ID on votesmart.org</li>
+<li><tt class="docutils literal">transparencydata_id</tt>: ID on Influence Explorer</li>
+<li><tt class="docutils literal">photo_url</tt></li>
+<li><tt class="docutils literal">created_at</tt>: timestamp of when object was created in our system</li>
+<li><tt class="docutils literal">updated_at</tt>: timestamp of when object was last updated in our system</li>
+</ul>
+</div>
+<div class="section" id="legislator-roles-csv">
+<h4>legislator_roles.csv</h4>
+<p>Links legislators (by id) to any roles that they've had.</p>
+<ul class="simple">
+<li><tt class="docutils literal">leg_id</tt>: Open States ID for legislator</li>
+<li><tt class="docutils literal">type</tt>: type of role (likely to be 'member' or 'committee member')</li>
+<li><tt class="docutils literal">term</tt>: term for which legislator held role</li>
+<li><tt class="docutils literal">district</tt>: if role is member, will be district served</li>
+<li><tt class="docutils literal">chamber</tt>: chamber of legislature (upper/lower)</li>
+<li><tt class="docutils literal">state</tt>: if role is member, will be state legislator was active in</li>
+<li><tt class="docutils literal">party</tt>: if role is member, will be legislator's party</li>
+<li><tt class="docutils literal">committee_id</tt>: if role is committee member, will be Open States ID for committee</li>
+<li><tt class="docutils literal">committee</tt>: if role if committee member, will be name of committee (parent if subcommittee)</li>
+<li><tt class="docutils literal">subcommittee</tt>: if role if committee member, will be name of subcommittee</li>
+<li><tt class="docutils literal">start_date</tt>: optional, start date for role</li>
+<li><tt class="docutils literal">end_date</tt>: optional, end date for role</li>
+</ul>
+</div>
+<div class="section" id="committees-csv">
+<h4>committees.csv</h4>
+<p>List of committees (see legislator_roles.csv) for membership info.</p>
+<ul class="simple">
+<li><tt class="docutils literal">id</tt>: Open States ID for committee</li>
+<li><tt class="docutils literal">state</tt></li>
+<li><tt class="docutils literal">chamber</tt>: may be upper, lower, or joint</li>
+<li><tt class="docutils literal">committee</tt>: name of committee (parent if subcommitee)</li>
+<li><tt class="docutils literal">subcommittee</tt>: name of subcommittee (blank if committee)</li>
+<li><tt class="docutils literal">parent_id</tt>: Open States ID for parent committee if this is a subcommitee</li>
+</ul>
+</div>
+<div class="section" id="bills-csv">
+<h4>bills.csv</h4>
+<p>Basic details on all bills for a given state.</p>
+<ul class="simple">
+<li><tt class="docutils literal">bill_id</tt>: state-assigned bill id (eg. HB 271 or SR 10)</li>
+<li><tt class="docutils literal">state</tt></li>
+<li><tt class="docutils literal">session</tt></li>
+<li><tt class="docutils literal">chamber</tt>: upper or lower</li>
+<li><tt class="docutils literal">title</tt>: state-given title of bill</li>
+<li><tt class="docutils literal">created_at</tt>: timestamp of when object was created in our system</li>
+<li><tt class="docutils literal">updated_at</tt>: timestamp of when object was last updated in our system</li>
+<li><tt class="docutils literal">type</tt>: bill types, pipe delimited if multi-valued (see <a class="reference external" href="/categorization/">categorization</a>)</li>
+<li><tt class="docutils literal">subjects</tt>: bill subjects, pipe delimited if multi-valued (see <a class="reference external" href="/categorization/">categorization</a>)</li>
+</ul>
+</div>
+<div class="section" id="bill-actions-csv">
+<h4>bill_actions.csv</h4>
+<p>Listing of actions taken on all bills.</p>
+<ul class="simple">
+<li><tt class="docutils literal">state</tt>: uniquely identifies bill together with session, chamber, and bill_id</li>
+<li><tt class="docutils literal">session</tt>: uniquely identifies bill together with state, chamber, and bill_id</li>
+<li><tt class="docutils literal">chamber</tt>: uniquely identifies bill together with state, session, and bill_id</li>
+<li><tt class="docutils literal">bill_id</tt>:  uniquely identifies bill together with session, chamber, and chamber</li>
+<li><tt class="docutils literal">date</tt>: date that action took place</li>
+<li><tt class="docutils literal">action</tt>: state-given name of action</li>
+<li><tt class="docutils literal">actor</tt>: often upper/lower, can be other values</li>
+<li><tt class="docutils literal">type</tt>: type of action (see <a class="reference external" href="/categorization/">categorization</a>)</li>
+</ul>
+</div>
+<div class="section" id="bill-sponsors-csv">
+<h4>bill_sponsors.csv</h4>
+<p>Listing of sponsors across all bills.</p>
+<ul class="simple">
+<li><tt class="docutils literal">state</tt>: uniquely identifies bill together with session, chamber, and bill_id</li>
+<li><tt class="docutils literal">session</tt>: uniquely identifies bill together with state, chamber, and bill_id</li>
+<li><tt class="docutils literal">chamber</tt>: uniquely identifies bill together with state, session, and bill_id</li>
+<li><tt class="docutils literal">bill_id</tt>:  uniquely identifies bill together with session, chamber, and chamber</li>
+<li><tt class="docutils literal">type</tt>: type of sponsor (primary/cosponsor/etc)</li>
+<li><tt class="docutils literal">name</tt>: given name of sponsor</li>
+<li><tt class="docutils literal">leg_id</tt>: Open States Legislator ID for sponsor</li>
+</ul>
+</div>
+<div class="section" id="bill-votes-csv">
+<h4>bill_votes.csv</h4>
+<p>A listing of all votes on all bills.</p>
+<ul class="simple">
+<li><tt class="docutils literal">state</tt>: uniquely identifies bill together with session, chamber, and bill_id</li>
+<li><tt class="docutils literal">session</tt>: uniquely identifies bill together with state, chamber, and bill_id</li>
+<li><tt class="docutils literal">chamber</tt>: uniquely identifies bill together with state, session, and bill_id</li>
+<li><tt class="docutils literal">bill_id</tt>:  uniquely identifies bill together with session, chamber, and chamber</li>
+<li><tt class="docutils literal">vote_id</tt>: Open States Vote ID for this vote</li>
+<li><tt class="docutils literal">vote_chamber</tt>: chamber vote took place in (upper/lower)</li>
+<li><tt class="docutils literal">motion</tt></li>
+<li><tt class="docutils literal">date</tt></li>
+<li><tt class="docutils literal">type</tt>: type of vote (see <a class="reference external" href="/categorization/">categorization</a>)</li>
+<li><tt class="docutils literal">yes_count</tt>: number of 'yes' votes</li>
+<li><tt class="docutils literal">no_count</tt>: number of 'no' votes</li>
+<li><tt class="docutils literal">other_count</tt>: number of 'other' votes</li>
+</ul>
+</div>
+<div class="section" id="bill-legislator-votes-csv">
+<h4>bill_legislator_votes.csv</h4>
+<p>Pairing of vote ids with how a specific legislator voted.</p>
+<ul class="simple">
+<li><tt class="docutils literal">vote_id</tt>: Open States Vote ID, matches <tt class="docutils literal">vote_id</tt> from bill_votes.csv</li>
+<li><tt class="docutils literal">leg_id</tt>: Open States Legislator ID</li>
+<li><tt class="docutils literal">name</tt>: name of legislator</li>
+<li><tt class="docutils literal">vote</tt>: yes/no/other</li>
+</ul>
+</div>
+</div>
+
+{% endblock %}

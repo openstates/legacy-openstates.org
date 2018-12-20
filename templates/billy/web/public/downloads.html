@@ -1,0 +1,52 @@
+{% extends "flat/flatpage.html" %}
+{% load i18n %}
+{% load markup_tags %}
+
+{% block title %} {% trans "Open States Bulk Downloads" %} {% endblock %}
+{% block description %} {% trans "Download CSV and JSON information on state legislators, bills, votes, committees from Open States." %} {% endblock %}
+
+{% block flatpage %}
+<h2> {% trans "Bulk Downloads" %} </h2>
+
+Because it is often convenient to get all of a state's data for testing or offline use, we provide bulk downloads of our data.
+
+We currently offer bulk data in two formats, JSON and CSV.
+
+
+<h3>JSON Archives</h3>
+
+The data contained in these downloads is in the same format as that obtained via the
+<a href="https://docs.openstates.org/en/latest/api/">API</a>. (Refer to those pages for specifics on file formats.)
+
+These downloads are not intended as a replacement for using the API.  The
+main deficit you'll notice is that they lag up to a month (but usually not more)
+behind the current data.  This makes them useful for general research
+purposes or initializing a database that will then be kept up to date
+via regular calls.  If you'd like more current data please use the API.
+
+<h3>
+    CSV Archives
+</h3>
+
+In addition to the JSON archives, we now also have CSV downloads available.
+
+<a href="/csv_downloads/">Documentation on the CSV bulk files</a>.
+
+Like the JSON archives, these aren't intended as a replacement for the API.
+In addition to being older than the data provided via the API CSV files
+do not reflect extra fields that the JSON files are able to include. This
+is due to an inherent limitation of the CSV format. If extra fields are
+required you should use the JSON downloads or API.
+
+<h3> Downloads </h3>
+<table id="download_list">
+    <tr><th>State</th><th>JSON</th><th>CSV</th></tr>
+    {% for state in all_metadata %}
+    <tr><td>{{state.name}}</td>
+        <td><a href="{{state.latest_json_url}}">{{state.latest_json_date|date}}</a></td>
+        <td><a href="{{state.latest_csv_url}}">{{state.latest_csv_date|date}}</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

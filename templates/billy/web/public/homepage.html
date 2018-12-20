@@ -1,0 +1,93 @@
+{% extends "billy/web/public/base.html" %}
+{% load customtags %}
+{% load i18n %}
+{% load static from staticfiles %}
+
+{% block title %}{% trans "Open States: discover politics in your state" %}{% endblock %}
+{% block description %}{% trans "Follow politics in your state legislature. Find your legislators, see how they vote and browse bills, and committees." %} {% endblock %}
+{% block share_options %} data-twitter-options="title=Open%20States:%20discover%20politics%20in%20your%20state%20with%20@OpenStates%20from%20@openstates" {% endblock %}
+
+{% block headblock %}
+<script src="{% static 'js/d3.v3.min.js' %}"></script>
+<script>
+    var blue = '#75afa5';
+    var green = '#a5b765';
+    $(function() {
+        /* add a mouseover handler for each g */
+        d3.selectAll('g')
+        //.each(function() { if(!this.id) { console.log(this);}  } )
+        .on("mouseover", function() {
+            d3.select(this).selectAll('stop').style('stop-color', blue);
+        })
+        .on("mouseout", function() {
+            d3.select(this).selectAll('stop').style('stop-color', green);
+        })
+        .on("click", function() {
+            if(this.id.length == 2) {
+                document.location = '/' + this.id + '/';
+            }
+        });
+    });
+</script>
+{% endblock %}
+
+{% block bodyclass %}home{% endblock %}
+
+{% block callOut %}
+	<div class="callOutBox tagline">
+		<div class="container">
+	         <h2 class="callOut">
+	        {% trans "Discover politics in your state" %}
+	        </h2>
+	        <ul>
+	        	<li>
+	        		<a href="/find_your_legislator">{% trans "Find your legislators" %}</a>
+	        	</li>
+	        	<li>
+	        		{% trans "Review their votes" %}
+	        	</li>
+	        	<li>
+	        		<a href="/all/bills/">{% trans "Search upcoming legislation" %}</a>
+	        	</li>
+	        	<li>
+	        		{% trans "Track bill progress" %}
+	        	</li>
+	        </ul>
+        </div>
+	</div>
+{% endblock callOut %}
+
+{% block content %}
+        <div class="module eightCol colLt">
+            <div class="module byAddress">
+            	<h3>{% trans "Enter your address:" %}</h3>
+            	 <form action="/find_your_legislator/" method="get" id="searchAddressform">
+		            <input class="transparent search" type="search" name="q" placeholder="{% trans 'e.g. 1818 N Street NW Washington, DC 20036' %}">
+		            <button type="submit">
+		                <span>{% trans "Search" %}</span>
+		            </button>
+		        </form>
+		        <div class="clear"></div>
+            </div>
+            <span class="fancyOr">or:</span>
+            <div class="module byState">
+                <h3>{% trans "Browse by state:" %}</h3>
+                <div id="svgmap" class="noBorder">
+                    {% include "flat/openstatesmap-embed.svg" %}
+                </div>
+            </div>
+        </div>
+        <div class="sidebar fourCol colRt">
+            <div class="module" >
+                <h4 id="videoBox" class="tipSm">{% trans "Learn more:" %}</h4>
+                <iframe width="230" height="140" src="https://www.youtube.com/embed/lHKbMg1tPsg?rel=0"></iframe>
+                <p>View the Open States tutorial on <a href="https://www.youtube.com/embed/H1dT3Vpl2SY">YouTube</a>.</p>
+                <p>See where your state ranks on our <a href="/reportcard/">Open Legislative Data Report Card</a>.</p>
+    	    </div>
+    	    <div class="module" >
+                <h4 id="dataBox" class="tipSm">{% trans "Just want data?" %}</h4>
+                <p>{% trans 'We gather legislative data from all 50 states, Washington D.C. and Puerto Rico, and then make it available in a common format via our <a href="https://docs.openstates.org/en/latest/api/">API</a> and <a href="/downloads/">bulk downloads</a>.' %}</p>
+    	    </div>
+        </div>
+        <div class="clear"></div>
+{% endblock %}
