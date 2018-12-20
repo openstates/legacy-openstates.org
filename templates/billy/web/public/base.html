@@ -36,10 +36,9 @@
     class="{% block bodyclass %}{% endblock %}"
     id="{% block body_id %}{% endblock %}">
 
-    <div id="emergency">
-        With the votes counted, the work of updating our data &amp; tools for 2019 begins.
+    <div id="emergency" style="font-size: 125%; min-height: 40px; padding-top: 10px;" >
+        You are viewing the legacy OpenStates.org, new information is available on <a href="https://openstates.org/">the new site</a>.
         <br />
-        We're aiming to raise $10,000 to fund this vital work between now and the start of the 2019 sessions, please <b><a href="/donate/">contribute today</a>!</b>
     </div>
 
     <header id="mainHeader">
@@ -47,15 +46,14 @@
             &nbsp;
         </div>
         <form action="/{{abbr|default:'all'}}/search/" method="get" id="searchform">
-            <input class="transparent search" type="search" name="search_text" id="id_q" placeholder="{% if abbr and abbr != 'all' %} {% blocktrans with metadata.name as state_name %} Search {{state_name}} for bills or legislators {% endblocktrans %} {% else %} {% blocktrans with abbr|upper as state_name %} Search for bills or legislators across all states {% endblocktrans %} {% endif %}">
+            <input disabled class="transparent search" type="search" name="search_text" id="id_q" placeholder="search disabled">
             <button type="submit">
                 <span>{% trans "Search" %}</span>
             </button>
         </form>
         <h1 class="clearfix"><a class="textReplace" href="/">Open States</a></h1>
 
-        <div class="share-buttons" data-socialite="auto" {% block share_options %} {% endblock %}
-            data-services="twitter,facebook"> </div>
+        <div class="share-buttons"> </div>
 
         {# Some pages are state-agnostic and will need to omit this block (like the homepage). #}
         {% region_select_form abbr %}
@@ -66,7 +64,6 @@
                 <li {% if nav_active == "home" %}class="active"{% endif %}><a href="{% url 'region' abbr %}">{% trans "Overview" %}</a></li>
                 <li {% if nav_active == "legislators" %}class="active"{% endif %}><a href="{% url 'legislators' abbr %}">{% trans "Legislators" %}</a></li>
                 <li {% if nav_active == "bills" %}class="active"{% endif %}><a href="{% url 'bills' abbr %}">{% trans "Bills" %}</a></li>
-                <li {% if nav_active == "committees" %}class="active"{% endif %}><a href="{% url 'committees' abbr %}">{% trans "Committees" %}</a></li>
             </ul>
         </nav>
         {% endif %}

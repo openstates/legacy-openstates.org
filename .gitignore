@@ -23,3 +23,4 @@ billy_local.py
 */settings/local.py
 *.sqlite3
 collected_static/
+html/

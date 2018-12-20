@@ -2,7 +2,9 @@ $(document).ready( function() {
 
     // make select2 work
     $("#id_abbr").select2({placeholder: "Select a State"}).change(
-        function() { this.form.submit(); });
+        function() { 
+            window.location = '/' + this.value;
+        });
     // made form submit on change, hide submit button
     $('#state_select_submit').hide();
     $('#mainFilter .select2-container').css('width', '200px');

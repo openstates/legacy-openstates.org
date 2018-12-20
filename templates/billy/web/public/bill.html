@@ -54,7 +54,7 @@
 
                     {% with latest_version=bill.versions_preview|last %}
                     {% if latest_version %}
-                    <a class="viewMore" href="{% url 'document' bill.state bill.session bill.bill_id latest_version.doc_id %}">View latest bill text</a>
+                    <a class="viewMore" href="{{latest_version.url}}">View latest bill text</a>
                     {% endif %}
                     {% endwith %}
                     </div>
@@ -222,7 +222,7 @@
                 <ul class="inlineThirds">
                 {% for version in bill.versions_preview %}
                     <li class="{% cycle 'one' 'two' 'three' %}">
-                    <a href="{% url 'document' bill.state bill.session bill.bill_id version.doc_id %}">{{ version.name }}</a>
+                        <a href="{{ version.url }}">{{ version.name }}</a>
                         {% with mimetype=version.mimetype %}
                         {% include "billy/web/public/_mimetype_tag.html" %}
                         {% endwith %}

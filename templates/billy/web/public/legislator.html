@@ -87,17 +87,6 @@
                 bills and is 'active' but not associated with a chamber.
                 {% endcomment %}
                 {% if legislator.active and 'chamber' in legislator %}
-                <div class="sixCol colLt withDash clear">
-                    {% include "billy/web/public/bio_blurb.html" %}
-                   <!-- <div class="eightCol tip clearfix">
-                        <ul class="inlineList tip noSpace" id="legLinks">
-                            <li><a href="#committees">{% trans "View committee membership" %}</a></li>
-                            <li><a href="#bills">{% trans "View sponsored bills" %}</a></li>
-                            <li><a href="#votes">{% trans "View recent votes" %}</a></li>
-                        </ul>
-                    </div> -->
-                </div>
-
                 <div class="sixCol colRt">
                     <ul>
                         {% for office in legislator.offices %}
@@ -144,8 +133,6 @@
                 </div>
                 {% endif %}
             </div>
-
-{% include "billy/web/public/developer_legislator.html" %}
 
             {% if not legislator.active %}
             <div class="fullWidth module clearfix">
